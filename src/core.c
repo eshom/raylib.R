@@ -14,10 +14,7 @@ SEXP InitWindow_R(SEXP width, SEXP height,  SEXP title)
 }
 
 // Check if KEY_ESCAPE pressed or Close icon pressed
-SEXP WindowShouldClose_R(void)
-{
-        return Rf_ScalarLogical(WindowShouldClose());
-}
+SEXP WindowShouldClose_R(void) { return Rf_ScalarLogical(WindowShouldClose()); }
 
 // Close window and unload OpenGL context
 SEXP CloseWindow_R(void)
@@ -26,13 +23,61 @@ SEXP CloseWindow_R(void)
         return R_NilValue;
 }
 
-/* RLAPI bool IsWindowReady(void);                                   // Check if window has been initialized successfully */
-/* RLAPI bool IsWindowFullscreen(void);                              // Check if window is currently fullscreen */
-/* RLAPI bool IsWindowHidden(void);                                  // Check if window is currently hidden (only PLATFORM_DESKTOP) */
-/* RLAPI bool IsWindowMinimized(void);                               // Check if window is currently minimized (only PLATFORM_DESKTOP) */
-/* RLAPI bool IsWindowMaximized(void);                               // Check if window is currently maximized (only PLATFORM_DESKTOP) */
-/* RLAPI bool IsWindowFocused(void);                                 // Check if window is currently focused (only PLATFORM_DESKTOP) */
-/* RLAPI bool IsWindowResized(void);                                 // Check if window has been resized last frame */
+// Check if window has been initialized successfully
+SEXP IsWindowReady_R(void)
+{
+        return Rf_ScalarLogical(IsWindowReady());
+}
+
+// Check if window is currently fullscreen
+SEXP IsWindowFullscreen_R(void)
+{
+        return Rf_ScalarLogical(IsWindowReady());
+}
+
+// Check if window is currently hidden (only PLATFORM_DESKTOP)
+SEXP IsWindowHidden_R(void)
+{
+        return Rf_ScalarLogical(IsWindowHidden());
+}
+
+// Check if window is currently minimized (only PLATFORM_DESKTOP)
+SEXP IsWindowMinimized_R(void)
+{
+        return Rf_ScalarLogical(IsWindowMinimized());
+}
+
+// Check if window is currently maximized (only PLATFORM_DESKTOP)
+SEXP IsWindowMaximized_R(void)
+{
+        return Rf_ScalarLogical(IsWindowMaximized());
+}
+
+// Check if window is currently maximized (only PLATFORM_DESKTOP)
+SEXP IsWindowFocused_R(void)
+{
+        return Rf_ScalarLogical(IsWindowFocused());
+}
+
+// Check if window has been resized last frame
+SEXP IsWindowResized_R(void)
+{
+        return Rf_ScalarLogical(IsWindowFocused());
+}
+
+// Check if one specific window flag is enabled
+SEXP IsWindowState_R(SEXP flag)
+{
+        int iflag = Rf_asInteger(flag);
+        if (iflag < 0) {
+                Rf_error("Error in IsWindowState_R: `flag` cannot be negative");
+                return R_NilValue;
+        }
+        unsigned int uiflag = iflag;
+
+        return Rf_ScalarLogical(IsWindowState(uiflag));
+}
+
 /* RLAPI bool IsWindowState(unsigned int flag);                      // Check if one specific window flag is enabled */
 /* RLAPI void SetWindowState(unsigned int flags);                    // Set window configuration state using flags (only PLATFORM_DESKTOP) */
 /* RLAPI void ClearWindowState(unsigned int flags);                  // Clear window configuration state flags */
