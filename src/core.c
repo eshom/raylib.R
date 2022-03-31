@@ -7,14 +7,17 @@
 // Windows-related functions
 
 // Initialize window and OpenGL context
-SEXP InitWindow_R(SEXP width, SEXP height,  SEXP title)
+SEXP InitWindow_R(SEXP width, SEXP height, SEXP title)
 {
         InitWindow(Rf_asInteger(width), Rf_asInteger(height), CHAR(Rf_asChar(title)));
         return R_NilValue;
 }
 
 // Check if KEY_ESCAPE pressed or Close icon pressed
-SEXP WindowShouldClose_R(void) { return Rf_ScalarLogical(WindowShouldClose()); }
+SEXP WindowShouldClose_R(void)
+{
+        return Rf_ScalarLogical(WindowShouldClose());
+}
 
 // Close window and unload OpenGL context
 SEXP CloseWindow_R(void)
@@ -62,26 +65,70 @@ SEXP IsWindowFocused_R(void)
 // Check if window has been resized last frame
 SEXP IsWindowResized_R(void)
 {
-        return Rf_ScalarLogical(IsWindowFocused());
+        return Rf_ScalarLogical(IsWindowResized());
 }
 
 // Check if one specific window flag is enabled
 SEXP IsWindowState_R(SEXP flag)
 {
         int iflag = Rf_asInteger(flag);
+
         if (iflag < 0) {
-                Rf_error("Error in IsWindowState_R: `flag` cannot be negative");
+                Rf_error("`flag` cannot be negative");
                 return R_NilValue;
         }
+
         unsigned int uiflag = iflag;
 
         return Rf_ScalarLogical(IsWindowState(uiflag));
 }
 
-/* RLAPI bool IsWindowState(unsigned int flag);                      // Check if one specific window flag is enabled */
-/* RLAPI void SetWindowState(unsigned int flags);                    // Set window configuration state using flags (only PLATFORM_DESKTOP) */
-/* RLAPI void ClearWindowState(unsigned int flags);                  // Clear window configuration state flags */
-/* RLAPI void ToggleFullscreen(void);                                // Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP) */
+// Set window configuration state using flags (only PLATFORM_DESKTOP)
+SEXP SetWindowState_R(SEXP flags)
+{
+        int iflags = Rf_asInteger(flags);
+
+        if (iflags < 0) {
+                Rf_error("`flags` cannot be negative");
+                return R_NilValue;
+        }
+
+        unsigned int uiflags = iflags;
+
+        SetWindowState(uiflags);
+
+        return R_NilValue;
+}
+
+// Clear window configuration state flags
+SEXP ClearWindowState_R(SEXP flags)
+{
+        int iflags = Rf_asInteger(flags);
+
+        if (iflags < 0) {
+                Rf_error("`flags` cannot be negative");
+                return R_NilValue;
+        }
+
+        unsigned int uiflags = iflags;
+
+        ClearWindowState(uiflags);
+
+        return R_NilValue;
+}
+
+// Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
+SEXP ToggleFullscreen_R(void)
+{
+        ToggleFullscreen();
+        return R_NilValue;
+}
+
+
+
+
+
+
 /* RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void MinimizeWindow(void);                                  // Set window state: minimized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void RestoreWindow(void);                                   // Set window state: not minimized/maximized (only PLATFORM_DESKTOP) */

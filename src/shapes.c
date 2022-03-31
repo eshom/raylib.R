@@ -13,9 +13,7 @@ SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
         double *source_p = REAL(rectangle_source);
 
         if (texture_p[0] < 0) {
-          REprintf("Error in `SetShapesTexture_R(SEXP texture, SEXP "
-                   "rectangle_source)`: Expecting positive number for first "
-                   "element of `texture` argument");
+          Rf_error("Expecting positive number for first element of `texture` argument");
           return R_NilValue;
         }
 
@@ -38,9 +36,8 @@ SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color)
         int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
 
         for (int i = 0; i < LENGTH(color); ++i) {
-                if (color_p[i] < 0 | color_p[i] > 255) {
-                  REprintf("Error in `DrawPixel_R(SEXP posX, SEXP "
-                           "posY, SEXP color)`: Expecting 0 < `color` <= 255");
+                if ((color_p[i] < 0) || (color_p[i] > 255)) {
+                  Rf_error("Expecting 0 < `color` <= 255");
                   return R_NilValue;
                 }
         }
@@ -60,9 +57,8 @@ SEXP DrawPixelV_R(SEXP vector2_position, SEXP color)
         double *position_p = REAL(vector2_position);
 
         for (int i = 0; i < LENGTH(color); ++i) {
-                if (color_p[i]<0 | color_p[i]> 255) {
-                        REprintf("Error in `DrawPixelV_R(SEXP posX, SEXP "
-                                 "posY, SEXP color)`: Expecting 0 < `color` <= 255");
+                if ((color_p[i] < 0) || (color_p[i] > 255)) {
+                        Rf_error("Expecting 0 < `color` <= 255");
                         return R_NilValue;
                 }
         }

@@ -1,3 +1,4 @@
 ^LICENSE\.md$
 compile_commands.json
 .cache
+^data-raw$

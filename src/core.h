@@ -15,5 +15,8 @@ SEXP IsWindowMaximized_R(void);
 SEXP IsWindowFocused_R(void);
 SEXP IsWindowResized_R(void);
 SEXP IsWindowState_R(SEXP flag);
+SEXP SetWindowState_R(SEXP flags);
+SEXP ClearWindowState_R(SEXP flags);
+SEXP ToggleFullscreen_R(void);
 
 #endif
