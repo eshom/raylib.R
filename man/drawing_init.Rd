@@ -16,4 +16,11 @@ end_drawing()
 \item \code{end_drawing} - End canvas drawing and swap buffers (double buffering)
 }
 }
+\seealso{
+Other Drawing-related functions: 
+\code{\link{mode2d_init}}
+
+Other Drawing-related functions: 
+\code{\link{mode2d_init}}
+}
 \concept{Drawing-related functions}

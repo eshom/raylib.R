@@ -140,17 +140,27 @@ SEXP EndDrawing_R(void)
          return R_NilValue;
 }
 
-// SEXP BeginMode2D_R()
-// {
-//          BeginMode2D();
-//          return R_NilValue;
-// }
-// 
-// SEXP EndMode2D_R(void)
-// {
-//          EndMode2D();
-//          return R_NilValue;
-// }
+SEXP BeginMode2D_R(offset1, offset2,
+                   target1, target2,
+                   rotation, zoom)
+ {
+  
+          Camera2D camera = { 0 };
+          camera.offset = (Vector2){ offset1, offset2 };
+          camera.target = (Vector2){ target1, target2 };
+          camera.rotation = rotation;
+          camera.zoom = zoom;
+          
+          BeginMode2D(camera);
+          
+          return R_NilValue;
+ }
+ 
+ SEXP EndMode2D_R(void)
+ {
+          EndMode2D();
+          return R_NilValue;
+ }
 
 
 /* RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable (only PLATFORM_DESKTOP) */

@@ -131,3 +131,35 @@ begin_drawing <- function() {
 end_drawing <- function() {
          .Call("EndDrawing_R")
 }
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @name mode2d_init
+#' @rdname mode2d_init
+#' @title Functions to start and stop 2D mode
+#' @description 
+#' - `begin_mode_2d` - Begin 2D mode with custom camera (2D)
+#' - `end_mode_2d` - Ends 2D mode with custom camera
+#' @aliases begin_mode_2d
+#' @aliases end_mode_2d
+NULL
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @family Drawing-related functions 
+#' @param camera Object created with Camera2D
+#' @rdname mode2d_init
+#' @export
+begin_mode_2d <- function(camera) {
+  if (class(camera) != "Camera2D") stop("Object passed to the 'camera' argument should be of 'Camera2D' class.")
+  .Call("BeginMode2D_R", 
+        camera[[1]][1], camera[[1]][2], 
+        camera[[2]][1], camera[[2]][2],
+        camera[[3]], camera[[4]])
+}
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @family Drawing-related functions
+#' @rdname mode2d_init
+#' @export
+end_mode_2d <- function() {
+  .Call("EndMode2D_R")
+}

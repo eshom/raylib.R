@@ -39,3 +39,27 @@ Vector4 <- function(x, y, z, w) {
 #' @rdname Vector4
 #' @export
 Quaternion <- Vector4
+
+#' Camera2D object
+#' @param offset Vector2: Camera offset (displacement from target)
+#' @param target Vector2: Camera target (rotation and zoom origin)
+#' @param rotation numeric: Camera rotation in degrees
+#' @param zoom numeric: Camera zoom (scaling), 1 by default
+#' @export
+Camera2D <- function(offset, target, rotation, zoom = 1) {
+  
+  stopifnot(is.numeric(offset), 
+            is.numeric(target), 
+            is.numeric(rotation), 
+            is.numeric(zoom))
+  
+  output <- list(offset,
+                 target,
+                 as.double(rotation),
+                 as.double(zoom))
+  
+  class(output) <- "Camera2D"
+  
+  return(output)
+  
+}
