@@ -22,3 +22,30 @@ SEXP CloseWindow_R(void)
         CloseWindow();
         return R_NilValue;
 }
+
+// Drawing-related functions
+
+SEXP BeginDrawing_R(void)
+{
+        BeginDrawing();
+        return R_NilValue;
+}
+
+SEXP EndDrawing_R(void)
+{
+         EndDrawing();
+         return R_NilValue;
+}
+
+// SEXP BeginMode2D_R()
+// {
+//          BeginMode2D();
+//          return R_NilValue;
+// }
+// 
+// SEXP EndMode2D_R(void)
+// {
+//          EndMode2D();
+//          return R_NilValue;
+// }
+
