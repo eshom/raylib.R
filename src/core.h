@@ -7,5 +7,16 @@
 SEXP InitWindow_R(SEXP width, SEXP height, SEXP title);
 SEXP WindowShouldClose_R(void);
 SEXP CloseWindow_R(void);
+SEXP IsWindowReady_R(void);
+SEXP IsWindowFullscreen_R(void);
+SEXP IsWindowHidden_R(void);
+SEXP IsWindowMinimized_R(void);
+SEXP IsWindowMaximized_R(void);
+SEXP IsWindowFocused_R(void);
+SEXP IsWindowResized_R(void);
+SEXP IsWindowState_R(SEXP flag);
+SEXP SetWindowState_R(SEXP flags);
+SEXP ClearWindowState_R(SEXP flags);
+SEXP ToggleFullscreen_R(void);
 
 #endif
