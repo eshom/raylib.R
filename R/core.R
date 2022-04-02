@@ -182,7 +182,7 @@ end_drawing <- function() {
 NULL
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @param camera Object created with Camera2D
+#' @param camera Object created with `Camera2D` constructor
 #' @rdname mode2d
 #' @export
 begin_mode_2d <- function(camera) {
@@ -198,4 +198,35 @@ begin_mode_2d <- function(camera) {
 #' @export
 end_mode_2d <- function() {
   .Call("EndMode2D_R")
+}
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @name mode3d
+#' @rdname mode3d
+#' @title Functions to start and stop 3D mode
+#' @description 
+#' - `begin_mode_3d` - Begin 3D mode with custom camera (2D)
+#' - `end_mode_3d` - Ends 3D mode with custom camera
+#' @aliases begin_mode_2d
+#' @aliases end_mode_2d
+#' @family Drawing-related functions 
+NULL
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @param camera Object created with `Camera3D` constructor
+#' @rdname mode3d
+#' @export
+begin_mode_3d <- function(camera) {
+  if (!"Camera3D" %in% class(camera)) 
+    stop("Object passed to the 'camera' argument should be of 'Camera3D' class.")
+  .Call("BeginMode3D_R", 
+        camera[[1]], camera[[2]],
+        camera[[3]], camera[[4]], camera[[5]])
+}
+
+#' @useDynLib raylib.R, .registration = TRUE
+#' @rdname mode3d
+#' @export
+end_mode_3d <- function() {
+  .Call("EndMode3D_R")
 }

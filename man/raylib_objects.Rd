@@ -19,5 +19,6 @@ to R color names. see: \code{\link[grDevices:colors]{grDevices::colors()}}
 \item \code{Vector4} - Vector4, 4 components
 \item \code{Quaternion} - alias to \code{Vector4}
 \item \code{Camera2D} - Camera2D, defines position/orientation in 2d space
+\item \code{Camera3D} - Camera3D, defines position/orientation in 3D space
 }
 }

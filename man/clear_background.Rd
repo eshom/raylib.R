@@ -7,7 +7,7 @@
 clear_background(color)
 }
 \arguments{
-\item{color}{An object of class 'Color'}
+\item{color}{Color object. Integer vector with RGBA values between 0 and 255.}
 }
 \description{
 Set background color (framebuffer clear color)
@@ -15,6 +15,7 @@ Set background color (framebuffer clear color)
 \seealso{
 Other Drawing-related functions: 
 \code{\link{drawing}},
-\code{\link{mode2d}}
+\code{\link{mode2d}},
+\code{\link{mode3d}}
 }
 \concept{Drawing-related functions}

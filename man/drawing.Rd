@@ -19,10 +19,12 @@ end_drawing()
 \seealso{
 Other Drawing-related functions: 
 \code{\link{clear_background}()},
-\code{\link{mode2d}}
+\code{\link{mode2d}},
+\code{\link{mode3d}}
 
 Other Drawing-related functions: 
 \code{\link{clear_background}()},
-\code{\link{mode2d}}
+\code{\link{mode2d}},
+\code{\link{mode3d}}
 }
 \concept{Drawing-related functions}

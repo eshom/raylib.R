@@ -236,8 +236,58 @@ SEXP EndMode2D_R(void)
           return R_NilValue;
 }
 
-/* RLAPI void BeginMode3D(Camera3D camera);                          // Begin 3D mode with custom camera (3D) */
-/* RLAPI void EndMode3D(void);                                       // Ends 3D mode and returns to default 2D orthographic mode */
+// Begin 3D mode with custom camera (3D)
+SEXP BeginMode3D_R( SEXP position,
+                    SEXP target,
+                    SEXP up,
+                    SEXP fovy,
+                    SEXP projection)
+{
+  
+  double *position_p = REAL(position);
+  double *target_p = REAL(target);
+  double *up_p = REAL(up);
+  double *fovy_p = REAL(fovy);
+  int *projection_p = INTEGER(projection);
+  
+  Camera camera = { 0 };
+  camera.position = (Vector3){ (float)position_p[0], (float)position_p[1], (float)position_p[2] };
+  camera.target = (Vector3){ (float)target_p[0], (float)target_p[1], (float)target_p[2] };
+  camera.up = (Vector3){ (float)up_p[0], (float)up_p[1], (float)up_p[2] };
+  camera.fovy = (float)fovy_p[0];
+  
+  switch(projection_p[0])
+  {
+  case 1:
+    camera.projection = CAMERA_CUSTOM; break;
+  case 2:
+    camera.projection = CAMERA_FIRST_PERSON; break;
+  case 3:
+    camera.projection = CAMERA_FREE; break;
+  case 4:
+    camera.projection = CAMERA_ORBITAL; break;
+  case 5:
+    camera.projection = CAMERA_ORTHOGRAPHIC; break;
+  case 6:
+    camera.projection = CAMERA_PERSPECTIVE; break;
+  case 7:
+    camera.projection = CAMERA_THIRD_PERSON; break;
+  default: Rf_error("CAMERA3D C ERROR: bad perspective integer");
+  }
+  
+  BeginMode3D(camera);
+  
+  return R_NilValue;
+  
+}
+
+// Ends 3D mode and returns to default 2D orthographic mode
+SEXP EndMode3D_R(void)
+{
+  EndMode3D();
+  return R_NilValue;
+}
+
 /* RLAPI void BeginTextureMode(RenderTexture2D target);              // Begin drawing to render texture */
 /* RLAPI void EndTextureMode(void);                                  // Ends drawing to render texture */
 /* RLAPI void BeginShaderMode(Shader shader);                        // Begin custom shader drawing */

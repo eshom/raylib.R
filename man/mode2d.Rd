@@ -11,7 +11,7 @@ begin_mode_2d(camera)
 end_mode_2d()
 }
 \arguments{
-\item{camera}{Object created with Camera2D}
+\item{camera}{Object created with \code{Camera2D} constructor}
 }
 \description{
 \itemize{
@@ -22,6 +22,7 @@ end_mode_2d()
 \seealso{
 Other Drawing-related functions: 
 \code{\link{clear_background}()},
-\code{\link{drawing}}
+\code{\link{drawing}},
+\code{\link{mode3d}}
 }
 \concept{Drawing-related functions}
