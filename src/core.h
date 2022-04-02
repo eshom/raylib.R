@@ -4,6 +4,7 @@
 #include <R.h>
 #include <Rinternals.h>
 
+// Window-related functions
 SEXP InitWindow_R(SEXP width, SEXP height, SEXP title);
 SEXP WindowShouldClose_R(void);
 SEXP CloseWindow_R(void);
@@ -19,4 +20,7 @@ SEXP SetWindowState_R(SEXP flags);
 SEXP ClearWindowState_R(SEXP flags);
 SEXP ToggleFullscreen_R(void);
 
+// Drawing-related functions
+SEXP BeginDrawing_R(void);
+SEXP EndDrawing_R(void);
 #endif
