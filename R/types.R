@@ -2,11 +2,33 @@
 
 #' @name raylib_objects
 #' @rdname raylib_objects
-#' @title Constructors for object used in Raylib functions
+#' @title Constructors For Object Used in Raylib Functions
 #' @description
 #' These objects are used in Raylib functions. The constructors
 #' make it easy to create objects that are aligned with
-#' Raylib API specifications
+#' Raylib API specifications.
+#' - `Texture` - Texture, tex data stored in GPU memory (VRAM)
+#' - `Texture2D` - alias for `Texture`
+#' - `TextureCubemap` - alias for `Texture`
+#' - `Rectangle` - Rectangle, 4 components
+#' - `Color` - Color, 4 components, R8G8B8A8 (32bit). `color_name` corresponds
+#' to R color names. see: [grDevices::colors()]
+#' - `Vector2` - Vector2, 2 components
+#' - `Vector3` - Vector3, 3 components
+#' - `Vector4` - Vector4, 4 components
+#' - `Quaternion` - alias to `Vector4`
+#' - `Camera2D` - Camera2D, defines position/orientation in 2d space
+#' @aliases Texture
+#' @aliases Texture2D
+#' @aliases TextureCubemap
+#' @aliases Rectangle
+#' @aliases Color
+#' @aliases Colour
+#' @aliases Vector2
+#' @aliases Vector3
+#' @aliases Vector4
+#' @aliases Quaternion
+#' @aliases Camera2D
 NULL
 
 #' @family Raylib objects
@@ -20,13 +42,11 @@ Texture <- function(id, width, height, mipmaps, format) {
 
 #' @family Raylib objects
 #' @rdname raylib_objects
-#' @rdname Texture
 #' @export
 Texture2D <- Texture
 
 #' @family Raylib objects
 #' @rdname raylib_objects
-#' @rdname Texture
 #' @export
 TextureCubemap <- Texture
 
@@ -50,7 +70,6 @@ Color <- function(color_name, alpha = 255) {
 
 #' @family Raylib objects
 #' @rdname raylib_objects
-#' @rdname Color
 #' @export
 Colour <- Color
 
@@ -83,13 +102,11 @@ Vector4 <- function(x, y, z, w) {
 
 #' @family Raylib objects
 #' @rdname raylib_objects
-#' @rdname Vector4
 #' @export
 Quaternion <- Vector4
 
 #' @family Raylib objects
 #' @rdname raylib_objects
-# Camera2D, defines position/orientation in 2d space
 #' @export
 Camera2D <- function(offset, target, rotation, zoom) {
         out <- list(offset, target, as.double(rotation), as.double(zoom))

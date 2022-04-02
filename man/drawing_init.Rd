@@ -4,7 +4,7 @@
 \alias{drawing_init}
 \alias{begin_drawing}
 \alias{end_drawing}
-\title{Functions to start and stop canvas drawing}
+\title{Functions To Start And Stop Canvas Drawing}
 \usage{
 begin_drawing()
 
