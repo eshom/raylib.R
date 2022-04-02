@@ -124,35 +124,6 @@ SEXP ToggleFullscreen_R(void)
         return R_NilValue;
 }
 
-
-
-// Drawing-related functions
-
-SEXP BeginDrawing_R(void)
-{
-        BeginDrawing();
-        return R_NilValue;
-}
-
-SEXP EndDrawing_R(void)
-{
-         EndDrawing();
-         return R_NilValue;
-}
-
-// SEXP BeginMode2D_R()
-// {
-//          BeginMode2D();
-//          return R_NilValue;
-// }
-// 
-// SEXP EndMode2D_R(void)
-// {
-//          EndMode2D();
-//          return R_NilValue;
-// }
-
-
 /* RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void MinimizeWindow(void);                                  // Set window state: minimized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void RestoreWindow(void);                                   // Set window state: not minimized/maximized (only PLATFORM_DESKTOP) */
@@ -200,8 +171,36 @@ SEXP EndDrawing_R(void)
 
 /* // Drawing-related functions */
 /* RLAPI void ClearBackground(Color color);                          // Set background color (framebuffer clear color) */
-/* RLAPI void BeginDrawing(void);                                    // Setup canvas (framebuffer) to start drawing */
-/* RLAPI void EndDrawing(void);                                      // End canvas drawing and swap buffers (double buffering) */
+
+// Drawing-related functions
+
+// Setup canvas (framebuffer) to start drawing
+SEXP BeginDrawing_R(void)
+{
+        BeginDrawing();
+        return R_NilValue;
+}
+
+// End canvas drawing and swap buffers (double buffering)
+SEXP EndDrawing_R(void)
+{
+         EndDrawing();
+         return R_NilValue;
+}
+
+// Begin 2D mode with custom camera (2D)
+// SEXP BeginMode2D_R()
+// {
+//          BeginMode2D();
+//          return R_NilValue;
+// }
+
+// Ends 2D mode with custom camera
+// SEXP EndMode2D_R(void)
+// {
+//          EndMode2D();
+//          return R_NilValue;
+// }
 /* RLAPI void BeginMode2D(Camera2D camera);                          // Begin 2D mode with custom camera (2D) */
 /* RLAPI void EndMode2D(void);                                       // Ends 2D mode with custom camera */
 /* RLAPI void BeginMode3D(Camera3D camera);                          // Begin 3D mode with custom camera (3D) */
