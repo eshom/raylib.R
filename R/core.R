@@ -144,6 +144,7 @@ NULL
 #' @export
 begin_drawing <- function() {
         .Call("BeginDrawing_R")
+        invisible()
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
@@ -151,5 +152,6 @@ begin_drawing <- function() {
 #' @rdname drawing_init
 #' @export
 end_drawing <- function() {
-         .Call("EndDrawing_R")
+        .Call("EndDrawing_R")
+        invisible()
 }
