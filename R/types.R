@@ -18,7 +18,9 @@ Rectangle <- function(x, y, width, height) {
 
 #' @export
 Color <- function(color_name, alpha = 255) {
-        as.integer(c(grDevices::col2rgb(color_name), alpha))
+        output <- as.integer(c(grDevices::col2rgb(color_name), alpha))
+        class(output) <- "Color"
+        return(output)
 }
 
 #' @export

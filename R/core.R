@@ -106,6 +106,21 @@ toggle_fullscreen <- function() {
 ## Drawing-related functions
 
 #' @useDynLib raylib.R, .registration = TRUE
+#' @name clear_background
+#' @title Set background color (framebuffer clear color)
+#' @param color An object of class 'Color'
+#' @export
+#' @family Drawing-related functions 
+clear_background <- function(color) {
+  
+  if (class(color) != "Color")
+    stop("Object of class 'Color' needs to be provided to the 'color' argument")
+  
+  .Call("ClearBackground_R", color[1], color[2], color[3], color[4])
+  
+}
+
+#' @useDynLib raylib.R, .registration = TRUE
 #' @name drawing_init
 #' @rdname drawing_init
 #' @title Functions to start and stop canvas drawing

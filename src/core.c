@@ -128,6 +128,14 @@ SEXP ToggleFullscreen_R(void)
 
 // Drawing-related functions
 
+SEXP ClearBackground_R(r, g, b, alpha)
+{
+       Color color = { r, g, b, alpha };
+       ClearBackground(color);
+       return R_NilValue;
+
+}
+
 SEXP BeginDrawing_R(void)
 {
         BeginDrawing();

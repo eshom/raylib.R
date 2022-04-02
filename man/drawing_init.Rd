@@ -18,9 +18,11 @@ end_drawing()
 }
 \seealso{
 Other Drawing-related functions: 
+\code{\link{clear_background}()},
 \code{\link{mode2d_init}}
 
 Other Drawing-related functions: 
+\code{\link{clear_background}()},
 \code{\link{mode2d_init}}
 }
 \concept{Drawing-related functions}
