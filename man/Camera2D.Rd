@@ -2,19 +2,30 @@
 % Please edit documentation in R/types.R
 \name{Camera2D}
 \alias{Camera2D}
-\title{Camera2D object}
+
+\title{Camera2D, defines position/orientation in 2d space}
 \usage{
-Camera2D(offset, target, rotation, zoom = 1)
+Camera2D(offset, target, rotation, zoom)
 }
 \arguments{
-\item{offset}{Vector2: Camera offset (displacement from target)}
+\item{offset}{Vector2. Camera offset (displacement from target)}
 
-\item{target}{Vector2: Camera target (rotation and zoom origin)}
+\item{target}{Vector2. Camera target (rotation and zoom origin)}
 
-\item{rotation}{numeric: Camera rotation in degrees}
+\item{rotation}{Camera rotation in degrees}
 
-\item{zoom}{numeric: Camera zoom (scaling), 1 by default}
+\item{zoom}{Camera zoom (scaling), should be 1.0f by default}
 }
 \description{
-Camera2D object
+Camera2D, defines position/orientation in 2d space
 }
+\seealso{
+Other Raylib objects: 
+\code{\link{Color}()},
+\code{\link{Rectangle}()},
+\code{\link{Texture}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+}
+\concept{Raylib objects}

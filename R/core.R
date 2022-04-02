@@ -1,7 +1,7 @@
 ## Windows-related functions
 
-#' @useDynLib raylib.R, .registration = TRUE
-#' @title Initialize the graphic window
+#' @family Windows-related functions
+#' @title Initialize window and OpenGL context
 #' @param width Width of the window
 #' @param height Height of the window
 #' @param title Title of the window
@@ -12,12 +12,16 @@ init_window <- function(width, height, title = "raylib.R") {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Check if KEY_ESCAPE pressed or Close icon pressed
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 window_should_close <- function() {
         .Call("WindowShouldClose_R")
 }
 
+#' @family Windows-related functions
+#' @title Close window and unload OpenGL context
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 close_window <- function() {
@@ -25,54 +29,65 @@ close_window <- function() {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Check if window has been initialized successfully
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
-is_windows_ready <- function() {
+is_window_ready <- function() {
         .Call("IsWindowReady_R")
 }
 
-#' @useDynLib raylib.R, .registration = TRUE
-#' @export
-is_windows_ready <- function() {
-        .Call("IsWindowReady_R")
-}
-
+#' @family Windows-related functions
+#' @title Check if window is currently fullscreen
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_fullscreen <- function() {
         .Call("IsWindowFullscreen_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if window is currently hidden (only PLATFORM_DESKTOP)
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_hidden <- function() {
         .Call("IsWindowHidden_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if window is currently minimized (only PLATFORM_DESKTOP)
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_minimized <- function() {
         .Call("IsWindowMinimized_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if window is currently maximized (only PLATFORM_DESKTOP)
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_maximized <- function() {
         .Call("IsWindowMaximized_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if window is currently maximized (only PLATFORM_DESKTOP)
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_focused <- function() {
         .Call("IsWindowFocused_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if window has been resized last frame
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_resized <- function() {
         .Call("IsWindowResized_R")
 }
 
+#' @family Windows-related functions
+#' @title Check if one specific window flag is enabled
+#' @param flag One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_state <- function(flag) {
@@ -80,6 +95,9 @@ is_window_state <- function(flag) {
         .Call("IsWindowState_R", as.integer(flag))
 }
 
+#' @family Windows-related functions
+#' @title Set window configuration state using flags (only PLATFORM_DESKTOP)
+#' @param flags One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 set_window_state <- function(flags) {
@@ -88,6 +106,9 @@ set_window_state <- function(flags) {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Clear window configuration state flags
+#' @param flags One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 clear_window_state <- function(flags) {
@@ -96,6 +117,8 @@ clear_window_state <- function(flags) {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 toggle_fullscreen <- function() {
@@ -123,8 +146,8 @@ clear_background <- function(color) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @name drawing_init
 #' @rdname drawing_init
-#' @title Functions to start and stop canvas drawing
-#' @description 
+#' @title Functions To Start And Stop Canvas Drawing
+#' @description
 #' - `begin_drawing` - Setup canvas (framebuffer) to start drawing
 #' - `end_drawing` - End canvas drawing and swap buffers (double buffering)
 #' @aliases begin_drawing
@@ -132,11 +155,12 @@ clear_background <- function(color) {
 NULL
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @family Drawing-related functions 
+#' @family Drawing-related functions
 #' @rdname drawing_init
 #' @export
 begin_drawing <- function() {
         .Call("BeginDrawing_R")
+        invisible()
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
@@ -144,7 +168,8 @@ begin_drawing <- function() {
 #' @rdname drawing_init
 #' @export
 end_drawing <- function() {
-         .Call("EndDrawing_R")
+        .Call("EndDrawing_R")
+        invisible()
 }
 
 #' @useDynLib raylib.R, .registration = TRUE

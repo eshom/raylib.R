@@ -2,6 +2,9 @@
 #include "shapes.h"
 #include <R_ext/Rdynload.h>
 
+// R_CallMethodDef quick reminder:
+// {<name of function>, (DL_FUNC) &<name of function>, <number of arguments>}
+
 static const R_CallMethodDef callMethods[] = {
         // Core module
 
@@ -20,6 +23,10 @@ static const R_CallMethodDef callMethods[] = {
         {"SetWindowState_R",     (DL_FUNC) &SetWindowState_R,     1},
         {"ClearWindowState_R",   (DL_FUNC) &ClearWindowState_R,   1},
         {"ToggleFullscreen_R",   (DL_FUNC) &ToggleFullscreen_R,   0},
+
+        // Drawing-related functions
+        {"BeginDrawing_R", (DL_FUNC) &BeginDrawing_R, 0},
+        {"EndDrawing_R",   (DL_FUNC) &EndDrawing_R,   0},
 
         // Basic shapes drawing functions
         {"SetShapesTexture_R", (DL_FUNC) &SetShapesTexture_R, 2},

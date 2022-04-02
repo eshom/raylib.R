@@ -3,10 +3,15 @@ Title: Bindings for Raylib
 Version: 0.0.0.9000
 Date: 2022-03-29
 Authors@R:
-    person(given = "Erez",
+    c(person(given = "Erez",
            family = "Shomron",
            role = c("aut", "cre"),
-           email = "erezshomron@mykolab.com")
+           email = "erezshomron@mykolab.com"),
+      person(given = "Michal",
+           family = "Kosinski",
+           role = c("ctb"),
+           email = "kosinski.mich@gmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0002-8426-3654")))
 Author: Erez Shomron [aut, cre],
 Maintainer: Erez Shomron <erezshomron@mykolab.com>
 Description: Bindings for 'raylib' library. A simple and easy-to-use library to enjoy videogames programming '<https://www.raylib.com>'.

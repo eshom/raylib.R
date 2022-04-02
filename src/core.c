@@ -124,53 +124,6 @@ SEXP ToggleFullscreen_R(void)
         return R_NilValue;
 }
 
-
-
-// Drawing-related functions
-
-SEXP ClearBackground_R(r, g, b, alpha)
-{
-       Color color = { r, g, b, alpha };
-       ClearBackground(color);
-       return R_NilValue;
-
-}
-
-SEXP BeginDrawing_R(void)
-{
-        BeginDrawing();
-        return R_NilValue;
-}
-
-SEXP EndDrawing_R(void)
-{
-         EndDrawing();
-         return R_NilValue;
-}
-
-SEXP BeginMode2D_R(offset1, offset2,
-                   target1, target2,
-                   rotation, zoom)
- {
-  
-          Camera2D camera = { 0 };
-          camera.offset = (Vector2){ offset1, offset2 };
-          camera.target = (Vector2){ target1, target2 };
-          camera.rotation = rotation;
-          camera.zoom = zoom;
-          
-          BeginMode2D(camera);
-          
-          return R_NilValue;
- }
- 
- SEXP EndMode2D_R(void)
- {
-          EndMode2D();
-          return R_NilValue;
- }
-
-
 /* RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void MinimizeWindow(void);                                  // Set window state: minimized, if resizable (only PLATFORM_DESKTOP) */
 /* RLAPI void RestoreWindow(void);                                   // Set window state: not minimized/maximized (only PLATFORM_DESKTOP) */
@@ -218,10 +171,56 @@ SEXP BeginMode2D_R(offset1, offset2,
 
 /* // Drawing-related functions */
 /* RLAPI void ClearBackground(Color color);                          // Set background color (framebuffer clear color) */
-/* RLAPI void BeginDrawing(void);                                    // Setup canvas (framebuffer) to start drawing */
-/* RLAPI void EndDrawing(void);                                      // End canvas drawing and swap buffers (double buffering) */
-/* RLAPI void BeginMode2D(Camera2D camera);                          // Begin 2D mode with custom camera (2D) */
-/* RLAPI void EndMode2D(void);                                       // Ends 2D mode with custom camera */
+
+// Drawing-related functions
+
+// Set background color (framebuffer clear color)
+SEXP ClearBackground_R(r, g, b, alpha)
+{
+       Color color = { r, g, b, alpha };
+       ClearBackground(color);
+       return R_NilValue;
+
+}
+
+// Setup canvas (framebuffer) to start drawing
+SEXP BeginDrawing_R(void)
+{
+        BeginDrawing();
+        return R_NilValue;
+}
+
+// End canvas drawing and swap buffers (double buffering)
+SEXP EndDrawing_R(void)
+{
+         EndDrawing();
+         return R_NilValue;
+}
+
+// Begin 2D mode with custom camera (2D)
+SEXP BeginMode2D_R(offset1, offset2,
+                   target1, target2,
+                   rotation, zoom)
+ {
+  
+          Camera2D camera = { 0 };
+          camera.offset = (Vector2){ offset1, offset2 };
+          camera.target = (Vector2){ target1, target2 };
+          camera.rotation = rotation;
+          camera.zoom = zoom;
+          
+          BeginMode2D(camera);
+          
+          return R_NilValue;
+ }
+
+// Ends 2D mode with custom camera
+ SEXP EndMode2D_R(void)
+ {
+          EndMode2D();
+          return R_NilValue;
+ }
+
 /* RLAPI void BeginMode3D(Camera3D camera);                          // Begin 3D mode with custom camera (3D) */
 /* RLAPI void EndMode3D(void);                                       // Ends 3D mode and returns to default 2D orthographic mode */
 /* RLAPI void BeginTextureMode(RenderTexture2D target);              // Begin drawing to render texture */
