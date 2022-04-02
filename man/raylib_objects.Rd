@@ -2,41 +2,7 @@
 % Please edit documentation in R/types.R
 \name{raylib_objects}
 \alias{raylib_objects}
-\alias{Texture}
-\alias{Texture2D}
-\alias{TextureCubemap}
-\alias{Rectangle}
-\alias{Color}
-\alias{Colour}
-\alias{Vector2}
-\alias{Vector3}
-\alias{Vector4}
-\alias{Quaternion}
-\alias{Camera2D}
 \title{Constructors For Object Used in Raylib Functions}
-\usage{
-Texture(id, width, height, mipmaps, format)
-
-Texture2D(id, width, height, mipmaps, format)
-
-TextureCubemap(id, width, height, mipmaps, format)
-
-Rectangle(x, y, width, height)
-
-Color(color_name, alpha = 255)
-
-Colour(color_name, alpha = 255)
-
-Vector2(x, y)
-
-Vector3(x, y, z)
-
-Vector4(x, y, z, w)
-
-Quaternion(x, y, z, w)
-
-Camera2D(offset, target, rotation, zoom)
-}
 \description{
 These objects are used in Raylib functions. The constructors
 make it easy to create objects that are aligned with
@@ -55,4 +21,3 @@ to R color names. see: \code{\link[grDevices:colors]{grDevices::colors()}}
 \item \code{Camera2D} - Camera2D, defines position/orientation in 2d space
 }
 }
-\concept{Raylib objects}

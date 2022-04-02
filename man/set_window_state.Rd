@@ -6,6 +6,9 @@
 \usage{
 set_window_state(flags)
 }
+\arguments{
+\item{flags}{One of System/Window config flags. See: \link{config_flags}}
+}
 \description{
 Set window configuration state using flags (only PLATFORM_DESKTOP)
 }

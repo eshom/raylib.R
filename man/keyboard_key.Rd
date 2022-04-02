@@ -19,7 +19,7 @@ C definition:
 typedef enum {
 KEY_NULL            = 0,        // Key: NULL, used for no key pressed
 // Alphanumeric keys
-KEY_APOSTROPHE      = 39,       // Key: '
+KEY_APOSTROPHE      = 39,       // Key: \'
 KEY_COMMA           = 44,       // Key: ,
 KEY_MINUS           = 45,       // Key: -
 KEY_PERIOD          = 46,       // Key: .
@@ -62,9 +62,9 @@ KEY_W               = 87,       // Key: W | w
 KEY_X               = 88,       // Key: X | x
 KEY_Y               = 89,       // Key: Y | y
 KEY_Z               = 90,       // Key: Z | z
-KEY_LEFT_BRACKET    = 91,       // Key: \link[=
-   KEY_BACKSLASH       = 92,       // Key: '\\'
-   KEY_RIGHT_BRACKET   = 93,       // Key: ]{ KEY_BACKSLASH       = 92,       // Key: '\' KEY_RIGHT_BRACKET   = 93,       // Key: }
+KEY_LEFT_BRACKET    = 91,       // Key: [
+KEY_BACKSLASH       = 92,       // Key: \\
+KEY_RIGHT_BRACKET   = 93,       // Key: ]
 KEY_GRAVE           = 96,       // Key: `
 // Function keys
 KEY_SPACE           = 32,       // Key: Space

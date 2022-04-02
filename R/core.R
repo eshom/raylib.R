@@ -97,6 +97,7 @@ is_window_state <- function(flag) {
 
 #' @family Windows-related functions
 #' @title Set window configuration state using flags (only PLATFORM_DESKTOP)
+#' @param flags One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 set_window_state <- function(flags) {
@@ -107,6 +108,7 @@ set_window_state <- function(flags) {
 
 #' @family Windows-related functions
 #' @title Clear window configuration state flags
+#' @param flags One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 clear_window_state <- function(flags) {
