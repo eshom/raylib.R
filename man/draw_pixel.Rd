@@ -9,7 +9,7 @@ draw_pixel(posX, posY, color)
 \arguments{
 \item{posX}{Integer. X position.}
 
-\item{posY}{Iteger. Y position.}
+\item{posY}{Integer. Y position.}
 
 \item{color}{Color object. Integer vector with RGBA values between 0 and 255.}
 }

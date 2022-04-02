@@ -29,6 +29,7 @@ Texture, tex data stored in GPU memory (VRAM)
 \seealso{
 Other Raylib objects: 
 \code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Rectangle}()},
 \code{\link{Vector2}()},
@@ -37,6 +38,7 @@ Other Raylib objects:
 
 Other Raylib objects: 
 \code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Rectangle}()},
 \code{\link{Vector2}()},
@@ -45,6 +47,7 @@ Other Raylib objects:
 
 Other Raylib objects: 
 \code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Rectangle}()},
 \code{\link{Vector2}()},

@@ -174,6 +174,24 @@ SEXP ToggleFullscreen_R(void)
 
 // Drawing-related functions
 
+// Set background color (framebuffer clear color)
+SEXP ClearBackground_R( SEXP color )
+{
+        int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
+  
+        for (int i = 0; i < LENGTH(color); ++i) {
+           if ((color_p[i] < 0) || (color_p[i] > 255)) {
+               Rf_error("Expecting 0 < `color` <= 255");
+               return R_NilValue;
+           }
+        }
+  
+        Color col = { color_p[0], color_p[1], color_p[2], color_p[3] };
+        ClearBackground(col);
+        return R_NilValue;
+  
+}
+
 // Setup canvas (framebuffer) to start drawing
 SEXP BeginDrawing_R(void)
 {
@@ -189,22 +207,87 @@ SEXP EndDrawing_R(void)
 }
 
 // Begin 2D mode with custom camera (2D)
-// SEXP BeginMode2D_R()
-// {
-//          BeginMode2D();
-//          return R_NilValue;
-// }
+SEXP BeginMode2D_R( SEXP offset,
+                    SEXP target,
+                    SEXP rotation, 
+                    SEXP zoom )
+{
+  
+          double *offset_p = REAL(offset);
+          double *target_p = REAL(target);
+          double *rotation_p = REAL(rotation);
+          double *zoom_p = REAL(zoom);
+  
+          Camera2D camera = { 0 };
+          camera.offset = (Vector2){ (float)offset_p[0], (float)offset_p[1] };
+          camera.target = (Vector2){ (float)target_p[0], (float)target_p[1] };
+          camera.rotation = (float)rotation_p[0];
+          camera.zoom = (float)zoom_p[0];
+  
+          BeginMode2D(camera);
+  
+          return R_NilValue;
+}
 
 // Ends 2D mode with custom camera
-// SEXP EndMode2D_R(void)
-// {
-//          EndMode2D();
-//          return R_NilValue;
-// }
-/* RLAPI void BeginMode2D(Camera2D camera);                          // Begin 2D mode with custom camera (2D) */
-/* RLAPI void EndMode2D(void);                                       // Ends 2D mode with custom camera */
-/* RLAPI void BeginMode3D(Camera3D camera);                          // Begin 3D mode with custom camera (3D) */
-/* RLAPI void EndMode3D(void);                                       // Ends 3D mode and returns to default 2D orthographic mode */
+SEXP EndMode2D_R(void)
+{
+          EndMode2D();
+          return R_NilValue;
+}
+
+// Begin 3D mode with custom camera (3D)
+SEXP BeginMode3D_R( SEXP position,
+                    SEXP target,
+                    SEXP up,
+                    SEXP fovy,
+                    SEXP projection)
+{
+  
+  double *position_p = REAL(position);
+  double *target_p = REAL(target);
+  double *up_p = REAL(up);
+  double *fovy_p = REAL(fovy);
+  int *projection_p = INTEGER(projection);
+  
+  Camera camera = { 0 };
+  camera.position = (Vector3){ (float)position_p[0], (float)position_p[1], (float)position_p[2] };
+  camera.target = (Vector3){ (float)target_p[0], (float)target_p[1], (float)target_p[2] };
+  camera.up = (Vector3){ (float)up_p[0], (float)up_p[1], (float)up_p[2] };
+  camera.fovy = (float)fovy_p[0];
+  
+  switch(projection_p[0])
+  {
+  case 1:
+    camera.projection = CAMERA_CUSTOM; break;
+  case 2:
+    camera.projection = CAMERA_FIRST_PERSON; break;
+  case 3:
+    camera.projection = CAMERA_FREE; break;
+  case 4:
+    camera.projection = CAMERA_ORBITAL; break;
+  case 5:
+    camera.projection = CAMERA_ORTHOGRAPHIC; break;
+  case 6:
+    camera.projection = CAMERA_PERSPECTIVE; break;
+  case 7:
+    camera.projection = CAMERA_THIRD_PERSON; break;
+  default: Rf_error("CAMERA3D C ERROR: bad perspective integer");
+  }
+  
+  BeginMode3D(camera);
+  
+  return R_NilValue;
+  
+}
+
+// Ends 3D mode and returns to default 2D orthographic mode
+SEXP EndMode3D_R(void)
+{
+  EndMode3D();
+  return R_NilValue;
+}
+
 /* RLAPI void BeginTextureMode(RenderTexture2D target);              // Begin drawing to render texture */
 /* RLAPI void EndTextureMode(void);                                  // Ends drawing to render texture */
 /* RLAPI void BeginShaderMode(Shader shader);                        // Begin custom shader drawing */

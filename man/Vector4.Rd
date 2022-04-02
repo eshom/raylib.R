@@ -24,6 +24,7 @@ Vector with 4 components
 \seealso{
 Other Raylib objects: 
 \code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
@@ -32,6 +33,7 @@ Other Raylib objects:
 
 Other Raylib objects: 
 \code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
