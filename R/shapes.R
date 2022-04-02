@@ -21,7 +21,7 @@ set_shapes_texture <- function(texture, rectangle_source) {
 #' @family Basic shapes drawing functions
 #' @title Draw a pixel
 #' @param posX Integer. X position.
-#' @param posY Iteger. Y position.
+#' @param posY Integer. Y position.
 #' @param color Color object. Integer vector with RGBA values between 0 and 255.
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export

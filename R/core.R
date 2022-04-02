@@ -131,13 +131,10 @@ toggle_fullscreen <- function() {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @name clear_background
 #' @title Set background color (framebuffer clear color)
-#' @param color An object of class 'Color'
+#' @param color Color object. Integer vector with RGBA values between 0 and 255.
 #' @export
 #' @family Drawing-related functions 
 clear_background <- function(color) {
-  
-  if (class(color) != "Color")
-    stop("Object of class 'Color' needs to be provided to the 'color' argument")
   
   .Call("ClearBackground_R", as.integer(color))
   
@@ -189,7 +186,8 @@ NULL
 #' @rdname mode2d
 #' @export
 begin_mode_2d <- function(camera) {
-  if (class(camera) != "Camera2D") stop("Object passed to the 'camera' argument should be of 'Camera2D' class.")
+  if (!"Camera2D" %in% class(camera)) 
+    stop("Object passed to the 'camera' argument should be of 'Camera2D' class.")
   .Call("BeginMode2D_R", 
         camera[[1]], camera[[2]],
         camera[[3]], camera[[4]])
