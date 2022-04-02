@@ -14,7 +14,7 @@ Set background color (framebuffer clear color)
 }
 \seealso{
 Other Drawing-related functions: 
-\code{\link{drawing_init}},
-\code{\link{mode2d_init}}
+\code{\link{drawing}},
+\code{\link{mode2d}}
 }
 \concept{Drawing-related functions}

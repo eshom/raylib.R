@@ -175,12 +175,21 @@ SEXP ToggleFullscreen_R(void)
 // Drawing-related functions
 
 // Set background color (framebuffer clear color)
-SEXP ClearBackground_R(r, g, b, alpha)
+SEXP ClearBackground_R( SEXP color )
 {
-       Color color = { r, g, b, alpha };
-       ClearBackground(color);
-       return R_NilValue;
-
+        int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
+  
+        for (int i = 0; i < LENGTH(color); ++i) {
+           if ((color_p[i] < 0) || (color_p[i] > 255)) {
+               Rf_error("Expecting 0 < `color` <= 255");
+               return R_NilValue;
+           }
+        }
+  
+        Color col = { color_p[0], color_p[1], color_p[2], color_p[3] };
+        ClearBackground(col);
+        return R_NilValue;
+  
 }
 
 // Setup canvas (framebuffer) to start drawing
@@ -198,28 +207,34 @@ SEXP EndDrawing_R(void)
 }
 
 // Begin 2D mode with custom camera (2D)
-SEXP BeginMode2D_R(offset1, offset2,
-                   target1, target2,
-                   rotation, zoom)
- {
+SEXP BeginMode2D_R( SEXP offset,
+                    SEXP target,
+                    SEXP rotation, 
+                    SEXP zoom )
+{
+  
+          double *offset_p = REAL(offset);
+          double *target_p = REAL(target);
+          double *rotation_p = REAL(rotation);
+          double *zoom_p = REAL(zoom);
   
           Camera2D camera = { 0 };
-          camera.offset = (Vector2){ offset1, offset2 };
-          camera.target = (Vector2){ target1, target2 };
-          camera.rotation = rotation;
-          camera.zoom = zoom;
-          
+          camera.offset = (Vector2){ (float)offset_p[0], (float)offset_p[1] };
+          camera.target = (Vector2){ (float)target_p[0], (float)target_p[1] };
+          camera.rotation = (float)rotation_p[0];
+          camera.zoom = (float)zoom_p[0];
+  
           BeginMode2D(camera);
-          
+  
           return R_NilValue;
- }
+}
 
 // Ends 2D mode with custom camera
- SEXP EndMode2D_R(void)
- {
+SEXP EndMode2D_R(void)
+{
           EndMode2D();
           return R_NilValue;
- }
+}
 
 /* RLAPI void BeginMode3D(Camera3D camera);                          // Begin 3D mode with custom camera (3D) */
 /* RLAPI void EndMode3D(void);                                       // Ends 3D mode and returns to default 2D orthographic mode */

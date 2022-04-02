@@ -2,7 +2,6 @@
 % Please edit documentation in R/types.R
 \name{Camera2D}
 \alias{Camera2D}
-
 \title{Camera2D, defines position/orientation in 2d space}
 \usage{
 Camera2D(offset, target, rotation, zoom)

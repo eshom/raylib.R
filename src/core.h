@@ -21,6 +21,10 @@ SEXP ClearWindowState_R(SEXP flags);
 SEXP ToggleFullscreen_R(void);
 
 // Drawing-related functions
+SEXP ClearBackground_R(SEXP color);
 SEXP BeginDrawing_R(void);
 SEXP EndDrawing_R(void);
+SEXP BeginMode2D_R(SEXP offset, SEXP target, SEXP rotation, SEXP zoom);
+SEXP EndMode2D_R(void);
+
 #endif

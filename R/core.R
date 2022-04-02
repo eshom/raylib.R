@@ -139,13 +139,13 @@ clear_background <- function(color) {
   if (class(color) != "Color")
     stop("Object of class 'Color' needs to be provided to the 'color' argument")
   
-  .Call("ClearBackground_R", color[1], color[2], color[3], color[4])
+  .Call("ClearBackground_R", as.integer(color))
   
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @name drawing_init
-#' @rdname drawing_init
+#' @name drawing
+#' @rdname drawing
 #' @title Functions To Start And Stop Canvas Drawing
 #' @description
 #' - `begin_drawing` - Setup canvas (framebuffer) to start drawing
@@ -156,7 +156,7 @@ NULL
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @family Drawing-related functions
-#' @rdname drawing_init
+#' @rdname drawing
 #' @export
 begin_drawing <- function() {
         .Call("BeginDrawing_R")
@@ -165,7 +165,7 @@ begin_drawing <- function() {
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @family Drawing-related functions
-#' @rdname drawing_init
+#' @rdname drawing
 #' @export
 end_drawing <- function() {
         .Call("EndDrawing_R")
@@ -173,32 +173,30 @@ end_drawing <- function() {
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @name mode2d_init
-#' @rdname mode2d_init
+#' @name mode2d
+#' @rdname mode2d
 #' @title Functions to start and stop 2D mode
 #' @description 
 #' - `begin_mode_2d` - Begin 2D mode with custom camera (2D)
 #' - `end_mode_2d` - Ends 2D mode with custom camera
 #' @aliases begin_mode_2d
 #' @aliases end_mode_2d
+#' @family Drawing-related functions 
 NULL
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @family Drawing-related functions 
 #' @param camera Object created with Camera2D
-#' @rdname mode2d_init
+#' @rdname mode2d
 #' @export
 begin_mode_2d <- function(camera) {
   if (class(camera) != "Camera2D") stop("Object passed to the 'camera' argument should be of 'Camera2D' class.")
   .Call("BeginMode2D_R", 
-        camera[[1]][1], camera[[1]][2], 
-        camera[[2]][1], camera[[2]][2],
+        camera[[1]], camera[[2]],
         camera[[3]], camera[[4]])
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @family Drawing-related functions
-#' @rdname mode2d_init
+#' @rdname mode2d
 #' @export
 end_mode_2d <- function() {
   .Call("EndMode2D_R")
