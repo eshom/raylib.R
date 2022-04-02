@@ -87,6 +87,7 @@ is_window_resized <- function() {
 
 #' @family Windows-related functions
 #' @title Check if one specific window flag is enabled
+#' @param flag One of System/Window config flags. See: [config_flags]
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_state <- function(flag) {

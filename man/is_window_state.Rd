@@ -6,6 +6,9 @@
 \usage{
 is_window_state(flag)
 }
+\arguments{
+\item{flag}{One of System/Window config flags. See: \link{config_flags}}
+}
 \description{
 Check if one specific window flag is enabled
 }
