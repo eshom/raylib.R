@@ -129,6 +129,7 @@ Camera2D <- function(offset, target, rotation, zoom) {
 }
 
 #' @family Raylib objects
+#' @useDynLib raylib.R, .registration = TRUE
 #' @title Camera3D, defines position/orientation in 3D space
 #' @param position Vector3. Camera position
 #' @param target Vector3. Camera target it looks-at
@@ -139,7 +140,10 @@ Camera2D <- function(offset, target, rotation, zoom) {
 #' CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 #' @export
 Camera3D <- function(position, target, up, fovy, projection) {
-        out <- list(position, target, up, as.double(fovy), as.integer(projection))
+        cam_list <- list(position, target, up, as.double(fovy),
+                         as.integer(projection))
+
+        out <- .Call("create_Camera3D_R", cam_list, NULL)
         class(out) <- c("Camera3D", class(out))
         out
 }

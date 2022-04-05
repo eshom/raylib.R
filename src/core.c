@@ -237,6 +237,13 @@ SEXP EndMode2D_R(void)
 }
 
 // Begin 3D mode with custom camera (3D)
+SEXP BeginMode3D_R(SEXP camera)
+{
+        Camera3D *camera_p = (Camera3D*)R_ExternalPtrAddr(camera);
+        BeginMode3D(*camera_p);
+        return R_NilValue;
+}
+
 /* SEXP BeginMode3D_R( SEXP position, */
 /*                     SEXP target, */
 /*                     SEXP up, */

@@ -2,10 +2,16 @@
 % Please edit documentation in R/core.R
 \name{mode3d}
 \alias{mode3d}
+\alias{begin_mode_3d}
 \alias{end_mode_3d}
 \title{Functions to start and stop 3D mode}
 \usage{
+begin_mode_3d(camera)
+
 end_mode_3d()
+}
+\arguments{
+\item{camera}{Camera3D object}
 }
 \description{
 \itemize{

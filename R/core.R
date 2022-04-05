@@ -211,16 +211,16 @@ end_mode_2d <- function() {
 #' @family Drawing-related functions
 NULL
 
-## #' @useDynLib raylib.R, .registration = TRUE
-## #' @param Camera3D object
-## #' @rdname mode3d
-## #' @export
-## begin_mode_3d <- function(camera) {
-##         stopifnot(inherits(camera, "Camera2D"))
+#' @useDynLib raylib.R, .registration = TRUE
+#' @param camera Camera3D object
+#' @rdname mode3d
+#' @export
+begin_mode_3d <- function(camera) {
+        stopifnot(inherits(camera, "Camera3D"))
 
-##         .Call("BeginMode3D_R", camera)
-##         invisible()
-## }
+        .Call("BeginMode3D_R", camera)
+        invisible()
+}
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @rdname mode3d
