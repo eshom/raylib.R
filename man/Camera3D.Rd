@@ -2,34 +2,39 @@
 % Please edit documentation in R/types.R
 \name{Camera3D}
 \alias{Camera3D}
+\alias{Camera}
 \title{Camera3D, defines position/orientation in 3D space}
 \usage{
-Camera3D(position, target, up, fovy, perspective)
+Camera3D(position, target, up, fovy, projection)
+
+Camera(position, target, up, fovy, projection)
 }
 \arguments{
 \item{position}{Vector3. Camera position}
 
-\item{target}{Vector3. Camera looking at point}
+\item{target}{Vector3. Camera target it looks-at}
 
-\item{up}{Vector3. Camera up vector (rotation towards target)}
+\item{up}{Vector3. Camera up vector (rotation over its axis)}
 
-\item{fovy}{Numeric. Camera field-of-view Y}
+\item{fovy}{Double. Camera field-of-view apperture in Y (degrees)
+in perspective, used as near plane width in orthographic}
 
-\item{perspective}{Camera mode type. One of:
-\itemize{
-\item "CUSTOM"
-\item "FIRST_PERSON"
-\item "FREE"
-\item "ORBITAL"
-\item "ORTHOGRAPHIC"
-\item "PERSPECTIVE"
-\item "THIRD_PERSON"
-}}
+\item{projection}{Camera projection:
+CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC}
 }
 \description{
 Camera3D, defines position/orientation in 3D space
 }
 \seealso{
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Color}()},
+\code{\link{Rectangle}()},
+\code{\link{Texture}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},

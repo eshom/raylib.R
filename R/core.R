@@ -133,11 +133,12 @@ toggle_fullscreen <- function() {
 #' @title Set background color (framebuffer clear color)
 #' @param color Color object. Integer vector with RGBA values between 0 and 255.
 #' @export
-#' @family Drawing-related functions 
+#' @family Drawing-related functions
 clear_background <- function(color) {
-  
-  .Call("ClearBackground_R", as.integer(color))
-  
+
+        .Call("ClearBackground_R", as.integer(color))
+        invisible()
+
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
@@ -173,60 +174,60 @@ end_drawing <- function() {
 #' @name mode2d
 #' @rdname mode2d
 #' @title Functions to start and stop 2D mode
-#' @description 
+#' @description
 #' - `begin_mode_2d` - Begin 2D mode with custom camera (2D)
 #' - `end_mode_2d` - Ends 2D mode with custom camera
 #' @aliases begin_mode_2d
 #' @aliases end_mode_2d
-#' @family Drawing-related functions 
+#' @family Drawing-related functions
 NULL
 
 #' @useDynLib raylib.R, .registration = TRUE
-#' @param camera Object created with `Camera2D` constructor
+#' @param camera Camera2D object
 #' @rdname mode2d
 #' @export
 begin_mode_2d <- function(camera) {
-  if (!"Camera2D" %in% class(camera)) 
-    stop("Object passed to the 'camera' argument should be of 'Camera2D' class.")
-  .Call("BeginMode2D_R", 
-        camera[[1]], camera[[2]],
-        camera[[3]], camera[[4]])
+        stopifnot(inherits(camera, "Camera2D"))
+
+        .Call("BeginMode2D_R", camera)
+        invisible()
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @rdname mode2d
 #' @export
 end_mode_2d <- function() {
-  .Call("EndMode2D_R")
+        .Call("EndMode2D_R")
+        invisible()
 }
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @name mode3d
 #' @rdname mode3d
 #' @title Functions to start and stop 3D mode
-#' @description 
-#' - `begin_mode_3d` - Begin 3D mode with custom camera (2D)
+#' @description
+#' - `begin_mode_3d` - Begin 3D mode with custom camera (3D)
 #' - `end_mode_3d` - Ends 3D mode with custom camera
 #' @aliases begin_mode_2d
 #' @aliases end_mode_2d
-#' @family Drawing-related functions 
+#' @family Drawing-related functions
 NULL
 
-#' @useDynLib raylib.R, .registration = TRUE
-#' @param camera Object created with `Camera3D` constructor
-#' @rdname mode3d
-#' @export
-begin_mode_3d <- function(camera) {
-  if (!"Camera3D" %in% class(camera)) 
-    stop("Object passed to the 'camera' argument should be of 'Camera3D' class.")
-  .Call("BeginMode3D_R", 
-        camera[[1]], camera[[2]],
-        camera[[3]], camera[[4]], camera[[5]])
-}
+## #' @useDynLib raylib.R, .registration = TRUE
+## #' @param Camera3D object
+## #' @rdname mode3d
+## #' @export
+## begin_mode_3d <- function(camera) {
+##         stopifnot(inherits(camera, "Camera2D"))
+
+##         .Call("BeginMode3D_R", camera)
+##         invisible()
+## }
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @rdname mode3d
 #' @export
 end_mode_3d <- function() {
-  .Call("EndMode3D_R")
+        .Call("EndMode3D_R")
+        invisible()
 }

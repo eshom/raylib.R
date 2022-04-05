@@ -25,8 +25,13 @@ static const R_CallMethodDef callMethods[] = {
         {"ToggleFullscreen_R",   (DL_FUNC) &ToggleFullscreen_R,   0},
 
         // Drawing-related functions
-        {"BeginDrawing_R", (DL_FUNC) &BeginDrawing_R, 0},
-        {"EndDrawing_R",   (DL_FUNC) &EndDrawing_R,   0},
+        {"ClearBackground_R", (DL_FUNC) &ClearBackground_R, 1},
+        {"BeginDrawing_R",    (DL_FUNC) &BeginDrawing_R,    0},
+        {"EndDrawing_R",      (DL_FUNC) &EndDrawing_R,      0},
+        {"BeginMode2D_R",     (DL_FUNC) &BeginMode2D_R,     1},
+        {"EndMode2D_R",       (DL_FUNC) &EndMode2D_R,       0},
+        //{"BeginMode3D_R",     (DL_FUNC) &BeginMode3D_R,     1},
+        {"EndMode3D_R",       (DL_FUNC) &EndMode3D_R,       0},
 
         // Basic shapes drawing functions
         {"SetShapesTexture_R", (DL_FUNC) &SetShapesTexture_R, 2},

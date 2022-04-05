@@ -11,7 +11,7 @@ begin_mode_2d(camera)
 end_mode_2d()
 }
 \arguments{
-\item{camera}{Object created with \code{Camera2D} constructor}
+\item{camera}{Camera2D object}
 }
 \description{
 \itemize{

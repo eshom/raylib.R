@@ -4,20 +4,14 @@
 \alias{mode3d}
 \alias{begin_mode_2d}
 \alias{end_mode_2d}
-\alias{begin_mode_3d}
 \alias{end_mode_3d}
 \title{Functions to start and stop 3D mode}
 \usage{
-begin_mode_3d(camera)
-
 end_mode_3d()
-}
-\arguments{
-\item{camera}{Object created with \code{Camera3D} constructor}
 }
 \description{
 \itemize{
-\item \code{begin_mode_3d} - Begin 3D mode with custom camera (2D)
+\item \code{begin_mode_3d} - Begin 3D mode with custom camera (3D)
 \item \code{end_mode_3d} - Ends 3D mode with custom camera
 }
 }

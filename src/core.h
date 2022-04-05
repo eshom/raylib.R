@@ -24,8 +24,8 @@ SEXP ToggleFullscreen_R(void);
 SEXP ClearBackground_R(SEXP color);
 SEXP BeginDrawing_R(void);
 SEXP EndDrawing_R(void);
-SEXP BeginMode2D_R(SEXP offset, SEXP target, SEXP rotation, SEXP zoom);
+SEXP BeginMode2D_R(SEXP camera);
 SEXP EndMode2D_R(void);
-SEXP BeginMode3D_R(SEXP position, SEXP target, SEXP up, SEXP fovy, SEXP projection);
+//SEXP BeginMode3D_R(SEXP position, SEXP target, SEXP up, SEXP fovy, SEXP projection);
 SEXP EndMode3D_R(void);
 #endif

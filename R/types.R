@@ -1,7 +1,3 @@
-## Handy utilities
-valid_3D_persp <-c("CUSTOM", "FIRST_PERSON", "FREE", "ORBITAL", 
-                   "ORTHOGRAPHIC", "PERSPECTIVE", "THIRD_PERSON")
-
 ## Raylib objects (corresponds to structure definitions)
 
 #' @name raylib_objects
@@ -135,28 +131,21 @@ Camera2D <- function(offset, target, rotation, zoom) {
 #' @family Raylib objects
 #' @title Camera3D, defines position/orientation in 3D space
 #' @param position Vector3. Camera position
-#' @param target Vector3. Camera looking at point
-#' @param up Vector3. Camera up vector (rotation towards target)
-#' @param fovy Numeric. Camera field-of-view Y
-#' @param perspective Camera mode type. One of: 
-#' - "CUSTOM" 
-#' - "FIRST_PERSON"
-#' - "FREE" 
-#' - "ORBITAL" 
-#' - "ORTHOGRAPHIC" 
-#' - "PERSPECTIVE" 
-#' - "THIRD_PERSON"
-#' 
+#' @param target Vector3. Camera target it looks-at
+#' @param up Vector3. Camera up vector (rotation over its axis)
+#' @param fovy Double. Camera field-of-view apperture in Y (degrees)
+#' in perspective, used as near plane width in orthographic
+#' @param projection Camera projection:
+#' CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 #' @export
-Camera3D <- function(position, target, up, fovy, perspective) {
-  if (!is.character(perspective) || length(perspective) != 1 ||
-      !perspective %in% c("CUSTOM", "FIRST_PERSON", "FREE", "ORBITAL", 
-                          "ORTHOGRAPHIC", "PERSPECTIVE", "THIRD_PERSON"))
-    stop(paste0("Character string passed to the 'perspective' argument ",
-                "should be one of: '",
-                paste(valid_3D_persp, collapse = "', '"), "'."))
-  
-  out <- list(position, target, up, as.double(fovy), which(valid_3D_persp == perspective))
-  class(out) <- c("Camera3D", class(out))
-  out
+Camera3D <- function(position, target, up, fovy, projection) {
+        stop("Dummy function, will be replaced soon")
+        out <- NULL
+        class(out) <- c("Camera3D", class(out))
+        out
 }
+
+#' @family Raylib objects
+#' @rdname Camera3D
+#' @export
+Camera <- Camera3D
