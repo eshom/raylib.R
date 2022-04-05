@@ -208,8 +208,6 @@ end_mode_2d <- function() {
 #' @description
 #' - `begin_mode_3d` - Begin 3D mode with custom camera (3D)
 #' - `end_mode_3d` - Ends 3D mode with custom camera
-#' @aliases begin_mode_2d
-#' @aliases end_mode_2d
 #' @family Drawing-related functions
 NULL
 

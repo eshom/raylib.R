@@ -2,8 +2,6 @@
 % Please edit documentation in R/core.R
 \name{mode3d}
 \alias{mode3d}
-\alias{begin_mode_2d}
-\alias{end_mode_2d}
 \alias{end_mode_3d}
 \title{Functions to start and stop 3D mode}
 \usage{
