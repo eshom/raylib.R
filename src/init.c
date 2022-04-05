@@ -1,5 +1,6 @@
 #include "core.h"
 #include "shapes.h"
+#include "camera3d.h"
 #include <R_ext/Rdynload.h>
 
 // R_CallMethodDef quick reminder:
@@ -37,6 +38,9 @@ static const R_CallMethodDef callMethods[] = {
         {"SetShapesTexture_R", (DL_FUNC) &SetShapesTexture_R, 2},
         {"DrawPixel_R",        (DL_FUNC) &DrawPixel_R,        3},
         {"DrawPixelV_R",       (DL_FUNC) &DrawPixelV_R,       2},
+
+        // Heap allocated structs and external pointer handling
+        {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
 
         {NULL, NULL, 0}};
 

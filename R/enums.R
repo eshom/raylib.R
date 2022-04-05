@@ -19,3 +19,9 @@
 #'
 #' Mouse buttons codes
 "mouse_button"
+
+#' Camera system modes
+"camera_mode"
+
+#' Camera projection
+"camera_projection"

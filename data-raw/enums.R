@@ -152,3 +152,18 @@ mouse_button <- list(
         MOUSE_BUTTON_BACK    = 6
 )
 usethis::use_data(mouse_button, overwrite = TRUE)
+
+camera_mode <- list(
+    CAMERA_CUSTOM = 0,
+    CAMERA_FREE = 1,
+    CAMERA_ORBITAL = 2,
+    CAMERA_FIRST_PERSON = 3,
+    CAMERA_THIRD_PERSON = 4
+)
+usethis::use_data(camera_mode, overwrite = TRUE)
+
+camera_projection <- list(
+        CAMERA_PERSPECTIVE = 0,
+        CAMERA_ORTHOGRAPHIC = 1
+)
+usethis::use_data(camera_projection, overwrite = TRUE)

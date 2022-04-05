@@ -139,8 +139,7 @@ Camera2D <- function(offset, target, rotation, zoom) {
 #' CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 #' @export
 Camera3D <- function(position, target, up, fovy, projection) {
-        stop("Dummy function, will be replaced soon")
-        out <- NULL
+        out <- list(position, target, up, as.double(fovy), as.integer(projection))
         class(out) <- c("Camera3D", class(out))
         out
 }
