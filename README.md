@@ -1,3 +1,5 @@
+[![R CMD check](https://github.com/eshom/raylib.R/actions/workflows/R_CMD_check_workflow.yml/badge.svg)](https://github.com/eshom/raylib.R/blob/master/.github/workflows/R_CMD_check_workflow.yml)
+
 # Raylib.R
 
 R bindings for raylib.
