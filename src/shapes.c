@@ -4,6 +4,13 @@
 #include <Rinternals.h>
 #include <raylib.h>
 
+static void check_color_bounds_else_error(int *color, int len)
+{
+        for (int i = 0; i < len; ++i)
+                if ((color[i] < 0) || (color[i] > 255))
+                        Rf_error("Expecting 0 < `color` <= 255");
+}
+
 // Set texture and rectangle to be used on shapes drawing
 // NOTE: It can be useful when using basic shapes and one single font,
 // defining a font char white rectangle would allow drawing everything in a single draw call
@@ -13,8 +20,8 @@ SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
         double *source_p = REAL(rectangle_source);
 
         if (texture_p[0] < 0) {
-          Rf_error("Expecting positive number for first element of `texture` argument");
-          return R_NilValue;
+                Rf_error("Expecting positive number for first element of `texture` argument");
+                // Stops execution and returns to R here
         }
 
         Texture2D t = {texture_p[0], // unsigned int
@@ -34,13 +41,7 @@ SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
 SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color)
 {
         int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
-
-        for (int i = 0; i < LENGTH(color); ++i) {
-                if ((color_p[i] < 0) || (color_p[i] > 255)) {
-                  Rf_error("Expecting 0 < `color` <= 255");
-                  return R_NilValue;
-                }
-        }
+        check_color_bounds_else_error(color_p, LENGTH(color));
 
         Color col = {(unsigned char)color_p[0], (unsigned char)color_p[1],
                      (unsigned char)color_p[2], (unsigned char)color_p[3]};
@@ -54,14 +55,9 @@ SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color)
 SEXP DrawPixelV_R(SEXP vector2_position, SEXP color)
 {
         int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
-        double *position_p = REAL(vector2_position);
+        check_color_bounds_else_error(color_p, LENGTH(color));
 
-        for (int i = 0; i < LENGTH(color); ++i) {
-                if ((color_p[i] < 0) || (color_p[i] > 255)) {
-                        Rf_error("Expecting 0 < `color` <= 255");
-                        return R_NilValue;
-                }
-        }
+        double *position_p = REAL(vector2_position);
 
         Color col = {(unsigned char)color_p[0], (unsigned char)color_p[1],
                 (unsigned char)color_p[2], (unsigned char)color_p[3]};
