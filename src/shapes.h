@@ -19,5 +19,6 @@ SEXP DrawLineBezier_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color);
 SEXP DrawLineBezierQuad_R(SEXP start_pos, SEXP end_pos, SEXP control_pos, SEXP thick, SEXP color);
 SEXP DrawLineBezierCubic_R(SEXP start_pos, SEXP end_pos, SEXP start_control_pos, SEXP end_control_pos, SEXP thick, SEXP color);
 SEXP DrawLineStrip_R(SEXP points, SEXP point_count, SEXP color);
+SEXP DrawCircleV_R(SEXP center, SEXP radius, SEXP color);
 
 #endif

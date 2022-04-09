@@ -130,3 +130,15 @@ draw_line_strip <- function(points, color) {
         .Call("DrawLineStrip_R", points, length(points), color)
         invisible()
 }
+
+#' @family Basic shapes drawing functions
+#' @title Draw a color-filled circle (Vector version)
+#' @param center Vector2. Center position of the filled circle.
+#' @param radius Float. Radius of the circle.
+#' @param color Color object. Integer vector with RGBA values between 0 and 255.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+draw_circle_v <- function(center, radius, color) {
+        .Call("DrawCircleV_R", center, radius, color)
+        invisible()
+}

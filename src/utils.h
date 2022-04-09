@@ -14,5 +14,6 @@ Rectangle rectangle_from_sexp(SEXP rectangle);
 unsigned int flag_from_sexp(SEXP flag);
 Camera2D camera2d_from_sexp(SEXP camera2d);
 Camera3D *camera3d_p_from_sexp(SEXP camera3d);
+const char *string_from_sexp(SEXP char_vec);
 
 #endif

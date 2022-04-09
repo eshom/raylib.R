@@ -22,6 +22,7 @@ Draw line using quadratic bezier curves with a control point
 }
 \seealso{
 Other Basic shapes drawing functions: 
+\code{\link{draw_circle_v}()},
 \code{\link{draw_line_bezier_cubic}()},
 \code{\link{draw_line_bezier}()},
 \code{\link{draw_line_ex}()},

@@ -20,6 +20,7 @@ Draw a line using cubic-bezier curves in-out
 }
 \seealso{
 Other Basic shapes drawing functions: 
+\code{\link{draw_circle_v}()},
 \code{\link{draw_line_bezier_cubic}()},
 \code{\link{draw_line_bezier_quad}()},
 \code{\link{draw_line_ex}()},

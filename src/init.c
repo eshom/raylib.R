@@ -1,5 +1,6 @@
 #include "core.h"
 #include "shapes.h"
+#include "text.h"
 #include "camera3d.h"
 #include <R_ext/Rdynload.h>
 
@@ -59,9 +60,13 @@ static const R_CallMethodDef callMethods[] = {
         {"DrawLineBezierQuad_R",  (DL_FUNC) &DrawLineBezierQuad_R,  5},
         {"DrawLineBezierCubic_R", (DL_FUNC) &DrawLineBezierCubic_R, 6},
         {"DrawLineStrip_R",       (DL_FUNC) &DrawLineStrip_R,       3},
+        {"DrawCircleV_R",         (DL_FUNC) &DrawCircleV_R,         3},
 
         // Heap allocated structs and external pointer handling
         {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
+
+        // Text module
+        {"DrawText_R",       (DL_FUNC) &DrawText_R,       5},
 
         {NULL, NULL, 0}};
 

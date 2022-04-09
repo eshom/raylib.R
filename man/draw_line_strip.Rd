@@ -16,6 +16,7 @@ Draw lines sequence
 }
 \seealso{
 Other Basic shapes drawing functions: 
+\code{\link{draw_circle_v}()},
 \code{\link{draw_line_bezier_cubic}()},
 \code{\link{draw_line_bezier_quad}()},
 \code{\link{draw_line_bezier}()},

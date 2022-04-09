@@ -141,6 +141,18 @@ SEXP DrawLineStrip_R(SEXP points, SEXP point_count, SEXP color)
 /* RLAPI void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);      // Draw a piece of a circle */
 /* RLAPI void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color); // Draw circle sector outline */
 /* RLAPI void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2);       // Draw a gradient-filled circle */
+
+// Draw a color-filled circle (Vector version)
+SEXP DrawCircleV_R(SEXP center, SEXP radius, SEXP color)
+{
+        Vector2 center_vec = vector2_from_sexp(center);
+        float rad = (float)Rf_asReal(radius);
+        Color col = color_from_sexp(color);
+
+        DrawCircleV(center_vec, rad, col);
+
+        return R_NilValue;
+}
 /* RLAPI void DrawCircleV(Vector2 center, float radius, Color color);                                       // Draw a color-filled circle (Vector version) */
 /* RLAPI void DrawCircleLines(int centerX, int centerY, float radius, Color color);                         // Draw circle outline */
 /* RLAPI void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color);             // Draw ellipse */

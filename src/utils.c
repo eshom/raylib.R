@@ -1,3 +1,4 @@
+#include <R_ext/Error.h>
 #define R_NO_REMAP
 #include "utils.h"
 #include <R.h>
@@ -112,4 +113,13 @@ Camera2D camera2d_from_sexp(SEXP camera)
 Camera3D *camera3d_p_from_sexp(SEXP camera)
 {
         return (Camera3D*)R_ExternalPtrAddr(camera);
+}
+
+// Get string for character vector of length 1 + checks. UTF-8 encoding
+const char *string_from_sexp(SEXP char_vec)
+{
+        if (LENGTH(char_vec) != 1)
+                Rf_error("Expecting character vector of length 1");
+
+        return Rf_translateCharUTF8(STRING_ELT(char_vec, 0));
 }
