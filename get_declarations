@@ -1,2 +1,2 @@
 #!/bin/bash
-egrep -h '^SEXP .+\(' src/*.c | grep -v '/\*' | sed 's/$/;/'
+grep -Ph '^.+\(.+\)(?!;)$' src/*.c | egrep -v '/\*|^//.+|if\s?\(|for\s?\(' | sed 's/$/;/'
