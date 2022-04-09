@@ -2,6 +2,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <raylib.h>
+#include "utils.h"
 #include "camera3d.h"
 
 // raylib object creation and handling defined here.
@@ -20,18 +21,9 @@ static void _finalizer(SEXP ext)
 
 SEXP create_Camera3D_R(SEXP cam_list, SEXP info)
 {
-        SEXP position = VECTOR_ELT(cam_list, 0);
-        double *position_p = REAL(position);
-        Vector3 position_vec = {(float)position_p[0], (float)position_p[1], (float)position_p[2]};
-
-        SEXP target = VECTOR_ELT(cam_list, 1);
-        double *target_p = REAL(target);
-        Vector3 target_vec = {(float)target_p[0], (float)target_p[1], (float)target_p[2]};
-
-        SEXP up = VECTOR_ELT(cam_list, 2);
-        double *up_p = REAL(up);
-        Vector3 up_vec = {(float)up_p[0], (float)up_p[1], (float)up_p[2]};
-
+        Vector3 position_vec = vector3_from_sexp(VECTOR_ELT(cam_list, 0));
+        Vector3 target_vec = vector3_from_sexp(VECTOR_ELT(cam_list, 1));
+        Vector3 up_vec = vector3_from_sexp(VECTOR_ELT(cam_list, 2));
         float fovy = (float)Rf_asReal(VECTOR_ELT(cam_list, 3));
         int projection = Rf_asInteger(VECTOR_ELT(cam_list, 4));
 

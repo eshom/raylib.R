@@ -61,9 +61,9 @@ SEXP DrawLine_R(SEXP position, SEXP color)
 // Draw a line (Vector version)
 SEXP DrawLineV_R(SEXP start_pos, SEXP end_pos, SEXP color)
 {
-        Color col = color_from_sexp(color);
         Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
         Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+        Color col = color_from_sexp(color);
 
         DrawLineV(start_pos_vec2, end_pos_vec2, col);
 
@@ -73,19 +73,70 @@ SEXP DrawLineV_R(SEXP start_pos, SEXP end_pos, SEXP color)
 // Draw a line defining thickness
 SEXP DrawLineEx_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color)
 {
-        Color col = color_from_sexp(color);
         Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
         Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
         float thk = (float)Rf_asReal(thick);
+        Color col = color_from_sexp(color);
 
         DrawLineEx(start_pos_vec2, end_pos_vec2, thk, col);
 
         return R_NilValue;
 }
-/* RLAPI void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);                   // Draw a line using cubic-bezier curves in-out */
-/* RLAPI void DrawLineBezierQuad(Vector2 startPos, Vector2 endPos, Vector2 controlPos, float thick, Color color); // Draw line using quadratic bezier curves with a control point */
-/* RLAPI void DrawLineBezierCubic(Vector2 startPos, Vector2 endPos, Vector2 startControlPos, Vector2 endControlPos, float thick, Color color); // Draw line using cubic bezier curves with 2 control points */
-/* RLAPI void DrawLineStrip(Vector2 *points, int pointCount, Color color);                                  // Draw lines sequence */
+
+// Draw a line using cubic-bezier curves in-out
+SEXP DrawLineBezier_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color)
+{
+        Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
+        Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+        float thk = (float)Rf_asReal(thick);
+        Color col = color_from_sexp(color);
+
+        DrawLineBezier(start_pos_vec2, end_pos_vec2, thk, col);
+
+        return R_NilValue;
+}
+
+// Draw line using quadratic bezier curves with a control point
+SEXP DrawLineBezierQuad_R(SEXP start_pos, SEXP end_pos, SEXP control_pos, SEXP thick, SEXP color)
+{
+        Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
+        Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+        Vector2 control_pos_vec2 = vector2_from_sexp(control_pos);
+        float thk = (float)Rf_asReal(thick);
+        Color col = color_from_sexp(color);
+
+        DrawLineBezierQuad(start_pos_vec2, end_pos_vec2, control_pos_vec2, thk, col);
+
+        return R_NilValue;
+}
+
+// Draw line using cubic bezier curves with 2 control points
+SEXP DrawLineBezierCubic_R(SEXP start_pos, SEXP end_pos, SEXP start_control_pos, SEXP end_control_pos, SEXP thick, SEXP color)
+{
+        Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
+        Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+        Vector2 start_control_pos_vec2 = vector2_from_sexp(start_control_pos);
+        Vector2 end_control_pos_vec2 = vector2_from_sexp(end_control_pos);
+        float thk = (float)Rf_asReal(thick);
+        Color col = color_from_sexp(color);
+
+        DrawLineBezierCubic(start_pos_vec2, end_pos_vec2, start_control_pos_vec2, end_control_pos_vec2, thk, col);
+
+        return R_NilValue;
+}
+
+// Draw lines sequence
+SEXP DrawLineStrip_R(SEXP points, SEXP point_count, SEXP color)
+{
+        Vector2 *vec2_arr = vector2_array_from_sexp(points);
+        int pc = Rf_asInteger(point_count);
+        Color col = color_from_sexp(color);
+
+        DrawLineStrip(vec2_arr, pc, col);
+        R_Free(vec2_arr);
+
+        return R_NilValue;
+}
 /* RLAPI void DrawCircle(int centerX, int centerY, float radius, Color color);                              // Draw a color-filled circle */
 /* RLAPI void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);      // Draw a piece of a circle */
 /* RLAPI void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color); // Draw circle sector outline */

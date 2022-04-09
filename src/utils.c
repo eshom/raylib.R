@@ -31,6 +31,34 @@ Vector2 vector2_from_sexp(SEXP vec2)
         return (Vector2){(float)vec2_p[0], (float)vec2_p[1]};
 }
 
+// Turn a list of R Vector2 objects into an array of Vector2
+// The return value needs to be freed
+Vector2 *vector2_array_from_sexp(SEXP vec2_list)
+{
+        int points_len = LENGTH(vec2_list);
+
+        if (points_len == 0)
+                Rf_error("Expecting list length greater than zero");
+
+        Vector2 *points_out = R_Calloc(points_len, Vector2);
+
+        if (points_out == NULL)
+                Rf_error("Could not allocate memory");
+
+        for (int i = 0; i < points_len; ++i)
+                points_out[i] = vector2_from_sexp(VECTOR_ELT(vec2_list, i));
+
+        return points_out;
+}
+
+// Take a vector3 vector passed from R, and return a Vector3
+Vector3 vector3_from_sexp(SEXP vec3)
+{
+        double *vec3_p = REAL(vec3);
+
+        return (Vector3){(float)vec3_p[0], (float)vec3_p[1], (float)vec3_p[2]};
+}
+
 // Take a texture vector passed from R, and return a Texture struct + checks
 Texture texture_from_sexp(SEXP texture)
 {
