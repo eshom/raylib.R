@@ -34,10 +34,28 @@ static const R_CallMethodDef callMethods[] = {
         {"BeginMode3D_R",     (DL_FUNC) &BeginMode3D_R,     1},
         {"EndMode3D_R",       (DL_FUNC) &EndMode3D_R,       0},
 
+        // Input-related functions: keyboard
+        {"IsKeyPressed_R",   (DL_FUNC) &IsKeyPressed_R,   1},
+        {"IsKeyDown_R",      (DL_FUNC) &IsKeyDown_R,      1},
+        {"IsKeyReleased_R",  (DL_FUNC) &IsKeyReleased_R,  1},
+        {"IsKeyUp_R",        (DL_FUNC) &IsKeyUp_R,        1},
+        {"SetExitKey_R",     (DL_FUNC) &SetExitKey_R,     1},
+        {"GetKeyPressed_R",  (DL_FUNC) &GetKeyPressed_R,  0},
+        {"GetCharPressed_R", (DL_FUNC) &GetCharPressed_R, 0},
+
+        // Shapes module
+
         // Basic shapes drawing functions
-        {"SetShapesTexture_R", (DL_FUNC) &SetShapesTexture_R, 2},
-        {"DrawPixel_R",        (DL_FUNC) &DrawPixel_R,        3},
-        {"DrawPixelV_R",       (DL_FUNC) &DrawPixelV_R,       2},
+        {"SetShapesTexture_R",    (DL_FUNC) &SetShapesTexture_R,    2},
+        {"DrawPixel_R",           (DL_FUNC) &DrawPixel_R,           3},
+        {"DrawPixelV_R",          (DL_FUNC) &DrawPixelV_R,          2},
+        {"DrawLine_R",            (DL_FUNC) &DrawLine_R,            2},
+        {"DrawLineV_R",           (DL_FUNC) &DrawLineV_R,           3},
+        {"DrawLineEx_R",          (DL_FUNC) &DrawLineEx_R,          4},
+        {"DrawLineBezier_R",      (DL_FUNC) &DrawLineBezier_R,      4},
+        {"DrawLineBezierQuad_R",  (DL_FUNC) &DrawLineBezierQuad_R,  5},
+        {"DrawLineBezierCubic_R", (DL_FUNC) &DrawLineBezierCubic_R, 6},
+        {"DrawLineStrip_R",       (DL_FUNC) &DrawLineStrip_R,       3},
 
         // Heap allocated structs and external pointer handling
         {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
