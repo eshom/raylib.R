@@ -349,7 +349,7 @@ SEXP SetExitKey_R(SEXP key)
         return R_NilValue;
 }
 
-// Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
+// get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
 SEXP GetKeyPressed_R(void)
 {
         return Rf_ScalarInteger(GetKeyPressed());

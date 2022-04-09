@@ -1,4 +1,6 @@
+##--------------------------##
 ## Windows-related functions
+##--------------------------##
 
 #' @family Windows-related functions
 #' @title Initialize window and OpenGL context
@@ -126,7 +128,9 @@ toggle_fullscreen <- function() {
         invisible()
 }
 
+##--------------------------##
 ## Drawing-related functions
+##--------------------------##
 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @name clear_background
@@ -228,4 +232,90 @@ begin_mode_3d <- function(camera) {
 end_mode_3d <- function() {
         .Call("EndMode3D_R")
         invisible()
+}
+
+##-----------------------------------##
+## Input-related functions: keyboard
+##-----------------------------------##
+
+#' @family Input-related functions: keyboard
+#' @title Check if a key has been pressed once
+#' @param key Keyboard key code. One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_key_pressed <- function(key) {
+        stopifnot(key %in% keyboard_key)
+
+        .Call("IsKeyPressed_R", key)
+}
+
+#' @family Input-related functions: keyboard
+#' @title Check if a key is being pressed
+#' @param key Keyboard key code. One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_key_down <- function(key) {
+        stopifnot(key %in% keyboard_key)
+
+        .Call("IsKeyDown_R", key)
+}
+
+#' @family Input-related functions: keyboard
+#' @title Check if a key has been released once
+#' @param key Keyboard key code. One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_key_released <- function(key) {
+        stopifnot(key %in% keyboard_key)
+
+        .Call("IsKeyReleased_R", key)
+}
+
+#' @family Input-related functions: keyboard
+#' @title Check if a key is NOT being pressed
+#' @param key Keyboard key code. One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_key_up <- function(key) {
+        stopifnot(key %in% keyboard_key)
+
+        .Call("IsKeyUp_R", key)
+}
+
+#' @family Input-related functions: keyboard
+#' @title Set a custom key to exit program (default is ESC)
+#' @param key Keyboard key code. One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_exit_key <- function(key) {
+        stopifnot(key %in% keyboard_key)
+
+        .Call("SetExitKey_R", key)
+        invisible()
+}
+
+#' @family Input-related functions: keyboard
+#' @title  get key pressed (keycode)
+#'
+#' call it multiple times for keys queued,
+#' returns "KEY_NULL" when the queue is empty
+#' @return One of [keyboard_key]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_key_pressed <- function() {
+        keycode <- .Call("GetKeyPressed_R")
+
+        names(keyboard_key)[which(keyboard_key %in% keycode)]
+}
+
+#' @family Input-related functions: keyboard
+#' @title  get key pressed (unicode)
+#'
+#' call it multiple times for keys queued,
+#' returns empty character when the queue is empty
+#' @return UTF-8 encoded character
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_char_pressed <- function() {
+        intToUtf8(.Call("GetCharPressed_R"))
 }
