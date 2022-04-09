@@ -316,14 +316,50 @@ SEXP EndMode3D_R(void)
 /* // Input Handling Functions (Module: core) */
 /* //------------------------------------------------------------------------------------ */
 
-/* // Input-related functions: keyboard */
-/* RLAPI bool IsKeyPressed(int key);                             // Check if a key has been pressed once */
-/* RLAPI bool IsKeyDown(int key);                                // Check if a key is being pressed */
-/* RLAPI bool IsKeyReleased(int key);                            // Check if a key has been released once */
-/* RLAPI bool IsKeyUp(int key);                                  // Check if a key is NOT being pressed */
-/* RLAPI void SetExitKey(int key);                               // Set a custom key to exit program (default is ESC) */
-/* RLAPI int GetKeyPressed(void);                                // Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty */
-/* RLAPI int GetCharPressed(void);                               // Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty */
+// Input-related functions: keyboard
+
+// Check if a key has been pressed once
+SEXP IsKeyPressed_R(SEXP key)
+{
+        return Rf_ScalarLogical(IsKeyPressed(Rf_asInteger(key)));
+}
+
+// Check if a key is being pressed
+SEXP IsKeyDown_R(SEXP key)
+{
+        return Rf_ScalarLogical(IsKeyDown(Rf_asInteger(key)));
+}
+
+// Check if a key has been released once
+SEXP IsKeyReleased_R(SEXP key)
+{
+        return Rf_ScalarLogical(IsKeyReleased(Rf_asInteger(key)));
+}
+
+// Check if a key is NOT being pressed
+SEXP IsKeyUp_R(SEXP key)
+{
+        return Rf_ScalarLogical(IsKeyUp(Rf_asInteger(key)));
+}
+
+// Set a custom key to exit program (default is ESC)
+SEXP SetExitKey_R(SEXP key)
+{
+        SetExitKey(Rf_asInteger(key));
+        return R_NilValue;
+}
+
+// Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
+SEXP GetKeyPressed_R(void)
+{
+        return Rf_ScalarInteger(GetKeyPressed());
+}
+
+// Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
+SEXP GetCharPressed_R(void)
+{
+        return Rf_ScalarInteger(GetCharPressed());
+}
 
 /* // Input-related functions: gamepads */
 /* RLAPI bool IsGamepadAvailable(int gamepad);                   // Check if a gamepad is available */

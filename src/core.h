@@ -28,4 +28,13 @@ SEXP BeginMode2D_R(SEXP camera);
 SEXP EndMode2D_R(void);
 SEXP BeginMode3D_R(SEXP camera);
 SEXP EndMode3D_R(void);
+
+// Input-related functions: keyboard
+SEXP IsKeyPressed_R(SEXP key);
+SEXP IsKeyDown_R(SEXP key);
+SEXP IsKeyReleased_R(SEXP key);
+SEXP IsKeyUp_R(SEXP key);
+SEXP SetExitKey_R(SEXP key);
+SEXP GetKeyPressed_R(void);
+SEXP GetCharPressed_R(void);
 #endif
