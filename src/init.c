@@ -34,6 +34,9 @@ static const R_CallMethodDef callMethods[] = {
         {"BeginMode3D_R",     (DL_FUNC) &BeginMode3D_R,     1},
         {"EndMode3D_R",       (DL_FUNC) &EndMode3D_R,       0},
 
+        // Timing-related functions
+        {"SetTargetFPS_R",   (DL_FUNC) &SetTargetFPS_R,   1},
+
         // Input-related functions: keyboard
         {"IsKeyPressed_R",   (DL_FUNC) &IsKeyPressed_R,   1},
         {"IsKeyDown_R",      (DL_FUNC) &IsKeyDown_R,      1},

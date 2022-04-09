@@ -8,6 +8,8 @@
 #' @param height Height of the window
 #' @param title Title of the window
 #' @export
+#' @examplesIf interactive()
+#'
 init_window <- function(width, height, title = "raylib.R") {
         stopifnot(is.numeric(width), is.numeric(height), is.character(title))
         .Call("InitWindow_R", as.integer(width), as.integer(height), title)
@@ -231,6 +233,19 @@ begin_mode_3d <- function(camera) {
 #' @export
 end_mode_3d <- function() {
         .Call("EndMode3D_R")
+        invisible()
+}
+
+##-----------------------------------##
+## Timing-related functions
+##-----------------------------------##
+#' @family Timing-related functions
+#' @title Set target FPS (maximum)
+#' @param fps Integer. Target FPS.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_target_fps <- function(fps) {
+        .Call("SetTargetFPS_R", fps)
         invisible()
 }
 

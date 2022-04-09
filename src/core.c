@@ -248,7 +248,14 @@ SEXP EndMode3D_R(void)
 /* RLAPI Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera); // Get the screen space position for a 2d camera world space position */
 /* RLAPI Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera); // Get the world space position for a 2d camera screen space position */
 
-/* // Timing-related functions */
+// Timing-related functions
+
+// Set target FPS (maximum)
+SEXP SetTargetFPS_R(SEXP fps)
+{
+        SetTargetFPS(Rf_asInteger(fps));
+        return R_NilValue;
+}
 /* RLAPI void SetTargetFPS(int fps);                                 // Set target FPS (maximum) */
 /* RLAPI int GetFPS(void);                                           // Get current FPS */
 /* RLAPI float GetFrameTime(void);                                   // Get time in seconds for last frame drawn (delta time) */
@@ -311,10 +318,6 @@ SEXP EndMode3D_R(void)
 /* RLAPI int LoadStorageValue(unsigned int position);                // Load integer value from storage file (from defined position) */
 
 /* RLAPI void OpenURL(const char *url);                              // Open URL with default system browser (if available) */
-
-/* //------------------------------------------------------------------------------------ */
-/* // Input Handling Functions (Module: core) */
-/* //------------------------------------------------------------------------------------ */
 
 // Input-related functions: keyboard
 

@@ -29,6 +29,11 @@ SEXP EndMode2D_R(void);
 SEXP BeginMode3D_R(SEXP camera);
 SEXP EndMode3D_R(void);
 
+// Timing-related functions
+
+// Set target FPS (maximum)
+SEXP SetTargetFPS_R(SEXP fps);
+
 // Input-related functions: keyboard
 SEXP IsKeyPressed_R(SEXP key);
 SEXP IsKeyDown_R(SEXP key);
