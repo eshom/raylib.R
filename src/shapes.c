@@ -1,34 +1,17 @@
 #define R_NO_REMAP
 #include "shapes.h"
+#include "utils.h"
 #include <R.h>
 #include <Rinternals.h>
 #include <raylib.h>
-
-static void check_color_bounds_else_error(int *color, int len)
-{
-        for (int i = 0; i < len; ++i)
-                if ((color[i] < 0) || (color[i] > 255))
-                        Rf_error("Expecting 0 < `color` <= 255");
-}
 
 // Set texture and rectangle to be used on shapes drawing
 // NOTE: It can be useful when using basic shapes and one single font,
 // defining a font char white rectangle would allow drawing everything in a single draw call
 SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
 {
-        int *texture_p = INTEGER(Rf_coerceVector(texture, INTSXP));
-        double *source_p = REAL(rectangle_source);
-
-        if (texture_p[0] < 0) {
-                Rf_error("Expecting positive number for first element of `texture` argument");
-                // Stops execution and returns to R here
-        }
-
-        Texture2D t = {texture_p[0], // unsigned int
-                       texture_p[1], texture_p[2], texture_p[3], texture_p[4]};
-
-        Rectangle r = {(float)source_p[0], (float)source_p[1],
-                       (float)source_p[2], (float)source_p[3]};
+        Texture2D t = texture_from_sexp(texture);
+        Rectangle r = rectangle_from_sexp(rectangle_source);
 
         SetShapesTexture(t, r);
 
@@ -40,11 +23,7 @@ SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
 // Draw a pixel
 SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color)
 {
-        int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
-        check_color_bounds_else_error(color_p, LENGTH(color));
-
-        Color col = {(unsigned char)color_p[0], (unsigned char)color_p[1],
-                     (unsigned char)color_p[2], (unsigned char)color_p[3]};
+        Color col = color_from_sexp(color);
 
         DrawPixel(Rf_asInteger(posX), Rf_asInteger(posY), col);
 
@@ -54,23 +33,55 @@ SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color)
 // Draw a pixel (Vector version)
 SEXP DrawPixelV_R(SEXP vector2_position, SEXP color)
 {
-        int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
-        check_color_bounds_else_error(color_p, LENGTH(color));
-
-        double *position_p = REAL(vector2_position);
-
-        Color col = {(unsigned char)color_p[0], (unsigned char)color_p[1],
-                (unsigned char)color_p[2], (unsigned char)color_p[3]};
-
-        Vector2 pos = {(float)position_p[0], (float)position_p[1]};
+        Color col = color_from_sexp(color);
+        Vector2 pos = vector2_from_sexp(vector2_position);
 
         DrawPixelV(pos, col);
 
         return R_NilValue;
 }
-/* RLAPI void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);                // Draw a line */
-/* RLAPI void DrawLineV(Vector2 startPos, Vector2 endPos, Color color);                                     // Draw a line (Vector version) */
-/* RLAPI void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color);                       // Draw a line defining thickness */
+
+// Draw a line
+SEXP DrawLine_R(SEXP position, SEXP color)
+{
+        Color col = color_from_sexp(color);
+
+        int *position_p = INTEGER(Rf_coerceVector(position, INTSXP));
+
+        int startx = position_p[0];
+        int starty = position_p[1];
+        int endx = position_p[2];
+        int endy = position_p[3];
+
+        DrawLine(startx, starty, endx, endy, col);
+
+        return R_NilValue;
+}
+
+// Draw a line (Vector version)
+SEXP DrawLineV_R(SEXP start_pos, SEXP end_pos, SEXP color)
+{
+        Color col = color_from_sexp(color);
+        Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
+        Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+
+        DrawLineV(start_pos_vec2, end_pos_vec2, col);
+
+        return R_NilValue;
+}
+
+// Draw a line defining thickness
+SEXP DrawLineEx_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color)
+{
+        Color col = color_from_sexp(color);
+        Vector2 start_pos_vec2 = vector2_from_sexp(start_pos);
+        Vector2 end_pos_vec2 = vector2_from_sexp(end_pos);
+        float thk = (float)Rf_asReal(thick);
+
+        DrawLineEx(start_pos_vec2, end_pos_vec2, thk, col);
+
+        return R_NilValue;
+}
 /* RLAPI void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);                   // Draw a line using cubic-bezier curves in-out */
 /* RLAPI void DrawLineBezierQuad(Vector2 startPos, Vector2 endPos, Vector2 controlPos, float thick, Color color); // Draw line using quadratic bezier curves with a control point */
 /* RLAPI void DrawLineBezierCubic(Vector2 startPos, Vector2 endPos, Vector2 startControlPos, Vector2 endControlPos, float thick, Color color); // Draw line using cubic bezier curves with 2 control points */

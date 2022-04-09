@@ -1,5 +1,6 @@
 #define R_NO_REMAP
 #include "core.h"
+#include "utils.h"
 #include <raylib.h>
 #include <R.h>
 #include <Rinternals.h>
@@ -71,14 +72,7 @@ SEXP IsWindowResized_R(void)
 // Check if one specific window flag is enabled
 SEXP IsWindowState_R(SEXP flag)
 {
-        int iflag = Rf_asInteger(flag);
-
-        if (iflag < 0) {
-                Rf_error("`flag` cannot be negative");
-                return R_NilValue;
-        }
-
-        unsigned int uiflag = iflag;
+        unsigned int uiflag = flag_from_sexp(flag);
 
         return Rf_ScalarLogical(IsWindowState(uiflag));
 }
@@ -86,14 +80,7 @@ SEXP IsWindowState_R(SEXP flag)
 // Set window configuration state using flags (only PLATFORM_DESKTOP)
 SEXP SetWindowState_R(SEXP flags)
 {
-        int iflags = Rf_asInteger(flags);
-
-        if (iflags < 0) {
-                Rf_error("`flags` cannot be negative");
-                return R_NilValue;
-        }
-
-        unsigned int uiflags = iflags;
+        unsigned int uiflags = flag_from_sexp(flags);
 
         SetWindowState(uiflags);
 
@@ -103,14 +90,7 @@ SEXP SetWindowState_R(SEXP flags)
 // Clear window configuration state flags
 SEXP ClearWindowState_R(SEXP flags)
 {
-        int iflags = Rf_asInteger(flags);
-
-        if (iflags < 0) {
-                Rf_error("`flags` cannot be negative");
-                return R_NilValue;
-        }
-
-        unsigned int uiflags = iflags;
+        unsigned int uiflags = flag_from_sexp(flags);
 
         ClearWindowState(uiflags);
 
@@ -177,16 +157,7 @@ SEXP ToggleFullscreen_R(void)
 // Set background color (framebuffer clear color)
 SEXP ClearBackground_R(SEXP color)
 {
-        int *color_p = INTEGER(Rf_coerceVector(color, INTSXP));
-
-        for (int i = 0; i < LENGTH(color); ++i) {
-                if ((color_p[i] < 0) || (color_p[i] > 255)) {
-                        Rf_error("Expecting 0 < `color` <= 255");
-                        return R_NilValue;
-                }
-        }
-
-        Color col = {color_p[0], color_p[1], color_p[2], color_p[3]};
+        Color col = color_from_sexp(color);
 
         ClearBackground(col);
 
@@ -210,19 +181,7 @@ SEXP EndDrawing_R(void)
 // Begin 2D mode with custom camera (2D)
 SEXP BeginMode2D_R(SEXP camera)
 {
-        SEXP offset = VECTOR_ELT(camera, 0);
-        SEXP target = VECTOR_ELT(camera, 1);
-        SEXP rotation = VECTOR_ELT(camera, 2);
-        SEXP zoom = VECTOR_ELT(camera, 3);
-
-        double *offset_p = REAL(offset);
-        double *target_p = REAL(target);
-
-        Vector2 offset_vec = {(float)offset_p[0], (float)offset_p[1]};
-        Vector2 target_vec = {(float)target_p[0], (float)target_p[1]};
-
-        Camera2D cam = {offset_vec, target_vec,
-                (float)Rf_asReal(rotation), (float)Rf_asReal(zoom)};
+        Camera2D cam = camera2d_from_sexp(camera);
 
         BeginMode2D(cam);
 
@@ -239,54 +198,12 @@ SEXP EndMode2D_R(void)
 // Begin 3D mode with custom camera (3D)
 SEXP BeginMode3D_R(SEXP camera)
 {
-        Camera3D *camera_p = (Camera3D*)R_ExternalPtrAddr(camera);
+        Camera3D *camera_p = camera3d_p_from_sexp(camera);
+
         BeginMode3D(*camera_p);
+
         return R_NilValue;
 }
-
-/* SEXP BeginMode3D_R( SEXP position, */
-/*                     SEXP target, */
-/*                     SEXP up, */
-/*                     SEXP fovy, */
-/*                     SEXP projection) */
-/* { */
-
-/*   double *position_p = REAL(position); */
-/*   double *target_p = REAL(target); */
-/*   double *up_p = REAL(up); */
-/*   double *fovy_p = REAL(fovy); */
-/*   int *projection_p = INTEGER(projection); */
-
-/*   Camera camera = { 0 }; */
-/*   camera.position = (Vector3){ (float)position_p[0], (float)position_p[1], (float)position_p[2] }; */
-/*   camera.target = (Vector3){ (float)target_p[0], (float)target_p[1], (float)target_p[2] }; */
-/*   camera.up = (Vector3){ (float)up_p[0], (float)up_p[1], (float)up_p[2] }; */
-/*   camera.fovy = (float)fovy_p[0]; */
-
-/*   switch(projection_p[0]) */
-/*   { */
-/*   case 1: */
-/*     camera.projection = CAMERA_CUSTOM; break; */
-/*   case 2: */
-/*     camera.projection = CAMERA_FIRST_PERSON; break; */
-/*   case 3: */
-/*     camera.projection = CAMERA_FREE; break; */
-/*   case 4: */
-/*     camera.projection = CAMERA_ORBITAL; break; */
-/*   case 5: */
-/*     camera.projection = CAMERA_ORTHOGRAPHIC; break; */
-/*   case 6: */
-/*     camera.projection = CAMERA_PERSPECTIVE; break; */
-/*   case 7: */
-/*     camera.projection = CAMERA_THIRD_PERSON; break; */
-/*   default: Rf_error("CAMERA3D C ERROR: bad perspective integer"); */
-/*   } */
-
-/*   BeginMode3D(camera); */
-
-/*   return R_NilValue; */
-
-/* } */
 
 // Ends 3D mode and returns to default 2D orthographic mode
 SEXP EndMode3D_R(void)
