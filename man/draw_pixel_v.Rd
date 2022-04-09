@@ -17,6 +17,13 @@ Draw a pixel (Vector version)
 }
 \seealso{
 Other Basic shapes drawing functions: 
+\code{\link{draw_line_bezier_cubic}()},
+\code{\link{draw_line_bezier_quad}()},
+\code{\link{draw_line_bezier}()},
+\code{\link{draw_line_ex}()},
+\code{\link{draw_line_strip}()},
+\code{\link{draw_line_v}()},
+\code{\link{draw_line}()},
 \code{\link{draw_pixel}()},
 \code{\link{set_shapes_texture}()}
 }

@@ -244,7 +244,7 @@ end_mode_3d <- function() {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_pressed <- function(key) {
-        stopifnot(key %in% keyboard_key)
+        stopifnot(key %in% raylib.R::keyboard_key)
 
         .Call("IsKeyPressed_R", key)
 }
@@ -255,7 +255,7 @@ is_key_pressed <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_down <- function(key) {
-        stopifnot(key %in% keyboard_key)
+        stopifnot(key %in% raylib.R::keyboard_key)
 
         .Call("IsKeyDown_R", key)
 }
@@ -266,7 +266,7 @@ is_key_down <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_released <- function(key) {
-        stopifnot(key %in% keyboard_key)
+        stopifnot(key %in% raylib.R::keyboard_key)
 
         .Call("IsKeyReleased_R", key)
 }
@@ -277,7 +277,7 @@ is_key_released <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_up <- function(key) {
-        stopifnot(key %in% keyboard_key)
+        stopifnot(key %in% raylib.R::keyboard_key)
 
         .Call("IsKeyUp_R", key)
 }
@@ -288,7 +288,7 @@ is_key_up <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 set_exit_key <- function(key) {
-        stopifnot(key %in% keyboard_key)
+        stopifnot(key %in% raylib.R::keyboard_key)
 
         .Call("SetExitKey_R", key)
         invisible()
@@ -305,7 +305,7 @@ set_exit_key <- function(key) {
 get_key_pressed <- function() {
         keycode <- .Call("GetKeyPressed_R")
 
-        names(keyboard_key)[which(keyboard_key %in% keycode)]
+        names(raylib.R::keyboard_key)[which(raylib.R::keyboard_key %in% keycode)]
 }
 
 #' @family Input-related functions: keyboard
