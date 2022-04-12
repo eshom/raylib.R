@@ -42,4 +42,19 @@ SEXP IsKeyUp_R(SEXP key);
 SEXP SetExitKey_R(SEXP key);
 SEXP GetKeyPressed_R(void);
 SEXP GetCharPressed_R(void);
+
+// Input-related functions: mouse
+SEXP IsMouseButtonPressed_R(SEXP button);
+SEXP IsMouseButtonDown_R(SEXP button);
+SEXP IsMouseButtonReleased_R(SEXP button);
+SEXP IsMouseButtonUp_R(SEXP button);
+SEXP GetMouseX_R(void);
+SEXP GetMouseY_R(void);
+SEXP GetMousePosition_R(void);
+SEXP GetMouseDelta_R(void);
+SEXP SetMousePosition_R(SEXP x, SEXP y);
+SEXP SetMouseOffset_R(SEXP offset_x, SEXP offset_y);
+SEXP SetMouseScale_R(SEXP scale_x, SEXP scale_y);
+SEXP GetMouseWheelMove_R(void);
+SEXP SetMouseCursor_R(SEXP cursor);
 #endif

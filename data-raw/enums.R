@@ -167,3 +167,50 @@ camera_projection <- list(
         CAMERA_ORTHOGRAPHIC = 1
 )
 usethis::use_data(camera_projection, overwrite = TRUE)
+
+raylib_color <- list(
+        LIGHTGRAY  = c(200, 200, 200, 255),
+        RAYWHITE   = c(245, 245, 245, 255),
+        LIGHTGRAY  = c(200, 200, 200, 255),
+        GRAY       = c(130, 130, 130, 255),
+        DARKGRAY   = c(80,  80,  80,  255),
+        YELLOW     = c(253, 249, 0,   255),
+        GOLD       = c(255, 203, 0,   255),
+        ORANGE     = c(255, 161, 0,   255),
+        PINK       = c(255, 109, 194, 255),
+        RED        = c(230, 41,  55,  255),
+        MAROON     = c(190, 33,  55,  255),
+        GREEN      = c(0,   228, 48,  255),
+        LIME       = c(0,   158, 47,  255),
+        DARKGREEN  = c(0,   117, 44,  255),
+        SKYBLUE    = c(102, 191, 255, 255),
+        BLUE       = c(0,   121, 241, 255),
+        DARKBLUE   = c(0,   82,  172, 255),
+        PURPLE     = c(200, 122, 255, 255),
+        VIOLET     = c(135, 60,  190, 255),
+        DARKPURPLE = c(112, 31,  126, 255),
+        BEIGE      = c(211, 176, 131, 255),
+        BROWN      = c(127, 106, 79,  255),
+        DARKBROWN  = c(76,  63,  47,  255),
+        WHITE      = c(255, 255, 255, 255),
+        BLACK      = c(0,   0,   0,   255),
+        BLANK      = c(0,   0,   0,   0),
+        MAGENTA    = c(255, 0,   255, 255),
+        RAYWHITE   = c(245, 245, 245, 255)
+)
+usethis::use_data(raylib_color, overwrite = TRUE)
+
+mouse_cursor <- list(
+        MOUSE_CURSOR_DEFAULT       = 0,
+        MOUSE_CURSOR_ARROW         = 1,
+        MOUSE_CURSOR_IBEAM         = 2,
+        MOUSE_CURSOR_CROSSHAIR     = 3,
+        MOUSE_CURSOR_POINTING_HAND = 4,
+        MOUSE_CURSOR_RESIZE_EW     = 5,
+        MOUSE_CURSOR_RESIZE_NS     = 6,
+        MOUSE_CURSOR_RESIZE_NWSE   = 7,
+        MOUSE_CURSOR_RESIZE_NESW   = 8,
+        MOUSE_CURSOR_RESIZE_ALL    = 9,
+        MOUSE_CURSOR_NOT_ALLOWED   = 10
+)
+usethis::use_data(mouse_cursor, overwrite = TRUE)

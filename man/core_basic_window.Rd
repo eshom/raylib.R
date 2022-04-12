@@ -33,6 +33,7 @@ close_window()
 }
 \seealso{
 Other Core examples: 
-\code{\link{core_input_keys}}
+\code{\link{core_input_keys}},
+\code{\link{core_input_mouse}}
 }
 \concept{Core examples}

@@ -25,3 +25,24 @@
 
 #' Camera projection
 "camera_projection"
+
+#' Raylib color
+"raylib_color"
+
+#' Mouse cursors
+#'
+#' @format An object of class ‘list’ of length 11.
+#' \describe{
+#'         \item{MOUSE_CURSOR_DEFAULT}{Default pointer shape}
+#'         \item{MOUSE_CURSOR_ARROW}{Arrow shape}
+#'         \item{MOUSE_CURSOR_IBEAM}{Text writing cursor shape}
+#'         \item{MOUSE_CURSOR_CROSSHAIR}{Cross shape}
+#'         \item{MOUSE_CURSOR_POINTING_HAND}{Pointing hand cursor}
+#'         \item{MOUSE_CURSOR_RESIZE_EW}{Horizontal resize/move arrow shape}
+#'         \item{MOUSE_CURSOR_RESIZE_NS}{Vertical resize/move arrow shape}
+#'         \item{MOUSE_CURSOR_RESIZE_NWSE}{Top-left to bottom-right diagonal resize/move arrow shape}
+#'         \item{MOUSE_CURSOR_RESIZE_NESW}{The top-right to bottom-left diagonal resize/move arrow shape}
+#'         \item{MOUSE_CURSOR_RESIZE_ALL}{The omni-directional resize/move cursor shape}
+#'         \item{MOUSE_CURSOR_NOT_ALLOWED}{The operation-not-allowed shape}
+#' }
+"mouse_cursor"

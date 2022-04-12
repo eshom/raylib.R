@@ -376,20 +376,95 @@ SEXP GetCharPressed_R(void)
 /* RLAPI float GetGamepadAxisMovement(int gamepad, int axis);    // Get axis movement value for a gamepad axis */
 /* RLAPI int SetGamepadMappings(const char *mappings);           // Set internal gamepad mappings (SDL_GameControllerDB) */
 
-/* // Input-related functions: mouse */
-/* RLAPI bool IsMouseButtonPressed(int button);                  // Check if a mouse button has been pressed once */
-/* RLAPI bool IsMouseButtonDown(int button);                     // Check if a mouse button is being pressed */
-/* RLAPI bool IsMouseButtonReleased(int button);                 // Check if a mouse button has been released once */
-/* RLAPI bool IsMouseButtonUp(int button);                       // Check if a mouse button is NOT being pressed */
-/* RLAPI int GetMouseX(void);                                    // Get mouse position X */
-/* RLAPI int GetMouseY(void);                                    // Get mouse position Y */
-/* RLAPI Vector2 GetMousePosition(void);                         // Get mouse position XY */
-/* RLAPI Vector2 GetMouseDelta(void);                            // Get mouse delta between frames */
-/* RLAPI void SetMousePosition(int x, int y);                    // Set mouse position XY */
-/* RLAPI void SetMouseOffset(int offsetX, int offsetY);          // Set mouse offset */
-/* RLAPI void SetMouseScale(float scaleX, float scaleY);         // Set mouse scaling */
-/* RLAPI float GetMouseWheelMove(void);                          // Get mouse wheel movement Y */
-/* RLAPI void SetMouseCursor(int cursor);                        // Set mouse cursor */
+// Input-related functions: mouse
+
+// Check if a mouse button has been pressed once
+SEXP IsMouseButtonPressed_R(SEXP button)
+{
+        return Rf_ScalarLogical(IsMouseButtonPressed(Rf_asInteger(button)));
+}
+
+// Check if a mouse button is being pressed
+SEXP IsMouseButtonDown_R(SEXP button)
+{
+        return Rf_ScalarLogical(IsMouseButtonDown(Rf_asInteger(button)));
+}
+
+// Check if a mouse button has been released once
+SEXP IsMouseButtonReleased_R(SEXP button)
+{
+        return Rf_ScalarLogical(IsMouseButtonReleased(Rf_asInteger(button)));
+}
+
+// Check if a mouse button is NOT being pressed
+SEXP IsMouseButtonUp_R(SEXP button)
+{
+        return Rf_ScalarLogical(IsMouseButtonUp(Rf_asInteger(button)));
+}
+
+// Get mouse position X
+SEXP GetMouseX_R(void)
+{
+        return Rf_ScalarInteger(GetMouseX());
+}
+
+// Get mouse position Y
+SEXP GetMouseY_R(void)
+{
+        return Rf_ScalarInteger(GetMouseY());
+}
+
+// Get mouse position XY
+SEXP GetMousePosition_R(void)
+{
+        SEXP vec_out = sexp_from_vector2(GetMousePosition());
+
+        UNPROTECT(1);
+        return vec_out;
+}
+
+// Get mouse delta between frames
+SEXP GetMouseDelta_R(void)
+{
+        SEXP vec_out = sexp_from_vector2(GetMouseDelta());
+
+        UNPROTECT(1);
+        return vec_out;
+}
+
+// Set mouse position XY
+SEXP SetMousePosition_R(SEXP x, SEXP y)
+{
+        SetMousePosition(Rf_asInteger(x), Rf_asInteger(y));
+        return R_NilValue;
+}
+
+// Set mouse offset
+SEXP SetMouseOffset_R(SEXP offset_x, SEXP offset_y)
+{
+        SetMouseOffset(Rf_asInteger(offset_x), Rf_asInteger(offset_y));
+        return R_NilValue;
+}
+
+// Set mouse scaling
+SEXP SetMouseScale_R(SEXP scale_x, SEXP scale_y)
+{
+        SetMouseScale((float)Rf_asReal(scale_x), (float)Rf_asReal(scale_y));
+        return R_NilValue;
+}
+
+// Get mouse wheel movement Y
+SEXP GetMouseWheelMove_R(void)
+{
+        return Rf_ScalarReal(GetMouseWheelMove());
+}
+
+// Set mouse cursor
+SEXP SetMouseCursor_R(SEXP cursor)
+{
+        SetMouseCursor(Rf_asInteger(cursor));
+        return R_NilValue;
+}
 
 /* // Input-related functions: touch */
 /* RLAPI int GetTouchX(void);                                    // Get touch position X for touch point 0 (relative to screen size) */

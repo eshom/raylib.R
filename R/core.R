@@ -332,3 +332,127 @@ get_key_pressed <- function() {
 get_char_pressed <- function() {
         intToUtf8(.Call("GetCharPressed_R"))
 }
+
+##-----------------------------------##
+## Input-related functions: mouse
+##-----------------------------------##
+#' @family Input-related functions: mouse
+#' @title Check if a mouse button has been pressed once
+#' @param button Integer. One of [mouse_button]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_mouse_button_pressed <- function(button) {
+        .Call("IsMouseButtonPressed_R", button)
+}
+
+#' @family Input-related functions: mouse
+#' @title Check if a mouse button is being pressed
+#' @param button Integer. One of [mouse_button]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_mouse_button_down <- function(button) {
+        .Call("IsMouseButtonDown_R", button)
+}
+
+#' @family Input-related functions: mouse
+#' @title Check if a mouse button has been released once
+#' @param button Integer. One of [mouse_button]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_mouse_button_released <- function(button) {
+        .Call("IsMouseButtonReleased_R", button)
+}
+
+#' @family Input-related functions: mouse
+#' @title Check if a mouse button is NOT being pressed
+#' @param button Integer. One of [mouse_button]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_mouse_button_up <- function(button) {
+        .Call("IsMouseButtonUp_R", button)
+}
+
+#' @family Input-related functions: mouse
+#' @title Get mouse position X
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_mouse_x <- function() {
+        .Call("GetMouseX_R")
+}
+
+#' @family Input-related functions: mouse
+#' @title Get mouse position Y
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_mouse_y <- function() {
+        .Call("GetMouseY_R")
+}
+
+#' @family Input-related functions: mouse
+#' @title Get mouse position XY
+#' @return Numeric vector with 2 elements: X position and Y position.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_mouse_position <- function() {
+        .Call("GetMousePosition_R")
+}
+
+#' @family Input-related functions: mouse
+#' @title Get mouse delta between frames
+#' @return Numeric vector with 2 elements
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_mouse_delta <- function() {
+        .Call("GetMouseDelta_R")
+}
+
+#' @family Input-related functions: mouse
+#' @title Set mouse position XY
+#' @param x Integer. X position.
+#' @param y Integer. Y position.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_mouse_position <- function(x, y) {
+        .Call("SetMousePosition_R", x, y)
+        invisible()
+}
+
+#' @family Input-related functions: mouse
+#' @title Set mouse offset
+#' @param offset_x Integer
+#' @param offset_y Integer
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_mouse_offset <- function(offset_x, offset_y) {
+        .Call("SetMouseOffset_R", offset_x, offset_y)
+        invisible()
+}
+
+#' @family Input-related functions: mouse
+#' @title Set mouse scaling
+#' @param scale_x Float
+#' @param scale_y Float
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_mouse_scale <- function(scale_x, scale_y) {
+        .Call("SetMouseScale_R", scale_x, scale_y)
+        invisible()
+}
+
+#' @family Input-related functions: mouse
+#' @title Get mouse wheel movement Y
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_mouse_wheel_move <- function() {
+        .Call("GetMouseWheelMove_R")
+}
+
+#' @family Input-related functions: mouse
+#' @title Set mouse cursor
+#' @param cursor Integer. One of [mouse_cursor]
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+set_mouse_cursor <- function(cursor) {
+        .Call("SetMouseCursor_R", cursor)
+        invisible()
+}

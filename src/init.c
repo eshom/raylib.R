@@ -47,6 +47,21 @@ static const R_CallMethodDef callMethods[] = {
         {"GetKeyPressed_R",  (DL_FUNC) &GetKeyPressed_R,  0},
         {"GetCharPressed_R", (DL_FUNC) &GetCharPressed_R, 0},
 
+        // Input-related functions: mouse
+        {"IsMouseButtonPressed_R",  (DL_FUNC) &IsMouseButtonPressed_R,  1},
+        {"IsMouseButtonDown_R",     (DL_FUNC) &IsMouseButtonDown_R,     1},
+        {"IsMouseButtonReleased_R", (DL_FUNC) &IsMouseButtonReleased_R, 1},
+        {"IsMouseButtonUp_R",       (DL_FUNC) &IsMouseButtonUp_R,       1},
+        {"GetMouseX_R",             (DL_FUNC) &GetMouseX_R,             0},
+        {"GetMouseY_R",             (DL_FUNC) &GetMouseY_R,             0},
+        {"GetMousePosition_R",      (DL_FUNC) &GetMousePosition_R,      0},
+        {"GetMouseDelta_R",         (DL_FUNC) &GetMouseDelta_R,         0},
+        {"SetMousePosition_R",      (DL_FUNC) &SetMousePosition_R,      2},
+        {"SetMouseOffset_R",        (DL_FUNC) &SetMouseOffset_R,        2},
+        {"SetMouseScale_R",         (DL_FUNC) &SetMouseScale_R,         2},
+        {"GetMouseWheelMove_R",     (DL_FUNC) &GetMouseWheelMove_R,     0},
+        {"SetMouseCursor_R",        (DL_FUNC) &SetMouseCursor_R,        1},
+
         // Shapes module
 
         // Basic shapes drawing functions

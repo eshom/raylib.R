@@ -52,6 +52,19 @@ Vector2 *vector2_array_from_sexp(SEXP vec2_list)
         return points_out;
 }
 
+// Allocate an R vector of length 2 from R vector.
+// Must UNPROTECT() after calling
+SEXP sexp_from_vector2(Vector2 vec)
+{
+        SEXP vec_out = PROTECT(Rf_allocVector(REALSXP, 2));
+        double *vec_out_p = REAL(vec_out);
+
+        vec_out_p[0] = vec.x;
+        vec_out_p[1] = vec.y;
+
+        return vec_out;
+}
+
 // Take a vector3 vector passed from R, and return a Vector3
 Vector3 vector3_from_sexp(SEXP vec3)
 {
