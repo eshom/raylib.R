@@ -1,3 +1,4 @@
 #!/bin/sh
 
 rm -f src/*.o src/raylib.R.so src/symbols.rds
+rm -rf inst/raylib-4.0.0

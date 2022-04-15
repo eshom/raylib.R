@@ -1,1 +1,19 @@
-PKG_LIBS = -lraylib
+.PHONY: all raylib cleanray
+
+RAYLIB_SRC = raylib-4.0.0
+
+PKG_LIBS = -L../inst/$(RAYLIB_SRC) -I../inst/include -lm -lraylib
+
+all: cleanray
+
+cleanray: $(SHLIB)
+	rm -rf ../inst/$(RAYLIB_SRC)
+
+$(SHLIB): raylib
+
+raylib:
+	(cd ../inst; tar -xf $(RAYLIB_SRC).tar.gz)
+	(cd ../inst/$(RAYLIB_SRC)/src; $(MAKE) PLATFORM=PLATFORM_DESKTOP)
+	mkdir -p ../inst/include
+	cp ../inst/$(RAYLIB_SRC)/src/raylib.h ../inst/include
+
