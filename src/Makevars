@@ -2,7 +2,8 @@
 
 RAYLIB_SRC = raylib-4.0.0
 
-PKG_LIBS = -L../inst/$(RAYLIB_SRC) -I../inst/include -lm -lraylib
+PKG_LIBS = -L../inst/$(RAYLIB_SRC) -lm -lraylib
+PKG_CPPFLAGS = -I../inst/include
 
 all: cleanray
 
