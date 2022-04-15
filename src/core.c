@@ -1,7 +1,7 @@
 #define R_NO_REMAP
 #include "core.h"
 #include "utils.h"
-#include <raylib.h>
+#include "raylib.h"
 #include <R.h>
 #include <Rinternals.h>
 

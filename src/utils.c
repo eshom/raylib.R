@@ -3,7 +3,7 @@
 #include "utils.h"
 #include <R.h>
 #include <Rinternals.h>
-#include <raylib.h>
+#include "raylib.h"
 
 // Colors must be between 0 and 255 in order to cast to unsigned char
 // Otherwise throw R error and return to R REPL environment

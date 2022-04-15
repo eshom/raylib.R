@@ -3,7 +3,7 @@
 
 #include <R.h>
 #include <Rinternals.h>
-#include <raylib.h>
+#include "raylib.h"
 
 Color color_from_sexp(SEXP color);
 Vector2 vector2_from_sexp(SEXP vec2);

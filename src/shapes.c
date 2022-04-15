@@ -3,7 +3,7 @@
 #include "utils.h"
 #include <R.h>
 #include <Rinternals.h>
-#include <raylib.h>
+#include "raylib.h"
 
 // Set texture and rectangle to be used on shapes drawing
 // NOTE: It can be useful when using basic shapes and one single font,
