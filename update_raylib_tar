@@ -1,0 +1,5 @@
+#!/bin/bash
+TAR_NAME=$(echo raylib-*)
+
+cd inst
+tar -czf "$TAR_NAME".tar.gz ../"$TAR_NAME"

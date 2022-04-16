@@ -6,4 +6,6 @@ compile_commands.json
 ^data-raw$
 .github/
 .raylib/
-get_declarations
+^raylib-.*$
+^update_raylib_tar$
+^get_declarations$
