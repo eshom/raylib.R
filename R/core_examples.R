@@ -94,13 +94,20 @@ NULL
 #'        ## Update
 #'        ball_position <- get_mouse_position()
 #'
-#'        if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_LEFT)) ball_color <- Color("maroon")
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_MIDDLE)) ball_color <- raylib_color$LIME
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_RIGHT)) ball_color <- Color("darkblue")
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_SIDE)) ball_color <- Color("purple")
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_EXTRA)) ball_color <- Color("yellow")
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_FORWARD)) ball_color <- Color("orange")
-#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_BACK)) ball_color <- Color("beige")
+#'        if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_LEFT))
+#'                ball_color <- Color("maroon")
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_MIDDLE))
+#'                ball_color <- raylib_color$LIME
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_RIGHT))
+#'                ball_color <- Color("darkblue")
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_SIDE))
+#'                ball_color <- Color("purple")
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_EXTRA))
+#'                ball_color <- Color("yellow")
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_FORWARD))
+#'                ball_color <- Color("orange")
+#'        else if (is_mouse_button_pressed(mouse_button$MOUSE_BUTTON_BACK))
+#'                ball_color <- Color("beige")
 #'
 #'        ## Draw
 #'        begin_drawing()
