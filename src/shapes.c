@@ -137,10 +137,44 @@ SEXP DrawLineStrip_R(SEXP points, SEXP point_count, SEXP color)
 
         return R_NilValue;
 }
-/* RLAPI void DrawCircle(int centerX, int centerY, float radius, Color color);                              // Draw a color-filled circle */
-/* RLAPI void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);      // Draw a piece of a circle */
-/* RLAPI void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color); // Draw circle sector outline */
-/* RLAPI void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2);       // Draw a gradient-filled circle */
+
+// Draw a color-filled circle
+SEXP DrawCircle_R(SEXP center_x, SEXP center_y, SEXP radius, SEXP color)
+{
+        DrawCircle(Rf_asInteger(center_x), Rf_asInteger(center_y),
+                   (float)Rf_asReal(radius), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a piece of a circle
+SEXP DrawCircleSector_R(SEXP center, SEXP radius, SEXP start_angle, SEXP end_angle, SEXP segments, SEXP color)
+{
+        DrawCircleSector(vector2_from_sexp(center), (float)Rf_asReal(radius), (float)Rf_asReal(start_angle),
+                         (float)Rf_asReal(end_angle), Rf_asInteger(segments), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw circle sector outline
+SEXP DrawCircleSectorLines_R(SEXP center, SEXP radius, SEXP start_angle, SEXP end_angle, SEXP segments, SEXP color)
+{
+        DrawCircleSectorLines(vector2_from_sexp(center), (float)Rf_asReal(radius),
+                              (float)Rf_asReal(start_angle), (float)Rf_asReal(end_angle),
+                              Rf_asInteger(segments), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+//Draw a gradient-filled circle
+SEXP DrawCircleGradient_R(SEXP center_x, SEXP center_y, SEXP radius, SEXP color1, SEXP color2)
+{
+        DrawCircleGradient(Rf_asInteger(center_x), Rf_asInteger(center_y),
+                           (float)Rf_asReal(radius), color_from_sexp(color1),
+                           color_from_sexp(color2));
+
+        return R_NilValue;
+}
 
 // Draw a color-filled circle (Vector version)
 SEXP DrawCircleV_R(SEXP center, SEXP radius, SEXP color)
@@ -153,36 +187,249 @@ SEXP DrawCircleV_R(SEXP center, SEXP radius, SEXP color)
 
         return R_NilValue;
 }
-/* RLAPI void DrawCircleV(Vector2 center, float radius, Color color);                                       // Draw a color-filled circle (Vector version) */
-/* RLAPI void DrawCircleLines(int centerX, int centerY, float radius, Color color);                         // Draw circle outline */
-/* RLAPI void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color);             // Draw ellipse */
-/* RLAPI void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, Color color);        // Draw ellipse outline */
-/* RLAPI void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color); // Draw ring */
-/* RLAPI void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);    // Draw ring outline */
-/* RLAPI void DrawRectangle(int posX, int posY, int width, int height, Color color);                        // Draw a color-filled rectangle */
-/* RLAPI void DrawRectangleV(Vector2 position, Vector2 size, Color color);                                  // Draw a color-filled rectangle (Vector version) */
-/* RLAPI void DrawRectangleRec(Rectangle rec, Color color);                                                 // Draw a color-filled rectangle */
-/* RLAPI void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color);                 // Draw a color-filled rectangle with pro parameters */
-/* RLAPI void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2);// Draw a vertical-gradient-filled rectangle */
-/* RLAPI void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2);// Draw a horizontal-gradient-filled rectangle */
-/* RLAPI void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4);       // Draw a gradient-filled rectangle with custom vertex colors */
-/* RLAPI void DrawRectangleLines(int posX, int posY, int width, int height, Color color);                   // Draw rectangle outline */
-/* RLAPI void DrawRectangleLinesEx(Rectangle rec, float lineThick, Color color);                            // Draw rectangle outline with extended parameters */
-/* RLAPI void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color);              // Draw rectangle with rounded edges */
-/* RLAPI void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, float lineThick, Color color); // Draw rectangle with rounded edges outline */
-/* RLAPI void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color);                                // Draw a color-filled triangle (vertex in counter-clockwise order!) */
-/* RLAPI void DrawTriangleLines(Vector2 v1, Vector2 v2, Vector2 v3, Color color);                           // Draw triangle outline (vertex in counter-clockwise order!) */
-/* RLAPI void DrawTriangleFan(Vector2 *points, int pointCount, Color color);                                // Draw a triangle fan defined by points (first vertex is the center) */
-/* RLAPI void DrawTriangleStrip(Vector2 *points, int pointCount, Color color);                              // Draw a triangle strip defined by points */
-/* RLAPI void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color);               // Draw a regular polygon (Vector version) */
-/* RLAPI void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color);          // Draw a polygon outline of n sides */
-/* RLAPI void DrawPolyLinesEx(Vector2 center, int sides, float radius, float rotation, float lineThick, Color color); // Draw a polygon outline of n sides with extended parameters */
+
+// Draw circle outline
+SEXP DrawCircleLines_R(SEXP center_x, SEXP center_y, SEXP radius, SEXP color)
+{
+        DrawCircleLines(Rf_asInteger(center_x), Rf_asInteger(center_y),
+                        (float)Rf_asReal(radius), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+//Draw ellipse
+SEXP DrawEllipse_R(SEXP center_x, SEXP center_y, SEXP radius_h, SEXP radius_v, SEXP color)
+{
+        DrawEllipse(Rf_asInteger(center_x), Rf_asInteger(center_y),
+                    (float)Rf_asReal(radius_h), (float)Rf_asReal(radius_v),
+                    color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+//Draw ellipse outline
+SEXP DrawEllipseLines_R(SEXP center_x, SEXP center_y, SEXP radius_h, SEXP radius_v, SEXP color)
+{
+        DrawEllipseLines(Rf_asInteger(center_x), Rf_asInteger(center_y),
+                         (float)Rf_asReal(radius_h), (float)Rf_asReal(radius_v),
+                         color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw ring
+SEXP DrawRing_R(SEXP center, SEXP inner_radius, SEXP outer_radius, SEXP start_angle, SEXP end_angle, SEXP segments, SEXP color)
+{
+        DrawRing(vector2_from_sexp(center), (float)Rf_asReal(inner_radius),
+                 (float)Rf_asReal(outer_radius), (float)Rf_asReal(start_angle),
+                 (float)Rf_asReal(end_angle), Rf_asInteger(segments),
+                 color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw ring outline
+SEXP DrawRingLines_R(SEXP center, SEXP inner_radius, SEXP outer_radius, SEXP start_angle, SEXP end_angle, SEXP segments, SEXP color)
+{
+        DrawRingLines(vector2_from_sexp(center), (float)Rf_asReal(inner_radius),
+                      (float)Rf_asReal(outer_radius), (float)Rf_asReal(start_angle),
+                      (float)Rf_asReal(end_angle), Rf_asInteger(segments),
+                      color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled rectangle
+SEXP DrawRectangle_R(SEXP pos_x, SEXP pos_y, SEXP width, SEXP height, SEXP color)
+{
+        DrawRectangle(Rf_asInteger(pos_x), Rf_asInteger(pos_y), Rf_asInteger(width),
+                      Rf_asInteger(height), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled rectangle (Vector version)
+SEXP DrawRectangleV_R(SEXP position, SEXP size, SEXP color)
+{
+        DrawRectangleV(vector2_from_sexp(position), vector2_from_sexp(size), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled rectangle
+SEXP DrawRectangleRec_R(SEXP rec, SEXP color)
+{
+        DrawRectangleRec(rectangle_from_sexp(rec), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled rectangle with pro parameters
+SEXP DrawRectanglePro_R(SEXP rec, SEXP origin, SEXP rotation, SEXP color)
+{
+        DrawRectanglePro(rectangle_from_sexp(rec), vector2_from_sexp(origin),
+                         (float)Rf_asReal(rotation), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a vertical-gradient-filled rectangle
+SEXP DrawRectangleGradientV_R(SEXP pos_x, SEXP pos_y, SEXP width, SEXP height, SEXP color1, SEXP color2)
+{
+        DrawRectangleGradientV(Rf_asInteger(pos_x), Rf_asInteger(pos_y), Rf_asInteger(width),
+                               Rf_asInteger(height), color_from_sexp(color1), color_from_sexp(color2));
+
+        return R_NilValue;
+}
+
+// Draw a horizontal-gradient-filled rectangle
+SEXP DrawRectangleGradientH_R(SEXP pos_x, SEXP pos_y, SEXP width, SEXP height, SEXP color1, SEXP color2)
+{
+        DrawRectangleGradientH(Rf_asInteger(pos_x), Rf_asInteger(pos_y), Rf_asInteger(width),
+                               Rf_asInteger(height), color_from_sexp(color1), color_from_sexp(color2));
+
+        return R_NilValue;
+}
+
+// Draw a gradient-filled rectangle with custom vertex colors
+SEXP DrawRectangleGradientEx_R(SEXP rec, SEXP col1, SEXP col2, SEXP col3, SEXP col4)
+{
+        DrawRectangleGradientEx(rectangle_from_sexp(rec), color_from_sexp(col1),
+                                color_from_sexp(col2), color_from_sexp(col3),
+                                color_from_sexp(col4));
+
+        return R_NilValue;
+}
+
+// Draw rectangle outline
+SEXP DrawRectangleLines_R(SEXP pos_x, SEXP pos_y, SEXP width, SEXP height, SEXP color)
+{
+        DrawRectangleLines(Rf_asInteger(pos_x), Rf_asInteger(pos_y), Rf_asInteger(width),
+                           Rf_asInteger(height), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw rectangle outline with extended parameters
+SEXP DrawRectangleLinesEx_R(SEXP rec, SEXP line_thick, SEXP color)
+{
+        DrawRectangleLinesEx(rectangle_from_sexp(rec), (float)Rf_asReal(line_thick), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw rectangle with rounded edges
+SEXP DrawRectangleRounded_R(SEXP rec, SEXP roundness, SEXP segments, SEXP color)
+{
+        DrawRectangleRounded(rectangle_from_sexp(rec), (float)Rf_asReal(roundness),
+                             Rf_asInteger(segments), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw rectangle with rounded edges outline
+SEXP DrawRectangleRoundedLines_R(SEXP rec, SEXP roundness, SEXP segments, SEXP line_thick, SEXP color)
+{
+        DrawRectangleRoundedLines(rectangle_from_sexp(rec), (float)Rf_asReal(roundness),
+                                  Rf_asInteger(segments), (float)Rf_asReal(line_thick),
+                                  color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled triangle (vertex in counter-clockwise order!)
+SEXP DrawTriangle_R(SEXP v1, SEXP v2, SEXP v3, SEXP color)
+{
+        DrawTriangle(vector2_from_sexp(v1), vector2_from_sexp(v2), vector2_from_sexp(v3),
+                     color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a color-filled triangle outline (vertex in counter-clockwise order!)
+SEXP DrawTriangleLines_R(SEXP v1, SEXP v2, SEXP v3, SEXP color)
+{
+        DrawTriangleLines(vector2_from_sexp(v1), vector2_from_sexp(v2), vector2_from_sexp(v3),
+                          color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a triangle fan defined by points (first vertex is the center)
+SEXP DrawTriangleFan_R(SEXP points, SEXP point_count, SEXP color)
+{
+        DrawTriangleFan(vector2_array_from_sexp(points), Rf_asInteger(point_count),
+                        color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a triangle strip defined by points
+SEXP DrawTriangleStrip_R(SEXP points, SEXP point_count, SEXP color)
+{
+        DrawTriangleStrip(vector2_array_from_sexp(points), Rf_asInteger(point_count),
+                          color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a regular polygon (Vector version)
+SEXP DrawPoly_R(SEXP center, SEXP sides, SEXP radius, SEXP rotation, SEXP color)
+{
+        DrawPoly(vector2_from_sexp(center), Rf_asInteger(sides), (float)Rf_asReal(radius),
+                 (float)Rf_asReal(rotation), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a polygon outline of n sides
+SEXP DrawPolyLines_R(SEXP center, SEXP sides, SEXP radius, SEXP rotation, SEXP color)
+{
+        DrawPolyLines(vector2_from_sexp(center), Rf_asInteger(sides), (float)Rf_asReal(radius),
+                      (float)Rf_asReal(rotation), color_from_sexp(color));
+
+        return R_NilValue;
+}
+
+// Draw a polygon outline of n sides with extended parameters
+SEXP DrawPolyLinesEx_R(SEXP center, SEXP sides, SEXP radius, SEXP rotation, SEXP line_thick, SEXP color)
+{
+        DrawPolyLinesEx(vector2_from_sexp(center), Rf_asInteger(sides), (float)Rf_asReal(radius),
+                        (float)Rf_asReal(rotation), (float)Rf_asReal(line_thick), color_from_sexp(color));
+
+        return R_NilValue;
+}
 
 // Basic shapes collision detection functions
-/* RLAPI bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2);                                           // Check collision between two rectangles */
-/* RLAPI bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2);        // Check collision between two circles */
-/* RLAPI bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec);                         // Check collision between circle and rectangle */
-/* RLAPI bool CheckCollisionPointRec(Vector2 point, Rectangle rec);                                         // Check if point is inside rectangle */
+
+// Check collision between two rectangles
+SEXP CheckCollisionRecs_R(SEXP rec1, SEXP rec2)
+{
+        return Rf_ScalarLogical(CheckCollisionRecs(rectangle_from_sexp(rec1), rectangle_from_sexp(rec2)));
+}
+
+// Check collision between two circles
+SEXP CheckCollisionCircles_R(SEXP center1, SEXP radius1, SEXP center2, SEXP radius2)
+{
+        return Rf_ScalarLogical(CheckCollisionCircles(vector2_from_sexp(center1),
+                                                      Rf_asReal(radius1),
+                                                      vector2_from_sexp(center2),
+                                                      Rf_asReal(radius2)));
+}
+
+// Check collision between circle and rectangle
+SEXP CheckCollisionCircleRec_R(SEXP center, SEXP radius, SEXP rec)
+{
+        return Rf_ScalarLogical(CheckCollisionCircleRec(vector2_from_sexp(center),
+                                                        Rf_asReal(radius),
+                                                        rectangle_from_sexp(rec)));
+}
+
+// Check if point is inside rectangle
+SEXP CheckCollisionPointRec_R(SEXP point, SEXP rec)
+{
+        return Rf_ScalarLogical(CheckCollisionPointRec(vector2_from_sexp(point), rectangle_from_sexp(rec)));
+}
 /* RLAPI bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius);                       // Check if point is inside circle */
 /* RLAPI bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3);               // Check if point is inside a triangle */
 /* RLAPI bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint); // Check the collision between two lines defined by two points each, returns collision point by reference */
