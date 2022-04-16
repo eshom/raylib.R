@@ -17,6 +17,23 @@ just coding in the most pure spartan-programmers way._
 Source: [https://www.raylib.com](https://www.raylib.com)
 
 ## How to install
+The package uses a modified version of raylib 4.0.0 in order to comply with CRAN package policies.
+The modified source code is included in the package.
+
+To compile the source pacakge, the following dependencies are required:
+
+**Ubuntu**
+```sh
+sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+```
+
+**Fedora**
+```sh
+sudo dnf install alsa-lib-devel mesa-libGL-devel libX11-devel libXrandr-devel libXi-devel libXcursor-devel libXinerama-devel
+```
+
+To install from Github run in R:
+
 ```r
 remotes::install_github("eshom/raylib.R")
 ```

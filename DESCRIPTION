@@ -1,7 +1,7 @@
 Package: raylib.R
 Title: Bindings for Raylib
-Version: 0.0.3
-Date: 2022-04-12
+Version: 0.0.4
+Date: 2022-04-16
 Authors@R:
     c(person(given = "Erez",
            family = "Shomron",
@@ -16,7 +16,6 @@ Author: Erez Shomron [aut, cre],
 Maintainer: Erez Shomron <erezshomron@mykolab.com>
 Description: Bindings for 'raylib' library. A simple and easy-to-use library to enjoy videogames programming '<https://www.raylib.com>'.
 NeedsCompilation: yes
-SystemRequirements: raylib
 Depends: R (>= 4.0)
 License: GPL (>= 2)
 Encoding: UTF-8
