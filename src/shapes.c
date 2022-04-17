@@ -430,8 +430,61 @@ SEXP CheckCollisionPointRec_R(SEXP point, SEXP rec)
 {
         return Rf_ScalarLogical(CheckCollisionPointRec(vector2_from_sexp(point), rectangle_from_sexp(rec)));
 }
-/* RLAPI bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius);                       // Check if point is inside circle */
-/* RLAPI bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3);               // Check if point is inside a triangle */
-/* RLAPI bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint); // Check the collision between two lines defined by two points each, returns collision point by reference */
-/* RLAPI bool CheckCollisionPointLine(Vector2 point, Vector2 p1, Vector2 p2, int threshold);                // Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold] */
-/* RLAPI Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2);                                         // Get collision rectangle for two rectangles collision */
+
+// Check if point is inside circle
+SEXP CheckCollisionPointCircle_R(SEXP point, SEXP center, SEXP radius)
+{
+        return Rf_ScalarLogical(CheckCollisionPointCircle(vector2_from_sexp(point),
+                                                          vector2_from_sexp(center),
+                                                          (float)Rf_asReal(radius)));
+}
+
+// Check if point is inside a triangle
+SEXP CheckCollisionPointTriangle_R(SEXP point, SEXP p1, SEXP p2, SEXP p3)
+{
+        return Rf_ScalarLogical(CheckCollisionPointTriangle(vector2_from_sexp(point),
+                                                            vector2_from_sexp(p1),
+                                                            vector2_from_sexp(p2),
+                                                            vector2_from_sexp(p3)));
+}
+
+// Check the collision between two lines defined by two points each, returns collision point by reference
+SEXP CheckCollisionLines_R(SEXP start_pos1, SEXP end_pos1, SEXP start_pos2, SEXP end_pos2)
+{
+        Vector2 collision_point = {0, 0};
+
+        SEXP collision = Rf_ScalarLogical(CheckCollisionLines(vector2_from_sexp(start_pos1),
+                                                              vector2_from_sexp(end_pos1),
+                                                              vector2_from_sexp(start_pos2),
+                                                              vector2_from_sexp(end_pos2),
+                                                              &collision_point));
+
+        const char *list_names[] = {"collision", "point", ""};
+        SEXP list = PROTECT(Rf_mkNamed(VECSXP, list_names));
+
+        SET_VECTOR_ELT(list, 0, collision);
+        SET_VECTOR_ELT(list, 1, sexp_from_vector2(collision_point));
+
+        UNPROTECT(2); // From Rf_mkNamed() + sexp_From_vector2()
+
+        return list;
+}
+
+// Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
+SEXP CheckCollisionPointLine_R(SEXP point, SEXP p1, SEXP p2, SEXP threshold)
+{
+        return Rf_ScalarLogical(CheckCollisionPointLine(vector2_from_sexp(point),
+                                                        vector2_from_sexp(p1),
+                                                        vector2_from_sexp(p2),
+                                                        Rf_asInteger(threshold)));
+}
+
+// Get collision rectangle for two rectangles collision
+SEXP GetCollisionRec_R(SEXP rec1, SEXP rec2)
+{
+        SEXP out = sexp_from_rectangle(GetCollisionRec(rectangle_from_sexp(rec1), rectangle_from_sexp(rec2)));
+
+        UNPROTECT(1);
+
+        return out;
+}

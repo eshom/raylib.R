@@ -52,7 +52,7 @@ Vector2 *vector2_array_from_sexp(SEXP vec2_list)
         return points_out;
 }
 
-// Allocate an R vector of length 2 from R vector.
+// Allocate an R vector of length 2 from Vector2.
 // Must UNPROTECT() after calling
 SEXP sexp_from_vector2(Vector2 vec)
 {
@@ -93,6 +93,21 @@ Rectangle rectangle_from_sexp(SEXP rectangle)
 
         return  (Rectangle){(float)rectangle_p[0], (float)rectangle_p[1],
                 (float)rectangle_p[2], (float)rectangle_p[3]};
+}
+
+// Allocate an R vector of length 4 from Rectangle (x, y, width ,height)
+// Must UNPROTECT() after calling
+SEXP sexp_from_rectangle(Rectangle rec)
+{
+        SEXP vec_out = PROTECT(Rf_allocVector(REALSXP, 4));
+        double *vec_out_p = REAL(vec_out);
+
+        vec_out_p[0] = rec.x;
+        vec_out_p[1] = rec.y;
+        vec_out_p[2] = rec.width;
+        vec_out_p[3] = rec.height;
+
+        return vec_out;
 }
 
 // Return a flag after checks from flag length 1 R vector
