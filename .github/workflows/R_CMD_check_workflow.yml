@@ -38,7 +38,7 @@ jobs:
           check-dir: '"check"'
 
   fail-if-any:
-    name: Job2 Status -> Workflow Status
+    name: General Workflow Status
     needs:
       - check
     runs-on: ubuntu-latest
