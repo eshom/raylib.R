@@ -38,11 +38,9 @@ jobs:
           check-dir: '"check"'
 
   fail-if-any:
-    # Without this step workflow remains "green" if job2 does fail.
     name: Job2 Status -> Workflow Status
     needs:
-      - check (ubuntu-latest)
-      - check (windows-latest)
+      - check
     runs-on: ubuntu-latest
     if: always()
     steps:
