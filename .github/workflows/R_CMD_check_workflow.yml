@@ -18,7 +18,7 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
-          r-version: '4.1.3'
+          r-version: 'release'
 
       - name: Install Raylib dependencies
         if: runner.os == 'Linux'
@@ -36,3 +36,17 @@ jobs:
           args: 'c("--no-manual", "--as-cran")'
           error-on: '"error"'
           check-dir: '"check"'
+
+  fail-if-any:
+    # Without this step workflow remains "green" if job2 does fail.
+    name: Job2 Status -> Workflow Status
+    needs:
+      - check (ubuntu-latest)
+      - check (windows-latest)
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v2
+      - name: Check Job Status status and fail if they are red
+        if: env.WORKFLOW_CONCLUSION == 'failure'
+        run: exit 1
