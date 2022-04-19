@@ -8,6 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
+        R: ['release', 'devel']
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -18,7 +19,7 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
-          r-version: 'release'
+          r-version: ${{ matrix.R }}
 
       - name: Install Raylib dependencies
         if: runner.os == 'Linux'
