@@ -23,16 +23,22 @@ NULL
 
 #' @family Raylib objects
 #' @title Texture, tex data stored in GPU memory (VRAM)
-#' @param id OpenGL texture id
+#' @param id OpenGL texture id. If the rest of the parameters are missing,
+#' expecting a vector of length 5 with the following
+#' components: id, width, height, mipmaps, format
 #' @param width Texture base width
 #' @param height Texture base height
 #' @param mipmaps Mipmap levels, 1 by default
 #' @param format Data format (PixelFormat type)
 #' @export
 Texture <- function(id, width, height, mipmaps, format) {
-        out <- as.integer(c(id, width, height, mipmaps, format))
+        if (missing(width) && missing(height) && missing(mipmaps) && length(format) == 5)
+                out <- as.integer(id)
+        else
+                out <- as.integer(c(id, width, height, mipmaps, format))
+
         class(out) <- c("Texture", class(out))
-        out
+        stats::setNames(out, c("id", "width", "height", "mipmaps", "format"))
 }
 
 #' @family Raylib objects
@@ -66,13 +72,24 @@ Rectangle <- function(x, y, width, height) {
 
 #' @family Raylib objects
 #' @title Create RGBA values between 0 and 255
-#' @param color_name R color name taken from one of [grDevices::colors()]
+#' @param color Two options:
+#' 1. Character vector. R color name taken from one of [grDevices::colors()]
+#' 2. Integer vector of length 4, defining RGBA values. In this case, `alpha`
+#' parameter is ignored.
 #' @param alpha Alpha value between 0 and 255. 0 is fully transparent.
 #' @export
-Color <- function(color_name, alpha = 255) {
-        out <- as.integer(c(grDevices::col2rgb(color_name), alpha))
-        class(out) <- c("Color", class(out))
-        out
+Color <- function(color, alpha = 255) {
+        if (is.character(color)) {
+                out <- as.integer(c(grDevices::col2rgb(color), alpha))
+                class(out) <- c("Color", class(out))
+                return(stats::setNames(out, c("red", "green", "blue", "alpha")))
+        } else if (is.numeric(color)) {
+                out <- as.integer(color)
+                class(out) <- c("Color", class(out))
+                return(stats::setNames(out, c("red", "green", "blue", "alpha")))
+        }
+
+        stop("Unexpected end of function.")
 }
 
 #' @family Raylib objects
@@ -145,7 +162,7 @@ Quaternion <- Vector4
 Camera2D <- function(offset, target, rotation, zoom) {
         out <- list(offset, target, as.double(rotation), as.double(zoom))
         class(out) <- c("Camera2D", class(out))
-        out
+        stats::setNames(out, c("offset", "target", "rotation", "zoom"))
 }
 
 #' @family Raylib objects

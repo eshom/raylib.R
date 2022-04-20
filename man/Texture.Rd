@@ -13,7 +13,9 @@ Texture2D(id, width, height, mipmaps, format)
 TextureCubemap(id, width, height, mipmaps, format)
 }
 \arguments{
-\item{id}{OpenGL texture id}
+\item{id}{OpenGL texture id. If the rest of the parameters are missing,
+expecting a vector of length 5 with the following
+components: id, width, height, mipmaps, format}
 
 \item{width}{Texture base width}
 

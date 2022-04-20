@@ -5,12 +5,17 @@
 \alias{Colour}
 \title{Create RGBA values between 0 and 255}
 \usage{
-Color(color_name, alpha = 255)
+Color(color, alpha = 255)
 
-Colour(color_name, alpha = 255)
+Colour(color, alpha = 255)
 }
 \arguments{
-\item{color_name}{R color name taken from one of \code{\link[grDevices:colors]{grDevices::colors()}}}
+\item{color}{Two options:
+\enumerate{
+\item Character vector. R color name taken from one of \code{\link[grDevices:colors]{grDevices::colors()}}
+\item Integer vector of length 4, defining RGBA values. In this case, \code{alpha}
+parameter is ignored.
+}}
 
 \item{alpha}{Alpha value between 0 and 255. 0 is fully transparent.}
 }

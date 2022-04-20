@@ -21,6 +21,9 @@ Maintainer: Erez Shomron <erezshomron@mykolab.com>
 Description: Bindings for 'raylib' library. A simple and easy-to-use library to enjoy videogames programming '<https://www.raylib.com>'.
 NeedsCompilation: yes
 Depends: R (>= 4.0)
+Imports:
+  stats,
+  grDevices
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
