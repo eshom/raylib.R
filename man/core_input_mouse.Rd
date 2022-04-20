@@ -59,6 +59,7 @@ close_window() # Close window and OpenGL context
 }
 \seealso{
 Other Core examples: 
+\code{\link{core_2d_camera}},
 \code{\link{core_basic_window}},
 \code{\link{core_input_keys}}
 }
