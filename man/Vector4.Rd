@@ -10,7 +10,8 @@ Vector4(x, y, z, w)
 Quaternion(x, y, z, w)
 }
 \arguments{
-\item{x}{Vector x component}
+\item{x}{Vector x component. If \code{y}, \code{z}, and \code{w} are missing, expecting
+a length 4 vector with x, y, z, and w components.}
 
 \item{y}{Vector y component}
 

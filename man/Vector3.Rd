@@ -7,7 +7,8 @@
 Vector3(x, y, z)
 }
 \arguments{
-\item{x}{Vector x component}
+\item{x}{Vector x component. If \code{y} and \code{z} are missing, expecting a length
+3 vector with x, y, and z components.}
 
 \item{y}{Vector y component}
 

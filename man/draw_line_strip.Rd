@@ -16,7 +16,14 @@ Draw lines sequence
 }
 \seealso{
 Other Basic shapes drawing functions: 
+\code{\link{draw_circle_gradient}()},
+\code{\link{draw_circle_lines}()},
+\code{\link{draw_circle_sector_lines}()},
+\code{\link{draw_circle_sector}()},
 \code{\link{draw_circle_v}()},
+\code{\link{draw_circle}()},
+\code{\link{draw_ellipse_lines}()},
+\code{\link{draw_ellipse}()},
 \code{\link{draw_line_bezier_cubic}()},
 \code{\link{draw_line_bezier_quad}()},
 \code{\link{draw_line_bezier}()},
@@ -25,6 +32,25 @@ Other Basic shapes drawing functions:
 \code{\link{draw_line}()},
 \code{\link{draw_pixel_v}()},
 \code{\link{draw_pixel}()},
+\code{\link{draw_poly_lines}()},
+\code{\link{draw_poly}()},
+\code{\link{draw_rectangle_gradient_ex}()},
+\code{\link{draw_rectangle_gradient_h}()},
+\code{\link{draw_rectangle_gradient_v}()},
+\code{\link{draw_rectangle_lines_ex}()},
+\code{\link{draw_rectangle_lines}()},
+\code{\link{draw_rectangle_pro}()},
+\code{\link{draw_rectangle_rec}()},
+\code{\link{draw_rectangle_rounded_lines}()},
+\code{\link{draw_rectangle_rounded}()},
+\code{\link{draw_rectangle_v}()},
+\code{\link{draw_rectangle}()},
+\code{\link{draw_ring_lines}()},
+\code{\link{draw_ring}()},
+\code{\link{draw_triangle_fan}()},
+\code{\link{draw_triangle_lines}()},
+\code{\link{draw_triangle_strip}()},
+\code{\link{draw_triangle}()},
 \code{\link{set_shapes_texture}()}
 }
 \concept{Basic shapes drawing functions}

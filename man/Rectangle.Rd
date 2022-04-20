@@ -7,7 +7,9 @@
 Rectangle(x, y, width, height)
 }
 \arguments{
-\item{x}{Rectangle top-left corner position x}
+\item{x}{Rectangle top-left corner position x. If other parameters
+are missing, then expecting a vector of length 4 with x, y, width, and
+height components.}
 
 \item{y}{Rectangle top-left corner position y}
 

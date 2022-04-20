@@ -46,7 +46,8 @@ while (!window_should_close()) { # Detect window close button or ESC key
 
        draw_circle_v(ball_position, 40, ball_color)
 
-       draw_text("move ball with mouse and click mouse button to change color", 10, 10, 20, Color("darkgray"))
+       draw_text("move ball with mouse and click mouse button to change color",
+                 10, 10, 20, Color("darkgray"))
 
 
        end_drawing()

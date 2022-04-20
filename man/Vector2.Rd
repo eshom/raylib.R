@@ -7,7 +7,8 @@
 Vector2(x, y)
 }
 \arguments{
-\item{x}{Vector x component}
+\item{x}{Vector x component. If \code{y} is missing, expecting a length 2 vector
+with x and y components.}
 
 \item{y}{Vector y component}
 }

@@ -47,15 +47,21 @@ TextureCubemap <- Texture
 
 #' @family Raylib objects
 #' @title Rectangle, 4 components
-#' @param x Rectangle top-left corner position x
+#' @param x Rectangle top-left corner position x. If other parameters
+#' are missing, then expecting a vector of length 4 with x, y, width, and
+#' height components.
 #' @param y Rectangle top-left corner position y
 #' @param width Rectangle width
 #' @param height Rectangle height
 #' @export
 Rectangle <- function(x, y, width, height) {
-        out <- as.double(c(x, y, width, height))
+        if (missing(y) && missing(width) && missing(height) && length(x) == 4)
+                out <- as.double(x)
+        else
+                out <- as.double(c(x, y, width, height))
+
         class(out) <- c("Rectangle", class(out))
-        out
+        stats::setNames(out, c("x", "y", "width", "height"))
 }
 
 #' @family Raylib objects
@@ -76,38 +82,52 @@ Colour <- Color
 
 #' @family Raylib objects
 #' @title Vector with 2 components
-#' @param x Vector x component
+#' @param x Vector x component. If `y` is missing, expecting a length 2 vector
+#' with x and y components.
 #' @param y Vector y component
 #' @export
 Vector2 <- function(x, y) {
-        out <- as.double(c(x, y))
+        if (missing(y) && length(x) == 2)
+                out <- as.double(x)
+        else
+                out <- as.double(c(x, y))
+
         class(out) <- c("Vector2", class(out))
-        out
+        stats::setNames(out, c("x", "y"))
 }
 
 #' @family Raylib objects
 #' @title Vector with 3 components
-#' @param x Vector x component
+#' @param x Vector x component. If `y` and `z` are missing, expecting a length
+#' 3 vector with x, y, and z components.
 #' @param y Vector y component
 #' @param z Vector z component
 #' @export
 Vector3 <- function(x, y, z) {
-        out <- as.double(c(x, y, z))
+        if (missing(y) && missing(z) && length(x) == 3)
+                out <- as.double(x)
+        else
+                out <- as.double(c(x, y, z))
+
         class(out) <- c("Vector3", class(out))
-        out
+        stats::setNames(out, c("x", "y", "z"))
 }
 
 #' @family Raylib objects
 #' @title Vector with 4 components
-#' @param x Vector x component
+#' @param x Vector x component. If `y`, `z`, and `w` are missing, expecting
+#' a length 4 vector with x, y, z, and w components.
 #' @param y Vector y component
 #' @param z Vector z component
 #' @param w Vector w component
 #' @export
 Vector4 <- function(x, y, z, w) {
-        out <- as.double(c(x, y, z, w))
+        if (missing(y) && missing(z) && missing(w) && length(x) == 4)
+                out <- as.double(x)
+        else
+                out <- as.double(c(x, y, z, w))
         class(out) <- c("Vector4", class(out))
-        out
+        stats::setNames(out, c("x", "y", "z", "w"))
 }
 
 #' @family Raylib objects
