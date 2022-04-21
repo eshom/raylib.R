@@ -9,8 +9,7 @@
 #' @param title Title of the window
 #' @export
 init_window <- function(width, height, title = "raylib.R") {
-        stopifnot(is.numeric(width), is.numeric(height), is.character(title))
-        .Call("InitWindow_R", as.integer(width), as.integer(height), title)
+        .Call("InitWindow_R", width, height, title)
         invisible()
 }
 
@@ -93,8 +92,7 @@ is_window_resized <- function() {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_window_state <- function(flag) {
-        stopifnot(is.numeric(flag))
-        .Call("IsWindowState_R", as.integer(flag))
+        .Call("IsWindowState_R", flag)
 }
 
 #' @family Windows-related functions
@@ -103,8 +101,7 @@ is_window_state <- function(flag) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 set_window_state <- function(flags) {
-        stopifnot(is.numeric(flags))
-        .Call("SetWindowState_R", as.integer(flags))
+        .Call("SetWindowState_R", flags)
         invisible()
 }
 
@@ -114,8 +111,7 @@ set_window_state <- function(flags) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 clear_window_state <- function(flags) {
-        stopifnot(is.numeric(flags))
-        .Call("ClearWindowState_R", as.integer(flags))
+        .Call("ClearWindowState_R", flags)
         invisible()
 }
 
@@ -140,7 +136,7 @@ toggle_fullscreen <- function() {
 #' @family Drawing-related functions
 clear_background <- function(color) {
 
-        .Call("ClearBackground_R", as.integer(color))
+        .Call("ClearBackground_R", color)
         invisible()
 
 }
@@ -191,8 +187,6 @@ NULL
 #' @rdname mode2d
 #' @export
 begin_mode_2d <- function(camera) {
-        stopifnot(inherits(camera, "Camera2D"))
-
         .Call("BeginMode2D_R", camera)
         invisible()
 }
@@ -220,8 +214,6 @@ NULL
 #' @rdname mode3d
 #' @export
 begin_mode_3d <- function(camera) {
-        stopifnot(inherits(camera, "Camera3D"))
-
         .Call("BeginMode3D_R", camera)
         invisible()
 }
@@ -257,8 +249,6 @@ set_target_fps <- function(fps) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_pressed <- function(key) {
-        stopifnot(key %in% raylib.R::keyboard_key)
-
         .Call("IsKeyPressed_R", key)
 }
 
@@ -268,8 +258,6 @@ is_key_pressed <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_down <- function(key) {
-        stopifnot(key %in% raylib.R::keyboard_key)
-
         .Call("IsKeyDown_R", key)
 }
 
@@ -279,8 +267,6 @@ is_key_down <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_released <- function(key) {
-        stopifnot(key %in% raylib.R::keyboard_key)
-
         .Call("IsKeyReleased_R", key)
 }
 
@@ -290,8 +276,6 @@ is_key_released <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 is_key_up <- function(key) {
-        stopifnot(key %in% raylib.R::keyboard_key)
-
         .Call("IsKeyUp_R", key)
 }
 
@@ -301,8 +285,6 @@ is_key_up <- function(key) {
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 set_exit_key <- function(key) {
-        stopifnot(key %in% raylib.R::keyboard_key)
-
         .Call("SetExitKey_R", key)
         invisible()
 }

@@ -1,9 +1,4 @@
-#define R_NO_REMAP
-#include "shapes.h"
-#include "utils.h"
-#include <R.h>
-#include <Rinternals.h>
-#include "raylib.h"
+#include "raylib.R.h"
 
 // Set texture and rectangle to be used on shapes drawing
 // NOTE: It can be useful when using basic shapes and one single font,
@@ -42,18 +37,10 @@ SEXP DrawPixelV_R(SEXP vector2_position, SEXP color)
 }
 
 // Draw a line
-SEXP DrawLine_R(SEXP position, SEXP color)
+SEXP DrawLine_R(SEXP start_pos_x, SEXP start_pos_y, SEXP end_pos_x, SEXP end_pos_y, SEXP color)
 {
-        Color col = color_from_sexp(color);
-
-        int *position_p = INTEGER(Rf_coerceVector(position, INTSXP));
-
-        int startx = position_p[0];
-        int starty = position_p[1];
-        int endx = position_p[2];
-        int endy = position_p[3];
-
-        DrawLine(startx, starty, endx, endy, col);
+        DrawLine(Rf_asInteger(start_pos_x), Rf_asInteger(start_pos_y),
+                 Rf_asInteger(end_pos_x), Rf_asInteger(end_pos_y), color_from_sexp(color));
 
         return R_NilValue;
 }

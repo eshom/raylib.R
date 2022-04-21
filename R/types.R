@@ -187,5 +187,26 @@ Camera3D <- function(position, target, up, fovy, projection) {
 
 #' @family Raylib objects
 #' @rdname Camera3D
+#' @param camera Camera3D object.
+#' @param what Named list with any of the following components:
+#' `position`, `target`, `up`, `fovy`, `projection` to set
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+Camera3D_set <- function(camera, what) {
+        .Call("set_Camera3D_R", camera, what)
+        invisible()
+}
+
+#' @family Raylib objects
+#' @rdname Camera3D
+#' @param camera Camera3D object.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+Camera3D_get <- function(camera) {
+        .Call("get_Camera3D_R", camera)
+}
+
+#' @family Raylib objects
+#' @rdname Camera3D
 #' @export
 Camera <- Camera3D

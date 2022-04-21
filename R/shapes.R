@@ -46,13 +46,15 @@ draw_pixel_v <- function(vector2_position, color) {
 
 #' @family Basic shapes drawing functions
 #' @title Draw a line
-#' @param position Integer Vector with 4 components:
-#' x start position, y start_position, x end position, y end position
+#' @param start_pos_x X position of start of the line.
+#' @param start_pos_y Y position of start of the line.
+#' @param end_pos_x X position of the end of the line.
+#' @param end_pos_y Y position of the end of the line.
 #' @param color Color object. Integer vector with RGBA values between 0 and 255.
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
-draw_line <- function(position, color) {
-        .Call("DrawLine_R", position, color)
+draw_line <- function(start_pos_x, start_pos_y, end_pos_x, end_pos_y, color) {
+        .Call("DrawLine_R", start_pos_x, start_pos_y, end_pos_x, end_pos_y, color)
         invisible()
 }
 

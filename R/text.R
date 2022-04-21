@@ -3,6 +3,17 @@
 ##-----------------------------------##
 #' @family Text-drawing functions
 #' @title Draw text (using default font)
+#' @param pos_x Integer. X position.
+#' @param pos_y Integer. Y position.
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+draw_fps <- function(pos_x, pos_y) {
+        .Call("DrawFPS_R", pos_x, pos_y)
+        invisible()
+}
+
+#' @family Text-drawing functions
+#' @title Draw text (using default font)
 #' @param text Length one character vector. The text to draw.
 #' @param pos_x Integer. X position.
 #' @param pos_y Integer. Y position.

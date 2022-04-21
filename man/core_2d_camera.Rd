@@ -107,10 +107,10 @@ while (!window_should_close()) { # Detect window close button or ESC key
 
                        draw_rectangle_rec(player, raylib_color$RED)
 
-                       draw_line(c(camera$target["x"], -screen_height * 10, camera$target["x"],
-                                 screen_height * 10), raylib_color$GREEN)
-                       draw_line(c(-screen_width * 10, camera$target["y"], screen_width * 10,
-                                 camera$target["y"]), raylib_color$GREEN)
+                       draw_line(camera$target["x"], -screen_height * 10, camera$target["x"],
+                                 screen_height * 10, raylib_color$GREEN)
+                       draw_line(-screen_width * 10, camera$target["y"], screen_width * 10,
+                                 camera$target["y"], raylib_color$GREEN)
                }
                end_mode_2d()
 
@@ -143,6 +143,7 @@ close_window() # Close window and OpenGL context
 }
 \seealso{
 Other Core examples: 
+\code{\link{core_3d_camera}},
 \code{\link{core_basic_window}},
 \code{\link{core_input_keys}},
 \code{\link{core_input_mouse}}

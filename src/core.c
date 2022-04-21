@@ -1,9 +1,5 @@
-#define R_NO_REMAP
-#include "core.h"
+#include "raylib.R.h"
 #include "utils.h"
-#include "raylib.h"
-#include <R.h>
-#include <Rinternals.h>
 
 // Windows-related functions
 
@@ -157,6 +153,8 @@ SEXP ToggleFullscreen_R(void)
 // Set background color (framebuffer clear color)
 SEXP ClearBackground_R(SEXP color)
 {
+        window_ready_else_error();
+
         Color col = color_from_sexp(color);
 
         ClearBackground(col);
@@ -167,6 +165,8 @@ SEXP ClearBackground_R(SEXP color)
 // Setup canvas (framebuffer) to start drawing
 SEXP BeginDrawing_R(void)
 {
+        window_ready_else_error();
+
         BeginDrawing();
         return R_NilValue;
 }
@@ -174,13 +174,17 @@ SEXP BeginDrawing_R(void)
 // End canvas drawing and swap buffers (double buffering)
 SEXP EndDrawing_R(void)
 {
-         EndDrawing();
-         return R_NilValue;
+        window_ready_else_error();
+
+        EndDrawing();
+        return R_NilValue;
 }
 
 // Begin 2D mode with custom camera (2D)
 SEXP BeginMode2D_R(SEXP camera)
 {
+        window_ready_else_error();
+
         Camera2D cam = camera2d_from_sexp(camera);
 
         BeginMode2D(cam);
@@ -191,13 +195,17 @@ SEXP BeginMode2D_R(SEXP camera)
 // Ends 2D mode with custom camera
 SEXP EndMode2D_R(void)
 {
-          EndMode2D();
-          return R_NilValue;
+        window_ready_else_error();
+
+        EndMode2D();
+        return R_NilValue;
 }
 
 // Begin 3D mode with custom camera (3D)
 SEXP BeginMode3D_R(SEXP camera)
 {
+        window_ready_else_error();
+
         Camera3D *camera_p = camera3d_p_from_sexp(camera);
 
         BeginMode3D(*camera_p);
@@ -208,6 +216,8 @@ SEXP BeginMode3D_R(SEXP camera)
 // Ends 3D mode and returns to default 2D orthographic mode
 SEXP EndMode3D_R(void)
 {
+        window_ready_else_error();
+
         EndMode3D();
         return R_NilValue;
 }
@@ -324,31 +334,41 @@ SEXP SetTargetFPS_R(SEXP fps)
 // Check if a key has been pressed once
 SEXP IsKeyPressed_R(SEXP key)
 {
-        return Rf_ScalarLogical(IsKeyPressed(Rf_asInteger(key)));
+        int ikey = Rf_asInteger(key);
+        keyboard_key_valid_else_error(ikey);
+        return Rf_ScalarLogical(IsKeyPressed(ikey));
 }
 
 // Check if a key is being pressed
 SEXP IsKeyDown_R(SEXP key)
 {
-        return Rf_ScalarLogical(IsKeyDown(Rf_asInteger(key)));
+        int ikey = Rf_asInteger(key);
+        keyboard_key_valid_else_error(ikey);
+        return Rf_ScalarLogical(IsKeyDown(ikey));
 }
 
 // Check if a key has been released once
 SEXP IsKeyReleased_R(SEXP key)
 {
-        return Rf_ScalarLogical(IsKeyReleased(Rf_asInteger(key)));
+        int ikey = Rf_asInteger(key);
+        keyboard_key_valid_else_error(ikey);
+        return Rf_ScalarLogical(IsKeyReleased(ikey));
 }
 
 // Check if a key is NOT being pressed
 SEXP IsKeyUp_R(SEXP key)
 {
-        return Rf_ScalarLogical(IsKeyUp(Rf_asInteger(key)));
+        int ikey = Rf_asInteger(key);
+        keyboard_key_valid_else_error(ikey);
+        return Rf_ScalarLogical(IsKeyUp(ikey));
 }
 
 // Set a custom key to exit program (default is ESC)
 SEXP SetExitKey_R(SEXP key)
 {
-        SetExitKey(Rf_asInteger(key));
+        int ikey = Rf_asInteger(key);
+        keyboard_key_valid_else_error(ikey);
+        SetExitKey(ikey);
         return R_NilValue;
 }
 
@@ -381,25 +401,29 @@ SEXP GetCharPressed_R(void)
 // Check if a mouse button has been pressed once
 SEXP IsMouseButtonPressed_R(SEXP button)
 {
-        return Rf_ScalarLogical(IsMouseButtonPressed(Rf_asInteger(button)));
+        int ibutton = Rf_asInteger(button);
+        return Rf_ScalarLogical(IsMouseButtonPressed(ibutton));
 }
 
 // Check if a mouse button is being pressed
 SEXP IsMouseButtonDown_R(SEXP button)
 {
-        return Rf_ScalarLogical(IsMouseButtonDown(Rf_asInteger(button)));
+        int ibutton = Rf_asInteger(button);
+        return Rf_ScalarLogical(IsMouseButtonDown(ibutton));
 }
 
 // Check if a mouse button has been released once
 SEXP IsMouseButtonReleased_R(SEXP button)
 {
-        return Rf_ScalarLogical(IsMouseButtonReleased(Rf_asInteger(button)));
+        int ibutton = Rf_asInteger(button);
+        return Rf_ScalarLogical(IsMouseButtonReleased(ibutton));
 }
 
 // Check if a mouse button is NOT being pressed
 SEXP IsMouseButtonUp_R(SEXP button)
 {
-        return Rf_ScalarLogical(IsMouseButtonUp(Rf_asInteger(button)));
+        int ibutton = Rf_asInteger(button);
+        return Rf_ScalarLogical(IsMouseButtonUp(ibutton));
 }
 
 // Get mouse position X
@@ -462,7 +486,10 @@ SEXP GetMouseWheelMove_R(void)
 // Set mouse cursor
 SEXP SetMouseCursor_R(SEXP cursor)
 {
-        SetMouseCursor(Rf_asInteger(cursor));
+        int icursor = Rf_asInteger(cursor);
+        mouse_cursor_valid_else_error(icursor);
+        SetMouseCursor(icursor);
+
         return R_NilValue;
 }
 

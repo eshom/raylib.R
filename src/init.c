@@ -1,7 +1,4 @@
-#include "core.h"
-#include "shapes.h"
-#include "text.h"
-#include "camera3d.h"
+#include "raylib.R.h"
 #include <R_ext/Rdynload.h>
 
 // R_CallMethodDef quick reminder:
@@ -68,7 +65,7 @@ static const R_CallMethodDef callMethods[] = {
         {"SetShapesTexture_R",          (DL_FUNC) &SetShapesTexture_R,          2},
         {"DrawPixel_R",                 (DL_FUNC) &DrawPixel_R,                 3},
         {"DrawPixelV_R",                (DL_FUNC) &DrawPixelV_R,                2},
-        {"DrawLine_R",                  (DL_FUNC) &DrawLine_R,                  2},
+        {"DrawLine_R",                  (DL_FUNC) &DrawLine_R,                  5},
         {"DrawLineV_R",                 (DL_FUNC) &DrawLineV_R,                 3},
         {"DrawLineEx_R",                (DL_FUNC) &DrawLineEx_R,                4},
         {"DrawLineBezier_R",            (DL_FUNC) &DrawLineBezier_R,            4},
@@ -115,11 +112,21 @@ static const R_CallMethodDef callMethods[] = {
         {"CheckCollisionPointLine_R",     (DL_FUNC) &CheckCollisionPointLine_R,     4},
         {"GetCollisionRec_R",             (DL_FUNC) &GetCollisionRec_R,             2},
 
+        // Text module
+        {"DrawFPS_R",        (DL_FUNC) &DrawFPS_R,        2},
+        {"DrawText_R",       (DL_FUNC) &DrawText_R,       5},
+
+        // models module
+        {"DrawCube_R",       (DL_FUNC) &DrawCube_R,       5},
+        {"DrawCubeV_R",      (DL_FUNC) &DrawCubeV_R,      3},
+        {"DrawCubeWires_R",  (DL_FUNC) &DrawCubeWires_R,  5},
+        {"DrawCubeWiresV_R", (DL_FUNC) &DrawCubeWiresV_R, 3},
+        {"DrawGrid_R",       (DL_FUNC) &DrawGrid_R,       2},
+
         // Heap allocated structs and external pointer handling
         {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
-
-        // Text module
-        {"DrawText_R",       (DL_FUNC) &DrawText_R,       5},
+        {"set_Camera3D_R",    (DL_FUNC) &set_Camera3D_R,    2},
+        {"get_Camera3D_R",    (DL_FUNC) &get_Camera3D_R,    1},
 
         {NULL, NULL, 0}};
 

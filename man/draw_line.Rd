@@ -4,11 +4,16 @@
 \alias{draw_line}
 \title{Draw a line}
 \usage{
-draw_line(position, color)
+draw_line(start_pos_x, start_pos_y, end_pos_x, end_pos_y, color)
 }
 \arguments{
-\item{position}{Integer Vector with 4 components:
-x start position, y start_position, x end position, y end position}
+\item{start_pos_x}{X position of start of the line.}
+
+\item{start_pos_y}{Y position of start of the line.}
+
+\item{end_pos_x}{X position of the end of the line.}
+
+\item{end_pos_y}{Y position of the end of the line.}
 
 \item{color}{Color object. Integer vector with RGBA values between 0 and 255.}
 }

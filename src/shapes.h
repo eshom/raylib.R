@@ -12,7 +12,7 @@ SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source);
 // Basic shapes drawing functions
 SEXP DrawPixel_R(SEXP posX, SEXP posY, SEXP color);
 SEXP DrawPixelV_R(SEXP vector2_position, SEXP color);
-SEXP DrawLine_R(SEXP position, SEXP color);
+SEXP DrawLine_R(SEXP start_pos_x, SEXP start_pos_y, SEXP end_pos_x, SEXP end_pos_y, SEXP color);
 SEXP DrawLineV_R(SEXP start_pos, SEXP end_pos, SEXP color);
 SEXP DrawLineEx_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color);
 SEXP DrawLineBezier_R(SEXP start_pos, SEXP end_pos, SEXP thick, SEXP color);

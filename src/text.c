@@ -1,9 +1,4 @@
-#define R_NO_REMAP
-#include "text.h"
-#include "utils.h"
-#include "raylib.h"
-#include <R.h>
-#include <Rinternals.h>
+#include "raylib.R.h"
 
 /* // Font loading/unloading functions */
 /*  Font GetFontDefault(void); // Get the default Font */
@@ -16,7 +11,13 @@
 /*  void UnloadFontData(GlyphInfo *chars, int glyphCount); // Unload font chars info data (RAM) */
 /*  void UnloadFont(Font font); // Unload Font from GPU memory (VRAM) */
 // Text drawing functions
-/*  void DrawFPS(int posX, int posY); // Draw current FPS */
+
+// Draw current FPS
+SEXP DrawFPS_R(SEXP pos_x, SEXP pos_y)
+{
+        DrawFPS(Rf_asInteger(pos_x), Rf_asInteger(pos_y));
+        return R_NilValue;
+}
 
 // Draw text (using default font)
 SEXP DrawText_R(SEXP text, SEXP pos_x, SEXP pos_y, SEXP font_size, SEXP color)

@@ -2,10 +2,16 @@
 % Please edit documentation in R/types.R
 \name{Camera3D}
 \alias{Camera3D}
+\alias{Camera3D_set}
+\alias{Camera3D_get}
 \alias{Camera}
 \title{Camera3D, defines position/orientation in 3D space}
 \usage{
 Camera3D(position, target, up, fovy, projection)
+
+Camera3D_set(camera, what)
+
+Camera3D_get(camera)
 
 Camera(position, target, up, fovy, projection)
 }
@@ -21,11 +27,34 @@ in perspective, used as near plane width in orthographic}
 
 \item{projection}{Camera projection:
 CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC}
+
+\item{camera}{Camera3D object.}
+
+\item{what}{Named list with any of the following components:
+\code{position}, \code{target}, \code{up}, \code{fovy}, \code{projection} to set}
 }
 \description{
 Camera3D, defines position/orientation in 3D space
 }
 \seealso{
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Color}()},
+\code{\link{Rectangle}()},
+\code{\link{Texture}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Color}()},
+\code{\link{Rectangle}()},
+\code{\link{Texture}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},
