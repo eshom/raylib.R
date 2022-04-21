@@ -9,3 +9,4 @@ compile_commands.json
 ^raylib-.*$
 ^update_raylib_tar$
 ^get_declarations$
+^get_title_case$
