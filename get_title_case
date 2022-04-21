@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+FILE_R="$1"
+
+cat "$FILE_R" |\
+sed -n -E 's/^[[:space:]]*(.+)[[:space:]]*<-[[:space:]]*function.*$/\1/p' |\
+sed -n -E "s/.*/#' @rdname \0\n#' @useDynLib raylib.R, .registration = TRUE\n#' @export\n\0<- \0\n/pg" |\
+Rscript -e '
+conn <- file("stdin")
+input <- readLines(conn)
+lines <- which(grepl(r"{^.+[[:space:]]*<-[[:space:]]*.+$}", input))
+input[lines] <- gsub(r"{_(.)(?=.*<-)|^(.)(?=.*<-)}", r"{\U\1\U\2}", input[lines], perl = TRUE)
+writeLines(input)
+' 
