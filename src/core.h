@@ -34,6 +34,10 @@ SEXP EndMode3D_R(void);
 // Set target FPS (maximum)
 SEXP SetTargetFPS_R(SEXP fps);
 
+// Files management functions
+SEXP IsFileDropped_R(void);
+SEXP GetDroppedFiles_R(void);
+
 // Input-related functions: keyboard
 SEXP IsKeyPressed_R(SEXP key);
 SEXP IsKeyDown_R(SEXP key);
@@ -58,7 +62,4 @@ SEXP SetMouseScale_R(SEXP scale_x, SEXP scale_y);
 SEXP GetMouseWheelMove_R(void);
 SEXP SetMouseCursor_R(SEXP cursor);
 
-// Files management functions
-SEXP IsFileDropped_R(void);
-SEXP GetDroppedFiles_R(void);
 #endif
