@@ -166,7 +166,7 @@ Camera2D <- function(offset, target, rotation, zoom) {
 }
 
 #' @family Raylib objects
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @title Camera3D, defines position/orientation in 3D space
 #' @param position Vector3. Camera position
 #' @param target Vector3. Camera target it looks-at
@@ -180,7 +180,7 @@ Camera3D <- function(position, target, up, fovy, projection) {
         cam_list <- list(position, target, up, as.double(fovy),
                          as.integer(projection))
 
-        out <- .Call("create_Camera3D_R", cam_list, NULL)
+        out <- .Call(.C_create_Camera3D_R, cam_list, NULL)
         class(out) <- c("Camera3D", class(out))
         out
 }
@@ -190,20 +190,20 @@ Camera3D <- function(position, target, up, fovy, projection) {
 #' @param camera Camera3D object.
 #' @param what Named list with any of the following components:
 #' `position`, `target`, `up`, `fovy`, `projection` to set
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 Camera3D_set <- function(camera, what) {
-        .Call("set_Camera3D_R", camera, what)
+        .Call(.C_set_Camera3D_R, camera, what)
         invisible()
 }
 
 #' @family Raylib objects
 #' @rdname Camera3D
 #' @param camera Camera3D object.
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 Camera3D_get <- function(camera) {
-        .Call("get_Camera3D_R", camera)
+        .Call(.C_get_Camera3D_R, camera)
 }
 
 #' @family Raylib objects

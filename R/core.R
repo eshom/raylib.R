@@ -7,120 +7,121 @@
 #' @param width Width of the window
 #' @param height Height of the window
 #' @param title Title of the window
+#'
 #' @export
 init_window <- function(width, height, title = "raylib.R") {
-        .Call("InitWindow_R", width, height, title)
+        .Call(.C_InitWindow_R, width, height, title)
         invisible()
 }
 
 #' @family Windows-related functions
 #' @title Check if KEY_ESCAPE pressed or Close icon pressed
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 window_should_close <- function() {
-        .Call("WindowShouldClose_R")
+        .Call(.C_WindowShouldClose_R)
 }
 
 #' @family Windows-related functions
 #' @title Close window and unload OpenGL context
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 close_window <- function() {
-        .Call("CloseWindow_R")
+        .Call(.C_CloseWindow_R)
         invisible()
 }
 
 #' @family Windows-related functions
 #' @title Check if window has been initialized successfully
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_ready <- function() {
-        .Call("IsWindowReady_R")
+        .Call(.C_IsWindowReady_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window is currently fullscreen
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_fullscreen <- function() {
-        .Call("IsWindowFullscreen_R")
+        .Call(.C_IsWindowFullscreen_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window is currently hidden (only PLATFORM_DESKTOP)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_hidden <- function() {
-        .Call("IsWindowHidden_R")
+        .Call(.C_IsWindowHidden_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window is currently minimized (only PLATFORM_DESKTOP)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_minimized <- function() {
-        .Call("IsWindowMinimized_R")
+        .Call(.C_IsWindowMinimized_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window is currently maximized (only PLATFORM_DESKTOP)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_maximized <- function() {
-        .Call("IsWindowMaximized_R")
+        .Call(.C_IsWindowMaximized_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window is currently maximized (only PLATFORM_DESKTOP)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_focused <- function() {
-        .Call("IsWindowFocused_R")
+        .Call(.C_IsWindowFocused_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if window has been resized last frame
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_resized <- function() {
-        .Call("IsWindowResized_R")
+        .Call(.C_IsWindowResized_R)
 }
 
 #' @family Windows-related functions
 #' @title Check if one specific window flag is enabled
 #' @param flag One of System/Window config flags. See: [config_flags]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_window_state <- function(flag) {
-        .Call("IsWindowState_R", flag)
+        .Call(.C_IsWindowState_R, flag)
 }
 
 #' @family Windows-related functions
 #' @title Set window configuration state using flags (only PLATFORM_DESKTOP)
 #' @param flags One of System/Window config flags. See: [config_flags]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_window_state <- function(flags) {
-        .Call("SetWindowState_R", flags)
+        .Call(.C_SetWindowState_R, flags)
         invisible()
 }
 
 #' @family Windows-related functions
 #' @title Clear window configuration state flags
 #' @param flags One of System/Window config flags. See: [config_flags]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 clear_window_state <- function(flags) {
-        .Call("ClearWindowState_R", flags)
+        .Call(.C_ClearWindowState_R, flags)
         invisible()
 }
 
 #' @family Windows-related functions
 #' @title Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 toggle_fullscreen <- function() {
-        .Call("ToggleFullscreen_R")
+        .Call(.C_ToggleFullscreen_R)
         invisible()
 }
 
@@ -128,7 +129,7 @@ toggle_fullscreen <- function() {
 ## Drawing-related functions
 ##--------------------------##
 
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @name clear_background
 #' @title Set background color (framebuffer clear color)
 #' @param color Color object. Integer vector with RGBA values between 0 and 255.
@@ -136,64 +137,64 @@ toggle_fullscreen <- function() {
 #' @family Drawing-related functions
 clear_background <- function(color) {
 
-        .Call("ClearBackground_R", color)
+        .Call(.C_ClearBackground_R, color)
         invisible()
 
 }
 
 #' @title Setup canvas (framebuffer) to start drawing
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @family Drawing-related functions
 #' @export
 begin_drawing <- function() {
-        .Call("BeginDrawing_R")
+        .Call(.C_BeginDrawing_R)
         invisible()
 }
 
 #' @title End canvas drawing and swap buffers (double buffering)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @family Drawing-related functions
 #' @export
 end_drawing <- function() {
-        .Call("EndDrawing_R")
+        .Call(.C_EndDrawing_R)
         invisible()
 }
 
 #' @family Drawing-related functions
 #' @title Begin 2D mode with custom camera (2D)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @param camera Camera2D object
 #' @export
 begin_mode_2d <- function(camera) {
-        .Call("BeginMode2D_R", camera)
+        .Call(.C_BeginMode2D_R, camera)
         invisible()
 }
 
 #' @family Drawing-related functions
 #' @title Ends 2D mode with custom camera (2D)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 end_mode_2d <- function() {
-        .Call("EndMode2D_R")
+        .Call(.C_EndMode2D_R)
         invisible()
 }
 
 #' @family Drawing-related functions
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @title Begin 3D mode with custom camera (3D)
 #' @param camera Camera3D object
 #' @export
 begin_mode_3d <- function(camera) {
-        .Call("BeginMode3D_R", camera)
+        .Call(.C_BeginMode3D_R, camera)
         invisible()
 }
 
 #' @family Drawing-related functions
 #' @title End 3D mode with custom camera (3D)
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 end_mode_3d <- function() {
-        .Call("EndMode3D_R")
+        .Call(.C_EndMode3D_R)
         invisible()
 }
 
@@ -203,10 +204,10 @@ end_mode_3d <- function() {
 #' @family Timing-related functions
 #' @title Set target FPS (maximum)
 #' @param fps Integer. Target FPS.
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_target_fps <- function(fps) {
-        .Call("SetTargetFPS_R", fps)
+        .Call(.C_SetTargetFPS_R, fps)
         invisible()
 }
 
@@ -216,19 +217,19 @@ set_target_fps <- function(fps) {
 
 #' @family File management functions
 #' @title Check if a file has been dropped into window
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_file_dropped <- function() {
-        .Call("IsFileDropped_R")
+        .Call(.C_IsFileDropped_R)
 }
 
 #' @family File management functions
 #' @title Get dropped files names
 #' @return Character vector of paths to the dropped files
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_dropped_files <- function() {
-        .Call("GetDroppedFiles_R")
+        .Call(.C_GetDroppedFiles_R)
 }
 
 ##-----------------------------------##
@@ -238,46 +239,46 @@ get_dropped_files <- function() {
 #' @family Input-related functions: keyboard
 #' @title Check if a key has been pressed once
 #' @param key Keyboard key code. One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_key_pressed <- function(key) {
-        .Call("IsKeyPressed_R", key)
+        .Call(.C_IsKeyPressed_R, key)
 }
 
 #' @family Input-related functions: keyboard
 #' @title Check if a key is being pressed
 #' @param key Keyboard key code. One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_key_down <- function(key) {
-        .Call("IsKeyDown_R", key)
+        .Call(.C_IsKeyDown_R, key)
 }
 
 #' @family Input-related functions: keyboard
 #' @title Check if a key has been released once
 #' @param key Keyboard key code. One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_key_released <- function(key) {
-        .Call("IsKeyReleased_R", key)
+        .Call(.C_IsKeyReleased_R, key)
 }
 
 #' @family Input-related functions: keyboard
 #' @title Check if a key is NOT being pressed
 #' @param key Keyboard key code. One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_key_up <- function(key) {
-        .Call("IsKeyUp_R", key)
+        .Call(.C_IsKeyUp_R, key)
 }
 
 #' @family Input-related functions: keyboard
 #' @title Set a custom key to exit program (default is ESC)
 #' @param key Keyboard key code. One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_exit_key <- function(key) {
-        .Call("SetExitKey_R", key)
+        .Call(.C_SetExitKey_R, key)
         invisible()
 }
 
@@ -287,10 +288,10 @@ set_exit_key <- function(key) {
 #' call it multiple times for keys queued,
 #' returns "KEY_NULL" when the queue is empty
 #' @return One of [keyboard_key]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_key_pressed <- function() {
-        keycode <- .Call("GetKeyPressed_R")
+        keycode <- .Call(.C_GetKeyPressed_R)
 
         names(raylib.R::keyboard_key)[which(raylib.R::keyboard_key %in% keycode)]
 }
@@ -301,10 +302,10 @@ get_key_pressed <- function() {
 #' call it multiple times for keys queued,
 #' returns empty character when the queue is empty
 #' @return UTF-8 encoded character
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_char_pressed <- function() {
-        intToUtf8(.Call("GetCharPressed_R"))
+        intToUtf8(.Call(.C_GetCharPressed_R))
 }
 
 ##-----------------------------------##
@@ -313,81 +314,81 @@ get_char_pressed <- function() {
 #' @family Input-related functions: mouse
 #' @title Check if a mouse button has been pressed once
 #' @param button Integer. One of [mouse_button]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_mouse_button_pressed <- function(button) {
-        .Call("IsMouseButtonPressed_R", button)
+        .Call(.C_IsMouseButtonPressed_R, button)
 }
 
 #' @family Input-related functions: mouse
 #' @title Check if a mouse button is being pressed
 #' @param button Integer. One of [mouse_button]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_mouse_button_down <- function(button) {
-        .Call("IsMouseButtonDown_R", button)
+        .Call(.C_IsMouseButtonDown_R, button)
 }
 
 #' @family Input-related functions: mouse
 #' @title Check if a mouse button has been released once
 #' @param button Integer. One of [mouse_button]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_mouse_button_released <- function(button) {
-        .Call("IsMouseButtonReleased_R", button)
+        .Call(.C_IsMouseButtonReleased_R, button)
 }
 
 #' @family Input-related functions: mouse
 #' @title Check if a mouse button is NOT being pressed
 #' @param button Integer. One of [mouse_button]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 is_mouse_button_up <- function(button) {
-        .Call("IsMouseButtonUp_R", button)
+        .Call(.C_IsMouseButtonUp_R, button)
 }
 
 #' @family Input-related functions: mouse
 #' @title Get mouse position X
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_mouse_x <- function() {
-        .Call("GetMouseX_R")
+        .Call(.C_GetMouseX_R)
 }
 
 #' @family Input-related functions: mouse
 #' @title Get mouse position Y
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_mouse_y <- function() {
-        .Call("GetMouseY_R")
+        .Call(.C_GetMouseY_R)
 }
 
 #' @family Input-related functions: mouse
 #' @title Get mouse position XY
 #' @return Numeric vector with 2 elements: X position and Y position.
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_mouse_position <- function() {
-        .Call("GetMousePosition_R")
+        .Call(.C_GetMousePosition_R)
 }
 
 #' @family Input-related functions: mouse
 #' @title Get mouse delta between frames
 #' @return Numeric vector with 2 elements
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_mouse_delta <- function() {
-        .Call("GetMouseDelta_R")
+        .Call(.C_GetMouseDelta_R)
 }
 
 #' @family Input-related functions: mouse
 #' @title Set mouse position XY
 #' @param x Integer. X position.
 #' @param y Integer. Y position.
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_mouse_position <- function(x, y) {
-        .Call("SetMousePosition_R", x, y)
+        .Call(.C_SetMousePosition_R, x, y)
         invisible()
 }
 
@@ -395,10 +396,10 @@ set_mouse_position <- function(x, y) {
 #' @title Set mouse offset
 #' @param offset_x Integer
 #' @param offset_y Integer
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_mouse_offset <- function(offset_x, offset_y) {
-        .Call("SetMouseOffset_R", offset_x, offset_y)
+        .Call(.C_SetMouseOffset_R, offset_x, offset_y)
         invisible()
 }
 
@@ -406,27 +407,27 @@ set_mouse_offset <- function(offset_x, offset_y) {
 #' @title Set mouse scaling
 #' @param scale_x Float
 #' @param scale_y Float
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_mouse_scale <- function(scale_x, scale_y) {
-        .Call("SetMouseScale_R", scale_x, scale_y)
+        .Call(.C_SetMouseScale_R, scale_x, scale_y)
         invisible()
 }
 
 #' @family Input-related functions: mouse
 #' @title Get mouse wheel movement Y
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 get_mouse_wheel_move <- function() {
-        .Call("GetMouseWheelMove_R")
+        .Call(.C_GetMouseWheelMove_R)
 }
 
 #' @family Input-related functions: mouse
 #' @title Set mouse cursor
 #' @param cursor Integer. One of [mouse_cursor]
-#' @useDynLib raylib.R, .registration = TRUE
+#'
 #' @export
 set_mouse_cursor <- function(cursor) {
-        .Call("SetMouseCursor_R", cursor)
+        .Call(.C_SetMouseCursor_R, cursor)
         invisible()
 }

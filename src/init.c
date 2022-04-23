@@ -1,5 +1,6 @@
 #include "raylib.R.h"
 #include <R_ext/Rdynload.h>
+#include <R_ext/Visibility.h>
 
 // R_CallMethodDef quick reminder:
 // {<name of function>, (DL_FUNC) &<name of function>, <number of arguments>}
@@ -137,7 +138,8 @@ static const R_CallMethodDef callMethods[] = {
 
         {NULL, NULL, 0}};
 
-void R_init_raylib(DllInfo *info) {
+void attribute_visible R_init_raylib_R(DllInfo *info) {
         R_registerRoutines(info, NULL, callMethods, NULL, NULL);
         R_useDynamicSymbols(info, FALSE);
+        R_forceSymbols(info, TRUE);
 }

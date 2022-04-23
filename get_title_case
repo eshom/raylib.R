@@ -7,7 +7,7 @@ function gen_title_case()
 {
         cat "$1" |\
                 sed -n -E 's/^[[:space:]]*(.+)[[:space:]]*<-[[:space:]]*function.*$/\1/p' |\
-                sed -n -E "s/.*/#' @rdname \0\n#' @useDynLib raylib.R, .registration = TRUE\n#' @export\n\0<- \0\n/pg" |\
+                sed -n -E "s/.*/#' @rdname \0\n#' @export\n\0<- \0\n/pg" |\
                 Rscript -e '
                 conn <- file("stdin")
                 input <- readLines(conn)
