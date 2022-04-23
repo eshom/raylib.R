@@ -232,6 +232,27 @@ void keyboard_key_valid_else_error(int key)
         }
 }
 
+void general_key_valid_else_error(int key)
+{
+        if (!(
+              key == 0                   ||
+              key == 4                   ||
+              key == 24                  ||
+              key == 25                  ||
+              key == 32                  ||
+              key == 39                  ||
+              (key >= 44 && key <= 93)   ||
+              key == 96                  ||
+              (key >= 256 && key <= 269) ||
+              (key >= 280 && key <= 284) ||
+              (key >= 290 && key <= 301) ||
+              (key >= 320 && key <= 336) ||
+              (key >= 340 && key <= 348)
+              )) {
+                Rf_error("Invalid key");
+        }
+}
+
 void mouse_button_valid_else_error(int button)
 {
         if (!(button >= 0 && button <= 6))

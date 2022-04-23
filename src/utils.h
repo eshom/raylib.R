@@ -20,6 +20,7 @@ Camera2D camera2d_from_sexp(SEXP camera2d);
 Camera3D *camera3d_p_from_sexp(SEXP camera3d);
 const char *string_from_sexp(SEXP char_vec);
 void keyboard_key_valid_else_error(int key);
+void general_key_valid_else_error(int key);
 void mouse_button_valid_else_error(int button);
 void mouse_cursor_valid_else_error(int cursor);
 void window_ready_else_error(void);
