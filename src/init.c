@@ -36,6 +36,14 @@ static const R_CallMethodDef callMethods[] = {
         // Timing-related functions
         {"SetTargetFPS_R",   (DL_FUNC) &SetTargetFPS_R,   1},
 
+        // Camera system functions
+        {"SetCameraMode_R",   (DL_FUNC) &SetCameraMode_R,   2},
+        {"UpdateCamera_R",   (DL_FUNC) &UpdateCamera_R,   1},
+        {"SetCameraPanControl_R",   (DL_FUNC) &SetCameraPanControl_R,   1},
+        {"SetCameraAltControl_R",   (DL_FUNC) &SetCameraAltControl_R,   1},
+        {"SetCameraSmoothZoomControl_R",   (DL_FUNC) &SetCameraSmoothZoomControl_R,   1},
+        {"SetCameraMoveControls_R",   (DL_FUNC) &SetCameraMoveControls_R,   6},
+
         // Input-related functions: keyboard
         {"IsKeyPressed_R",   (DL_FUNC) &IsKeyPressed_R,   1},
         {"IsKeyDown_R",      (DL_FUNC) &IsKeyDown_R,      1},
@@ -72,10 +80,10 @@ static const R_CallMethodDef callMethods[] = {
         {"DrawPixelV_R",                (DL_FUNC) &DrawPixelV_R,                2},
         {"DrawLine_R",                  (DL_FUNC) &DrawLine_R,                  5},
         {"DrawLineV_R",                 (DL_FUNC) &DrawLineV_R,                 3},
-        {"DrawLineEx_R",                (DL_FUNC) &DrawLineEx_R,                4},
+        {"DrawLineEx_R",                (DL_FUNC) &DrawLineEx_R,                3},
         {"DrawLineBezier_R",            (DL_FUNC) &DrawLineBezier_R,            4},
         {"DrawLineBezierQuad_R",        (DL_FUNC) &DrawLineBezierQuad_R,        5},
-        {"DrawLineBezierCubic_R",       (DL_FUNC) &DrawLineBezierCubic_R,       6},
+        {"DrawLineBezierCubic_R",       (DL_FUNC) &DrawLineBezierCubic_R,       5},
         {"DrawLineStrip_R",             (DL_FUNC) &DrawLineStrip_R,             3},
         {"DrawCircle_R",                (DL_FUNC) &DrawCircle_R,                4},
         {"DrawCircleSector_R",          (DL_FUNC) &DrawCircleSector_R,          6},
@@ -103,7 +111,7 @@ static const R_CallMethodDef callMethods[] = {
         {"DrawTriangleFan_R",           (DL_FUNC) &DrawTriangleFan_R,           3},
         {"DrawTriangleStrip_R",         (DL_FUNC) &DrawTriangleStrip_R,         3},
         {"DrawPoly_R",                  (DL_FUNC) &DrawPoly_R,                  5},
-        {"DrawPolyLines_R",             (DL_FUNC) &DrawPolyLines_R,             5},
+        {"DrawPolyLines_R",             (DL_FUNC) &DrawPolyLines_R,             6},
         {"DrawPolyLinesEx_R",           (DL_FUNC) &DrawPolyLinesEx_R,           6},
 
         // Basic shapes collision detection functions

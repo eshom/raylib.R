@@ -26,8 +26,8 @@ update_camera <- function(camera) {
 #' @param key_pan Integer. A key. One of [keyboard_key]
 #'
 #' @export
-set_camera_pan_controls <- function(key_pan) {
-        .Call(.C_SetCameraPanControls_R, key_pan)
+set_camera_pan_control <- function(key_pan) {
+        .Call(.C_SetCameraPanControl_R, key_pan)
         invisible()
 }
 
@@ -36,8 +36,8 @@ set_camera_pan_controls <- function(key_pan) {
 #' @param key_alt Integer. A key. One of [keyboard_key]
 #'
 #' @export
-set_camera_alt_controls <- function(key_alt) {
-        .Call(.C_SetCameraAltControls_R, key_alt)
+set_camera_alt_control <- function(key_alt) {
+        .Call(.C_SetCameraAltControl_R, key_alt)
         invisible()
 }
 
@@ -46,8 +46,8 @@ set_camera_alt_controls <- function(key_alt) {
 #' @param key_smooth_zoom Integer. A key. One of [keyboard_key]
 #'
 #' @export
-set_camera_smooth_zoom_controls <- function(key_smooth_zoom) {
-        .Call(.C_SetCameraSmoothZoomControls_R, key_smooth_zoom)
+set_camera_smooth_zoom_control <- function(key_smooth_zoom) {
+        .Call(.C_SetCameraSmoothZoomControl_R, key_smooth_zoom)
         invisible()
 }
 
@@ -62,6 +62,6 @@ set_camera_smooth_zoom_controls <- function(key_smooth_zoom) {
 #'
 #' @export
 set_camera_move_controls <- function(key_front, key_back, key_right, key_left, key_up, key_down) {
-        .Call(.C_setCameraMoveControls_R, key_front, key_back, key_right, key_left, key_up, key_down)
+        .Call(.C_SetCameraMoveControls_R, key_front, key_back, key_right, key_left, key_up, key_down)
         invisible()
 }

@@ -323,7 +323,7 @@ draw_rectangle_rec <- function(rec, color) {
 #'
 #' @export
 draw_rectangle_pro <- function(rec, origin, rotation, color) {
-        .Call(.C_DrawRectanglePro_R, rec, color)
+        .Call(.C_DrawRectanglePro_R, rec, origin, rotation, color)
         invisible()
 }
 

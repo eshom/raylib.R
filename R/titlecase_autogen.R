@@ -405,17 +405,17 @@ SetCameraMode <- set_camera_mode
 #' @export
 UpdateCamera <- update_camera 
 
-#' @rdname set_camera_pan_controls 
+#' @rdname set_camera_pan_control 
 #' @export
-SetCameraPanControls <- set_camera_pan_controls 
+SetCameraPanControl <- set_camera_pan_control 
 
-#' @rdname set_camera_alt_controls 
+#' @rdname set_camera_alt_control 
 #' @export
-SetCameraAltControls <- set_camera_alt_controls 
+SetCameraAltControl <- set_camera_alt_control 
 
-#' @rdname set_camera_smooth_zoom_controls 
+#' @rdname set_camera_smooth_zoom_control 
 #' @export
-SetCameraSmoothZoomControls <- set_camera_smooth_zoom_controls 
+SetCameraSmoothZoomControl <- set_camera_smooth_zoom_control 
 
 #' @rdname set_camera_move_controls 
 #' @export
