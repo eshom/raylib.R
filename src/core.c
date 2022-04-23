@@ -1,5 +1,7 @@
 #include "raylib.R.h"
 #include "utils.h"
+#include <Rinternals.h>
+#include <raylib.h>
 
 // Windows-related functions
 
@@ -291,31 +293,35 @@ SEXP SetTargetFPS_R(SEXP fps)
 /* RLAPI void SetLoadFileTextCallback(LoadFileTextCallback callback); // Set custom file text data loader */
 /* RLAPI void SetSaveFileTextCallback(SaveFileTextCallback callback); // Set custom file text data saver */
 
-/* // Files management functions */
-/* RLAPI unsigned char *LoadFileData(const char *fileName, unsigned int *bytesRead); // Load file data as byte array (read) */
-/* RLAPI void UnloadFileData(unsigned char *data);                   // Unload file data allocated by LoadFileData() */
-/* RLAPI bool SaveFileData(const char *fileName, void *data, unsigned int bytesToWrite); // Save data to file from byte array (write), returns true on success */
-/* RLAPI char *LoadFileText(const char *fileName);                   // Load text data from file (read), returns a '\0' terminated string */
-/* RLAPI void UnloadFileText(char *text);                            // Unload file text data allocated by LoadFileText() */
-/* RLAPI bool SaveFileText(const char *fileName, char *text);        // Save text data to file (write), string must be '\0' terminated, returns true on success */
-/* RLAPI bool FileExists(const char *fileName);                      // Check if file exists */
-/* RLAPI bool DirectoryExists(const char *dirPath);                  // Check if a directory path exists */
-/* RLAPI bool IsFileExtension(const char *fileName, const char *ext); // Check file extension (including point: .png, .wav) */
-/* RLAPI int GetFileLength(const char *fileName);                    // Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h) */
-/* RLAPI const char *GetFileExtension(const char *fileName);         // Get pointer to extension for a filename string (includes dot: '.png') */
-/* RLAPI const char *GetFileName(const char *filePath);              // Get pointer to filename for a path string */
-/* RLAPI const char *GetFileNameWithoutExt(const char *filePath);    // Get filename string without extension (uses static string) */
-/* RLAPI const char *GetDirectoryPath(const char *filePath);         // Get full path for a given fileName with path (uses static string) */
-/* RLAPI const char *GetPrevDirectoryPath(const char *dirPath);      // Get previous directory path for a given path (uses static string) */
-/* RLAPI const char *GetWorkingDirectory(void);                      // Get current working directory (uses static string) */
-/* RLAPI const char *GetApplicationDirectory(void);                  // Get the directory if the running application (uses static string) */
-/* RLAPI char **GetDirectoryFiles(const char *dirPath, int *count);  // Get filenames in a directory path (memory should be freed) */
-/* RLAPI void ClearDirectoryFiles(void);                             // Clear directory files paths buffers (free memory) */
-/* RLAPI bool ChangeDirectory(const char *dir);                      // Change working directory, return true on success */
-/* RLAPI bool IsFileDropped(void);                                   // Check if a file has been dropped into window */
-/* RLAPI char **GetDroppedFiles(int *count);                         // Get dropped files names (memory should be freed) */
-/* RLAPI void ClearDroppedFiles(void);                               // Clear dropped files paths buffer (free memory) */
-/* RLAPI long GetFileModTime(const char *fileName);                  // Get file modification time (last write time) */
+// Files management functions
+
+// Check if a file has been dropped into window
+SEXP IsFileDropped_R(void)
+{
+        return Rf_ScalarLogical(IsFileDropped());
+}
+
+// Get dropped files names (memory should be freed)
+SEXP GetDroppedFiles_R(void)
+{
+        int count = 0;
+
+        char **file_names = GetDroppedFiles(&count);
+
+        if (!count) {
+                ClearDroppedFiles();
+                return Rf_allocVector(STRSXP, 0);
+        }
+
+        SEXP str_out = PROTECT(Rf_allocVector(STRSXP, count)); // Needs UNPROTECT
+        for (int ind = 0; ind < count; ++ind)
+                SET_STRING_ELT(str_out, ind, Rf_mkCharCE(file_names[ind], CE_UTF8));
+
+        ClearDroppedFiles();
+        UNPROTECT(1);
+
+        return str_out;
+}
 
 /* // Compression/Encoding functionality */
 /* RLAPI unsigned char *CompressData(const unsigned char *data, int dataLength, int *compDataLength);        // Compress data (DEFLATE algorithm) */

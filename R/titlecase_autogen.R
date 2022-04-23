@@ -211,6 +211,16 @@ GetMouseWheelMove <- get_mouse_wheel_move
 #' @export
 SetMouseCursor <- set_mouse_cursor 
 
+#' @rdname is_file_dropped 
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+IsFileDropped <- is_file_dropped 
+
+#' @rdname get_dropped_files 
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+GetDroppedFiles <- get_dropped_files 
+
 #' @rdname set_shapes_texture 
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
@@ -480,4 +490,9 @@ DrawCubeWiresV <- draw_cube_wires_v
 #' @useDynLib raylib.R, .registration = TRUE
 #' @export
 DrawGrid <- draw_grid 
+
+#' @rdname fade 
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+Fade <- fade 
 

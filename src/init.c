@@ -59,6 +59,10 @@ static const R_CallMethodDef callMethods[] = {
         {"GetMouseWheelMove_R",     (DL_FUNC) &GetMouseWheelMove_R,     0},
         {"SetMouseCursor_R",        (DL_FUNC) &SetMouseCursor_R,        1},
 
+        // Files management functions
+        {"IsFileDropped_R",   (DL_FUNC) &IsFileDropped_R,   0},
+        {"GetDroppedFiles_R", (DL_FUNC) &GetDroppedFiles_R, 0},
+
         // Shapes module
 
         // Basic shapes drawing functions

@@ -6,6 +6,7 @@
 #include "raylib.h"
 
 Color color_from_sexp(SEXP color);
+SEXP sexp_from_color(Color color);
 Vector2 vector2_from_sexp(SEXP vec2);
 Vector2 *vector2_array_from_sexp(SEXP vec2_list);
 SEXP sexp_from_vector2(Vector2 vec);

@@ -409,3 +409,24 @@ set_mouse_cursor <- function(cursor) {
         .Call("SetMouseCursor_R", cursor)
         invisible()
 }
+
+##-----------------------------------##
+## File management functions
+##-----------------------------------##
+
+#' @family File management functions
+#' @title Check if a file has been dropped into window
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+is_file_dropped <- function() {
+        .Call("IsFileDropped_R")
+}
+
+#' @family File management functions
+#' @title Get dropped files names
+#' @return Character vector of paths to the dropped files
+#' @useDynLib raylib.R, .registration = TRUE
+#' @export
+get_dropped_files <- function() {
+        .Call("GetDroppedFiles_R")
+}

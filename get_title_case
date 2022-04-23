@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-R_FILES="R/core.R R/shapes.R R/text.R R/models.R"
+R_FILES="R/core.R R/shapes.R R/text.R R/models.R R/textures.R"
 
 function gen_title_case()
 {

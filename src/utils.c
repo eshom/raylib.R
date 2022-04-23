@@ -1,4 +1,5 @@
 #include <R_ext/Error.h>
+#include <Rinternals.h>
 #include "raylib.R.h"
 
 // Colors must be between 0 and 255 in order to cast to unsigned char
@@ -18,6 +19,23 @@ Color color_from_sexp(SEXP color)
 
         return (Color){(unsigned char)color_p[0], (unsigned char)color_p[1],
                 (unsigned char)color_p[2], (unsigned char)color_p[3]};
+}
+
+SEXP sexp_from_color(Color color)
+{
+
+        //const char *names[] = {"red", "green", "blue", "alpha", ""};
+        //SEXP col_out = PROTECT(Rf_mkNamed(INTSXP, names));
+        SEXP col_out = PROTECT(Rf_allocVector(INTSXP, 4));
+
+        int *col_out_p = INTEGER(col_out);
+
+        col_out_p[0] = color.r;
+        col_out_p[1] = color.g;
+        col_out_p[2] = color.b;
+        col_out_p[3] = color.a;
+
+        return col_out;
 }
 
 // Take a vector2 vector passed from R, and return a Vector2
