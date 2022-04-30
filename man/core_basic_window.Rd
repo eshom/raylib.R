@@ -34,6 +34,8 @@ close_window()
 \seealso{
 Other Core examples: 
 \code{\link{core_2d_camera}},
+\code{\link{core_3d_camera_first_person}},
+\code{\link{core_3d_camera_free}},
 \code{\link{core_3d_camera}},
 \code{\link{core_drop_files}},
 \code{\link{core_input_keys}},

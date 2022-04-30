@@ -53,6 +53,14 @@ SEXP DrawCubeWiresV_R(SEXP position, SEXP size, SEXP color)
 /* RLAPI void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder with base at startPos and top at endPos */
 /* RLAPI void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone wires */
 /* RLAPI void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder wires with base at startPos and top at endPos */
+
+// Draw a plane XZ
+SEXP DrawPlane_R(SEXP center_pos, SEXP size, SEXP color)
+{
+        DrawPlane(vector3_from_sexp(center_pos), vector2_from_sexp(size), color_from_sexp(color));
+        return R_NilValue;
+}
+
 /* RLAPI void DrawPlane(Vector3 centerPos, Vector2 size, Color color);                                      // Draw a plane XZ */
 /* RLAPI void DrawRay(Ray ray, Color color);                                                                // Draw a ray line */
 

@@ -57,6 +57,18 @@ draw_cube_wires_v <- function(position, size, color) {
 }
 
 #' @family Basic geometric 3D shapes drawing functions
+#' @title Draw a plane XZ
+#' @param center_pos  Vector3. Plane position in 3d space.
+#' @param size Vector2. X and Z dimensions for the plane in 3d space.
+#' @param color Color object. Integer vector with RGBA values between 0 and 255.
+#'
+#' @export
+draw_plane <- function(center_pos, size, color) {
+        .Call(.C_DrawPlane_R, center_pos, size, color)
+        invisible()
+}
+
+#' @family Basic geometric 3D shapes drawing functions
 #' @title Draw a grid
 #'
 #' The grid is centered at position`c(0, 0, 0)`

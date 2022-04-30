@@ -83,8 +83,14 @@ Color <- function(color, alpha = 255) {
                 out <- as.integer(c(grDevices::col2rgb(color), alpha))
                 class(out) <- c("Color", class(out))
                 return(stats::setNames(out, c("red", "green", "blue", "alpha")))
+
         } else if (is.numeric(color)) {
-                out <- as.integer(color)
+
+                if (length(color) == 3)
+                        out <- as.integer(c(color, alpha))
+                else
+                        out <- as.integer(color)
+
                 class(out) <- c("Color", class(out))
                 return(stats::setNames(out, c("red", "green", "blue", "alpha")))
         }
@@ -188,12 +194,12 @@ Camera3D <- function(position, target, up, fovy, projection) {
 #' @family Raylib objects
 #' @rdname Camera3D
 #' @param camera Camera3D object.
-#' @param what Named list with any of the following components:
-#' `position`, `target`, `up`, `fovy`, `projection` to set
+#' @param ... Set any of the following parameters: position, target, up, fovy,
+#' projection.
 #'
 #' @export
-Camera3D_set <- function(camera, what) {
-        .Call(.C_set_Camera3D_R, camera, what)
+Camera3D_set <- function(camera, ...) {
+        .Call(.C_set_Camera3D_R, camera, list(...))
         invisible()
 }
 

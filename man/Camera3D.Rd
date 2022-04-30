@@ -9,7 +9,7 @@
 \usage{
 Camera3D(position, target, up, fovy, projection)
 
-Camera3D_set(camera, what)
+Camera3D_set(camera, ...)
 
 Camera3D_get(camera)
 
@@ -30,8 +30,8 @@ CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC}
 
 \item{camera}{Camera3D object.}
 
-\item{what}{Named list with any of the following components:
-\code{position}, \code{target}, \code{up}, \code{fovy}, \code{projection} to set}
+\item{...}{Set any of the following parameters: position, target, up, fovy,
+projection.}
 }
 \description{
 Camera3D, defines position/orientation in 3D space

@@ -25,6 +25,7 @@ Other Basic geometric 3D shapes drawing functions:
 \code{\link{draw_cube_wires_v}()},
 \code{\link{draw_cube_wires}()},
 \code{\link{draw_cube}()},
-\code{\link{draw_grid}()}
+\code{\link{draw_grid}()},
+\code{\link{draw_plane}()}
 }
 \concept{Basic geometric 3D shapes drawing functions}

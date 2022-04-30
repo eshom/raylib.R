@@ -134,10 +134,11 @@ static const R_CallMethodDef callMethods[] = {
         {"DrawCubeV_R",      (DL_FUNC) &DrawCubeV_R,      3},
         {"DrawCubeWires_R",  (DL_FUNC) &DrawCubeWires_R,  5},
         {"DrawCubeWiresV_R", (DL_FUNC) &DrawCubeWiresV_R, 3},
+        {"DrawPlane_R",      (DL_FUNC) &DrawPlane_R,      3},
         {"DrawGrid_R",       (DL_FUNC) &DrawGrid_R,       2},
 
         // Color or pixel related functions
-        {"Fade_R",       (DL_FUNC) &DrawGrid_R,       2},
+        {"Fade_R",       (DL_FUNC) &Fade_R,       2},
 
         // Heap allocated structs and external pointer handling
         {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
