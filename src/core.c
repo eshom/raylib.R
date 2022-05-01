@@ -21,6 +21,7 @@ SEXP WindowShouldClose_R(void)
 // Close window and unload OpenGL context
 SEXP CloseWindow_R(void)
 {
+        window_ready_else_error();
         CloseWindow();
         return R_NilValue;
 }
