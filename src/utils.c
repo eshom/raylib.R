@@ -211,6 +211,15 @@ const char *string_from_sexp(SEXP char_vec)
         return Rf_translateCharUTF8(STRING_ELT(char_vec, 0));
 }
 
+// Generate an R character vector with a single string.
+// Needs to cleanup with `UNPROTECT()` after.
+SEXP sexp_from_string(const char *str)
+{
+        SEXP out = PROTECT(Rf_allocVector(STRSXP, 1));
+        SET_STRING_ELT(out, 0, Rf_mkCharCE(str, CE_UTF8));
+        return out;
+}
+
 void keyboard_key_valid_else_error(int key)
 {
         if (!(

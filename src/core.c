@@ -1,5 +1,6 @@
 #include "raylib.R.h"
 #include "utils.h"
+#include <R_ext/Error.h>
 #include <Rinternals.h>
 #include <raylib.h>
 
@@ -131,30 +132,172 @@ SEXP SetWindowIcon_R(SEXP image)
         return R_NilValue;
 }
 
-/* RLAPI void SetWindowTitle(const char *title);                     // Set title for window (only PLATFORM_DESKTOP) */
-/* RLAPI void SetWindowPosition(int x, int y);                       // Set window position on screen (only PLATFORM_DESKTOP) */
-/* RLAPI void SetWindowMonitor(int monitor);                         // Set monitor for the current window (fullscreen mode) */
-/* RLAPI void SetWindowMinSize(int width, int height);               // Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE) */
-/* RLAPI void SetWindowSize(int width, int height);                  // Set window dimensions */
-/* RLAPI void SetWindowOpacity(float opacity);                       // Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP) */
+// Set title for window (only PLATFORM_DESKTOP)
+SEXP SetWindowTitle_R(SEXP title)
+{
+        SetWindowTitle(string_from_sexp(title));
+        return R_NilValue;
+}
+
+// Set window position on screen (only PLATFORM_DESKTOP)
+SEXP SetWindowPosition_R(SEXP x, SEXP y)
+{
+        SetWindowPosition(Rf_asInteger(x), Rf_asInteger(y));
+        return R_NilValue;
+}
+
+// Set monitor for the current window (fullscreen mode)
+SEXP SetWindowMonitor_R(SEXP monitor)
+{
+        SetWindowMonitor(Rf_asInteger(monitor));
+        return R_NilValue;
+}
+
+// Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
+SEXP SetWindowMinSize_R(SEXP width, SEXP height)
+{
+        SetWindowMinSize(Rf_asInteger(width), Rf_asInteger(height));
+        return R_NilValue;
+}
+
+// Set window dimensions
+SEXP SetWindowSize_R(SEXP width, SEXP height)
+{
+        SetWindowSize(Rf_asInteger(width), Rf_asInteger(height));
+        return R_NilValue;
+}
+
+// Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
+SEXP SetWindowOpacity_R(SEXP opacity)
+{
+        float fopacity = (float)Rf_asReal(opacity);
+
+        if (fopacity < 0.0f || fopacity > 1.0f)
+                Rf_error("Expecting opacity value between 0 and 1");
+
+        SetWindowOpacity(fopacity);
+        return R_NilValue;
+}
+
 /* RLAPI void *GetWindowHandle(void);                                // Get native window handle */
-/* RLAPI int GetScreenWidth(void);                                   // Get current screen width */
-/* RLAPI int GetScreenHeight(void);                                  // Get current screen height */
-/* RLAPI int GetRenderWidth(void);                                   // Get current render width (it considers HiDPI) */
-/* RLAPI int GetRenderHeight(void);                                  // Get current render height (it considers HiDPI) */
-/* RLAPI int GetMonitorCount(void);                                  // Get number of connected monitors */
-/* RLAPI int GetCurrentMonitor(void);                                // Get current connected monitor */
-/* RLAPI Vector2 GetMonitorPosition(int monitor);                    // Get specified monitor position */
-/* RLAPI int GetMonitorWidth(int monitor);                           // Get specified monitor width (max available by monitor) */
-/* RLAPI int GetMonitorHeight(int monitor);                          // Get specified monitor height (max available by monitor) */
-/* RLAPI int GetMonitorPhysicalWidth(int monitor);                   // Get specified monitor physical width in millimetres */
-/* RLAPI int GetMonitorPhysicalHeight(int monitor);                  // Get specified monitor physical height in millimetres */
-/* RLAPI int GetMonitorRefreshRate(int monitor);                     // Get specified monitor refresh rate */
-/* RLAPI Vector2 GetWindowPosition(void);                            // Get window position XY on monitor */
-/* RLAPI Vector2 GetWindowScaleDPI(void);                            // Get window scale DPI factor */
-/* RLAPI const char *GetMonitorName(int monitor);                    // Get the human-readable, UTF-8 encoded name of the primary monitor */
-/* RLAPI void SetClipboardText(const char *text);                    // Set clipboard text content */
-/* RLAPI const char *GetClipboardText(void);                         // Get clipboard text content */
+
+// Get current screen width
+SEXP GetScreenWidth_R(void)
+{
+        return Rf_ScalarInteger(GetScreenWidth());
+}
+
+// Get current screen height
+SEXP GetScreenHeight_R(void)
+{
+        return Rf_ScalarInteger(GetScreenHeight());
+}
+
+// Get current render width (it considers HiDPI)
+SEXP GetRenderWidth_R(void)
+{
+        return Rf_ScalarInteger(GetRenderWidth());
+}
+
+// Get current render height (it considers HiDPI)
+SEXP GetRenderHeight_R(void)
+{
+        return Rf_ScalarInteger(GetRenderHeight());
+}
+
+// Get number of connected monitors
+SEXP GetMonitorCount_R(void)
+{
+        return Rf_ScalarInteger(GetMonitorCount());
+}
+
+// Get current connected monitor
+SEXP GetCurrentMonitor_R(void)
+{
+        return Rf_ScalarInteger(GetCurrentMonitor());
+}
+
+// Get specified monitor position
+SEXP GetMonitorPosition_R(SEXP monitor)
+{
+        SEXP out = sexp_from_vector2(GetMonitorPosition(Rf_asInteger(monitor)));
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get specified monitor width (max available by monitor)
+SEXP GetMonitorWidth_R(SEXP monitor)
+{
+        return Rf_ScalarInteger(GetMonitorWidth(Rf_asInteger(monitor)));
+}
+
+// Get specified monitor height (max available by monitor)
+SEXP GetMonitorHeight_R(SEXP monitor)
+{
+        return Rf_ScalarInteger(GetMonitorHeight(Rf_asInteger(monitor)));
+}
+
+// Get specified monitor physical width in millimetres
+SEXP GetMonitorPhysicalWidth_R(SEXP monitor)
+{
+        return Rf_ScalarInteger(GetMonitorPhysicalWidth(Rf_asInteger(monitor)));
+}
+
+// Get specified monitor physical height in millimetres
+SEXP GetMonitorPhysicalHeight_R(SEXP monitor)
+{
+        return Rf_ScalarInteger(GetMonitorPhysicalHeight(Rf_asInteger(monitor)));
+}
+
+// Get specified monitor refresh rate
+SEXP GetMonitorRefreshRate_R(SEXP monitor)
+{
+        return Rf_ScalarInteger(GetMonitorRefreshRate(Rf_asInteger(monitor)));
+}
+
+// Get window position XY on monitor
+SEXP GetWindowPosition_R(void)
+{
+        SEXP out = sexp_from_vector2(GetWindowPosition());
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get window scale DPI factor
+SEXP GetWindowScaleDPI_R(void)
+{
+        SEXP out = sexp_from_vector2(GetWindowScaleDPI());
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get the human-readable, UTF-8 encoded name of the primary monitor
+SEXP GetMonitorName_R(SEXP monitor)
+{
+        SEXP out = sexp_from_string(GetMonitorName(Rf_asInteger(monitor)));
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Set clipboard text content
+SEXP SetClipboardText_R(SEXP text)
+{
+        SetClipboardText(string_from_sexp(text));
+        return R_NilValue;
+}
+
+// Get clipboard text content
+SEXP GetClipboardText_R(void)
+{
+        SEXP out = sexp_from_string(GetClipboardText());
+
+        UNPROTECT(1);
+        return out;
+}
 
 /* // Custom frame control functions */
 /* // NOTE: Those functions are intended for advance users that want full control over the frame processing */
