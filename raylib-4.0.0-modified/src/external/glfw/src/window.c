@@ -35,6 +35,10 @@
 #include <stdlib.h>
 #include <float.h>
 
+#undef assert
+#define R_NO_REMAP
+#include "R_ext/Error.h"
+#define assert(x) do {if (!(x)) Rf_error("Assertion `" #x "` failed.");} while(0)
 
 //////////////////////////////////////////////////////////////////////////
 //////                         GLFW event API                       //////
