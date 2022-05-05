@@ -270,3 +270,19 @@ void window_ready_else_error(void)
         if (!IsWindowReady())
                 Rf_error("Window is not initialized or not ready");
 }
+
+Image *image_p_from_sexp(SEXP image)
+{
+        if (!Rf_inherits(image, "Image"))
+                Rf_error("Expecting Image object");
+
+        if (!Rf_inherits(image, "externalptr"))
+                Rf_error("Expecting external pointer to Image");
+
+        Image *ext_out = (Image*)R_ExternalPtrAddr(image);
+
+        if (!ext_out)
+                Rf_error("Caught NULL pointer. Expecting pointer to Image");
+
+        return ext_out;
+}

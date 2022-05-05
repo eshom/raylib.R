@@ -26,6 +26,7 @@ static const R_CallMethodDef callMethods[] = {
         {"MaximizeWindow_R",     (DL_FUNC) &MaximizeWindow_R,     0},
         {"MinimizeWindow_R",     (DL_FUNC) &MinimizeWindow_R,     0},
         {"RestoreWindow_R",      (DL_FUNC) &RestoreWindow_R,      0},
+        {"SetWindowIcon_R",      (DL_FUNC) &SetWindowIcon_R,      1},
 
         // Drawing-related functions
         {"ClearBackground_R", (DL_FUNC) &ClearBackground_R, 1},
@@ -147,6 +148,7 @@ static const R_CallMethodDef callMethods[] = {
         {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
         {"set_Camera3D_R",    (DL_FUNC) &set_Camera3D_R,    2},
         {"get_Camera3D_R",    (DL_FUNC) &get_Camera3D_R,    1},
+        {"create_Image_R",    (DL_FUNC) &create_Image_R,    2},
 
         {NULL, NULL, 0}};
 

@@ -1,5 +1,4 @@
 #include "raylib.R.h"
-#include "utils.h"
 #include <Rinternals.h>
 
 // raylib object creation and handling defined here.

@@ -216,3 +216,12 @@ Camera3D_get <- function(camera) {
 #' @rdname Camera3D
 #' @export
 Camera <- Camera3D
+
+#' @family Raylib objects
+#' @param filename Path of an image file
+#' @export
+Image <- function(filename) {
+        out <- .Call(.C_create_Image_R, filename, NULL)
+        class(out) <- c("Image", class(out))
+        out
+}

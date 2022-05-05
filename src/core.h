@@ -22,6 +22,7 @@ SEXP ToggleFullscreen_R(void);
 SEXP MaximizeWindow_R(void);
 SEXP MinimizeWindow_R(void);
 SEXP RestoreWindow_R(void);
+SEXP SetWindowIcon_R(SEXP image);
 
 // Drawing-related functions
 SEXP ClearBackground_R(SEXP color);

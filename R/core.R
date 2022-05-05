@@ -152,6 +152,16 @@ restore_window <- function() {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+#' @param image Image object. Image data loaded with [Image()]
+#'
+#' @export
+set_window_icon <- function(image) {
+        .Call(.C_SetWindowIcon_R, image)
+        invisible()
+}
+
 ##--------------------------##
 ## Drawing-related functions
 ##--------------------------##

@@ -24,5 +24,6 @@ void general_key_valid_else_error(int key);
 void mouse_button_valid_else_error(int button);
 void mouse_cursor_valid_else_error(int cursor);
 void window_ready_else_error(void);
+Image *image_p_from_sexp(SEXP image);
 
 #endif

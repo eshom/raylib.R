@@ -123,7 +123,14 @@ SEXP RestoreWindow_R(void)
         RestoreWindow();
         return R_NilValue;
 }
-/* RLAPI void SetWindowIcon(Image image);                            // Set icon for window (only PLATFORM_DESKTOP) */
+
+// Set icon for window (only PLATFORM_DESKTOP)
+SEXP SetWindowIcon_R(SEXP image)
+{
+        SetWindowIcon(*image_p_from_sexp(image));
+        return R_NilValue;
+}
+
 /* RLAPI void SetWindowTitle(const char *title);                     // Set title for window (only PLATFORM_DESKTOP) */
 /* RLAPI void SetWindowPosition(int x, int y);                       // Set window position on screen (only PLATFORM_DESKTOP) */
 /* RLAPI void SetWindowMonitor(int monitor);                         // Set monitor for the current window (fullscreen mode) */
