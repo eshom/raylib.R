@@ -40,6 +40,7 @@ Camera3D, defines position/orientation in 3D space
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
@@ -49,6 +50,7 @@ Other Raylib objects:
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
@@ -58,6 +60,7 @@ Other Raylib objects:
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
@@ -67,6 +70,7 @@ Other Raylib objects:
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},

@@ -25,6 +25,10 @@ Other Windows-related functions:
 \code{\link{is_window_ready}()},
 \code{\link{is_window_resized}()},
 \code{\link{is_window_state}()},
+\code{\link{maximize_window}()},
+\code{\link{minimize_window}()},
+\code{\link{restore_window}()},
+\code{\link{set_window_icon}()},
 \code{\link{set_window_state}()},
 \code{\link{toggle_fullscreen}()}
 }

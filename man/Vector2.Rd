@@ -20,6 +20,7 @@ Other Raylib objects:
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector3}()},

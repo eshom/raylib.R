@@ -25,6 +25,7 @@ Other Raylib objects:
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
 \code{\link{Vector3}()},

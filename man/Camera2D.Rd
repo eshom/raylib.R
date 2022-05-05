@@ -22,6 +22,7 @@ Camera2D, defines position/orientation in 2d space
 Other Raylib objects: 
 \code{\link{Camera3D}()},
 \code{\link{Color}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},

@@ -26,6 +26,7 @@ Create RGBA values between 0 and 255
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
@@ -35,6 +36,7 @@ Other Raylib objects:
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},
+\code{\link{Image}()},
 \code{\link{Rectangle}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},

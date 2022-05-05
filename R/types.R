@@ -218,6 +218,7 @@ Camera3D_get <- function(camera) {
 Camera <- Camera3D
 
 #' @family Raylib objects
+#' @title Image, pixel data stored in CPU memory (RAM)
 #' @param filename Path of an image file
 #' @export
 Image <- function(filename) {
