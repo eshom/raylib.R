@@ -23,6 +23,9 @@ static const R_CallMethodDef callMethods[] = {
         {"SetWindowState_R",     (DL_FUNC) &SetWindowState_R,     1},
         {"ClearWindowState_R",   (DL_FUNC) &ClearWindowState_R,   1},
         {"ToggleFullscreen_R",   (DL_FUNC) &ToggleFullscreen_R,   0},
+        {"MaximizeWindow_R",     (DL_FUNC) &MaximizeWindow_R,     0},
+        {"MinimizeWindow_R",     (DL_FUNC) &MinimizeWindow_R,     0},
+        {"RestoreWindow_R",      (DL_FUNC) &RestoreWindow_R,      0},
 
         // Drawing-related functions
         {"ClearBackground_R", (DL_FUNC) &ClearBackground_R, 1},

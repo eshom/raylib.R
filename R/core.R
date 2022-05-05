@@ -125,6 +125,33 @@ toggle_fullscreen <- function() {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
+#'
+#' @export
+maximize_window <- function() {
+        .Call(.C_MaximizeWindow_R)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
+#'
+#' @export
+minimize_window <- function() {
+        .Call(.C_MinimizeWindow_R)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+#'
+#' @export
+restore_window <- function() {
+        .Call(.C_RestoreWindow_R)
+        invisible()
+}
+
 ##--------------------------##
 ## Drawing-related functions
 ##--------------------------##

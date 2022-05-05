@@ -103,9 +103,26 @@ SEXP ToggleFullscreen_R(void)
         return R_NilValue;
 }
 
-/* RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable (only PLATFORM_DESKTOP) */
-/* RLAPI void MinimizeWindow(void);                                  // Set window state: minimized, if resizable (only PLATFORM_DESKTOP) */
-/* RLAPI void RestoreWindow(void);                                   // Set window state: not minimized/maximized (only PLATFORM_DESKTOP) */
+// Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
+SEXP MaximizeWindow_R(void)
+{
+        MaximizeWindow();
+        return R_NilValue;
+}
+
+// Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
+SEXP MinimizeWindow_R(void)
+{
+        MinimizeWindow();
+        return R_NilValue;
+}
+
+// Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+SEXP RestoreWindow_R(void)
+{
+        RestoreWindow();
+        return R_NilValue;
+}
 /* RLAPI void SetWindowIcon(Image image);                            // Set icon for window (only PLATFORM_DESKTOP) */
 /* RLAPI void SetWindowTitle(const char *title);                     // Set title for window (only PLATFORM_DESKTOP) */
 /* RLAPI void SetWindowPosition(int x, int y);                       // Set window position on screen (only PLATFORM_DESKTOP) */

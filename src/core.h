@@ -19,6 +19,9 @@ SEXP IsWindowState_R(SEXP flag);
 SEXP SetWindowState_R(SEXP flags);
 SEXP ClearWindowState_R(SEXP flags);
 SEXP ToggleFullscreen_R(void);
+SEXP MaximizeWindow_R(void);
+SEXP MinimizeWindow_R(void);
+SEXP RestoreWindow_R(void);
 
 // Drawing-related functions
 SEXP ClearBackground_R(SEXP color);
