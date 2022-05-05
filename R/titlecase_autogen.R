@@ -57,6 +57,22 @@ ClearWindowState <- clear_window_state
 #' @export
 ToggleFullscreen <- toggle_fullscreen 
 
+#' @rdname maximize_window 
+#' @export
+MaximizeWindow <- maximize_window 
+
+#' @rdname minimize_window 
+#' @export
+MinimizeWindow <- minimize_window 
+
+#' @rdname restore_window 
+#' @export
+RestoreWindow <- restore_window 
+
+#' @rdname set_window_icon 
+#' @export
+SetWindowIcon <- set_window_icon 
+
 #' @rdname clear_background 
 #' @export
 ClearBackground <- clear_background 
@@ -388,6 +404,10 @@ DrawCubeWires <- draw_cube_wires
 #' @rdname draw_cube_wires_v 
 #' @export
 DrawCubeWiresV <- draw_cube_wires_v 
+
+#' @rdname draw_plane 
+#' @export
+DrawPlane <- draw_plane 
 
 #' @rdname draw_grid 
 #' @export
