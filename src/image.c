@@ -1,5 +1,4 @@
 #include "raylib.R.h"
-#include <Rinternals.h>
 
 static void _finalizer(SEXP ext)
 {

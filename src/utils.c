@@ -2,6 +2,7 @@
 #include <Rinternals.h>
 #include <raylib.h>
 #include "raylib.R.h"
+#include "utils.h"
 
 // Colors must be between 0 and 255 in order to cast to unsigned char
 // Otherwise throw R error and return to R REPL environment
@@ -295,6 +296,24 @@ void mouse_cursor_valid_else_error(int cursor)
                 Rf_error("Invalid mouse cursor");
 }
 
+void shader_loc_index_valid_else_error(int loc_index)
+{
+        if (!(loc_index >= 0 && loc_index <= 25))
+                Rf_error("Invalid shader location index");
+}
+
+void shader_uniform_type_valid_else_error(int uniform_type)
+{
+        if (!(uniform_type >= 0 && uniform_type <= 8))
+                Rf_error("Invalid shader uniform type");
+}
+
+void blending_mode_valid_else_error(int mode)
+{
+        if (!(mode >= 0 && mode <= 6))
+                Rf_error("Invalid blending mode");
+}
+
 void window_ready_else_error(void)
 {
         if (!IsWindowReady())
@@ -315,4 +334,38 @@ Image *image_p_from_sexp(SEXP image)
                 Rf_error("Caught NULL pointer. Expecting pointer to Image");
 
         return ext_out;
+}
+
+Shader *shader_p_from_sexp(SEXP shader)
+{
+        if (!Rf_inherits(shader, "Shader"))
+                Rf_error("Expecting Shader object");
+
+        if (!Rf_inherits(shader, "externalptr"))
+                Rf_error("Expecting external pointer to Shader");
+
+        Shader *ext_out = (Shader*)R_ExternalPtrAddr(shader);
+
+        if (!ext_out)
+                Rf_error("Caught NULL pointer. Expecting pointer to Shader");
+
+        return ext_out;
+}
+
+Matrix matrix_4x4_from_sexp(SEXP matrix)
+{
+        SEXP dmatrix = Rf_coerceVector(matrix, REALSXP);
+
+        if (!Rf_isMatrix(dmatrix))
+                Rf_error("Expecting a 4x4 matrix");
+
+        if (!(Rf_nrows(dmatrix) == 4 && Rf_ncols(dmatrix) == 4))
+                Rf_error("Expecting a 4x4 matrix");
+
+        double *m = REAL(dmatrix);
+
+        return (Matrix){(float)m[0], (float)m[4], (float)m[8], (float)m[12],
+                        (float)m[1], (float)m[5], (float)m[9], (float)m[13],
+                        (float)m[2], (float)m[6], (float)m[10], (float)m[14],
+                        (float)m[3], (float)m[7], (float)m[11], (float)m[15]};
 }

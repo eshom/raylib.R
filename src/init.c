@@ -145,10 +145,12 @@ static const R_CallMethodDef callMethods[] = {
         {"Fade_R",       (DL_FUNC) &Fade_R,       2},
 
         // Heap allocated structs and external pointer handling
-        {"create_Camera3D_R", (DL_FUNC) &create_Camera3D_R, 2},
-        {"set_Camera3D_R",    (DL_FUNC) &set_Camera3D_R,    2},
-        {"get_Camera3D_R",    (DL_FUNC) &get_Camera3D_R,    1},
-        {"create_Image_R",    (DL_FUNC) &create_Image_R,    2},
+        {"create_Camera3D_R",    (DL_FUNC) &create_Camera3D_R,    2},
+        {"set_Camera3D_R",       (DL_FUNC) &set_Camera3D_R,       2},
+        {"get_Camera3D_R",       (DL_FUNC) &get_Camera3D_R,       1},
+        {"create_Image_R",       (DL_FUNC) &create_Image_R,       2},
+        {"create_Shader_R",      (DL_FUNC) &create_Shader_R,      3},
+        {"create_Shader_code_R", (DL_FUNC) &create_Shader_code_R, 3},
 
         {NULL, NULL, 0}};
 

@@ -441,12 +441,64 @@ SEXP EndTextureMode_R(void)
         EndTextureMode();
         return R_NilValue;
 }
-/* RLAPI void BeginShaderMode(Shader shader);                        // Begin custom shader drawing */
-/* RLAPI void EndShaderMode(void);                                   // End custom shader drawing (use default shader) */
-/* RLAPI void BeginBlendMode(int mode);                              // Begin blending mode (alpha, additive, multiplied, subtract, custom) */
-/* RLAPI void EndBlendMode(void);                                    // End blending mode (reset to default: alpha blending) */
-/* RLAPI void BeginScissorMode(int x, int y, int width, int height); // Begin scissor mode (define screen area for following drawing) */
-/* RLAPI void EndScissorMode(void);                                  // End scissor mode */
+
+// Begin custom shader drawing
+SEXP BeginShaderMode_R(SEXP shader)
+{
+        window_ready_else_error();
+
+        BeginShaderMode(shader_p_from_sexp(shader));
+        return R_NilValue;
+}
+
+// End custom shader drawing (use default shader)
+SEXP EndShaderMode_R(void)
+{
+        window_ready_else_error();
+
+        EndShaderMode();
+        return R_NilValue;
+}
+
+// Begin blending mode (alpha, additive, multiplied, subtract, custom)
+SEXP BeginBlendMode_R(SEXP mode)
+{
+        window_ready_else_error();
+
+        int imode = Rf_asInteger(mode);
+
+        blending_mode_valid_else_error(imode);
+
+        BeginBlendMode(imode);
+        return R_NilValue;
+}
+
+// End blending mode (reset to default: alpha blending)
+SEXP EndBlendMode_R(void)
+{
+        window_ready_else_error();
+
+        EndBlendMode();
+        return R_NilValue;
+}
+
+// Begin scissor mode (define screen area for following drawing)
+SEXP BeginScissorMode_R(SEXP x, SEXP y, SEXP width, SEXP height)
+{
+        window_ready_else_error();
+
+        BeginScissorMode(Rf_asInteger(x), Rf_asInteger(y), Rf_asInteger(width), Rf_asInteger(height));
+        return R_NilValue;
+}
+
+// End scissor mode
+SEXP EndScissorMode_R(void)
+{
+        window_ready_else_error();
+
+        EndScissorMode();
+        return R_NilValue;
+}
 /* RLAPI void BeginVrStereoMode(VrStereoConfig config);              // Begin stereo rendering (requires VR simulator) */
 /* RLAPI void EndVrStereoMode(void);                                 // End stereo rendering (requires VR simulator) */
 
@@ -454,19 +506,81 @@ SEXP EndTextureMode_R(void)
 /* RLAPI VrStereoConfig LoadVrStereoConfig(VrDeviceInfo device);     // Load VR stereo config for VR simulator device parameters */
 /* RLAPI void UnloadVrStereoConfig(VrStereoConfig config);           // Unload VR stereo config */
 
-/* // Shader management functions */
-/* // NOTE: Shader functionality is not available on OpenGL 1.1 */
-/* RLAPI Shader LoadShader(const char *vsFileName, const char *fsFileName);   // Load shader from files and bind default locations */
-/* RLAPI Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode); // Load shader from code strings and bind default locations */
-/* RLAPI int GetShaderLocation(Shader shader, const char *uniformName);       // Get shader uniform location */
-/* RLAPI int GetShaderLocationAttrib(Shader shader, const char *attribName);  // Get shader attribute location */
-/* RLAPI void SetShaderValue(Shader shader, int locIndex, const void *value, int uniformType);               // Set shader uniform value */
-/* RLAPI void SetShaderValueV(Shader shader, int locIndex, const void *value, int uniformType, int count);   // Set shader uniform value vector */
-/* RLAPI void SetShaderValueMatrix(Shader shader, int locIndex, Matrix mat);         // Set shader uniform value (matrix 4x4) */
-/* RLAPI void SetShaderValueTexture(Shader shader, int locIndex, Texture2D texture); // Set shader uniform value for texture (sampler2d) */
-/* RLAPI void UnloadShader(Shader shader);                                    // Unload shader from GPU memory (VRAM) */
+// Shader management functions
+// NOTE: Shader functionality is not available on OpenGL 1.1
 
-/* // Screen-space-related functions */
+// Get shader uniform location
+SEXP GetShaderLocation_R(SEXP shader, SEXP uniform_name)
+{
+        return Rf_ScalarInteger(GetShaderLocation(*shader_p_from_sexp(shader),
+                                                  string_from_sexp(uniform_name)));
+}
+
+// Get shader attribute location
+SEXP GetShaderLocationAttrib_R(SEXP shader, SEXP attrib_name)
+{
+        return Rf_ScalarInteger(GetShaderLocationAttrib(*shader_p_from_sexp(shader),
+                                                  string_from_sexp(attrib_name)));
+}
+
+// Set shader uniform value
+SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type)
+{
+        int iloc_index = Rf_asInteger(loc_index);
+        int iuniform_type = Rf_asInteger(uniform_type);
+
+        shader_loc_index_valid_else_error(iloc_index);
+        shader_uniform_type_valid_else_error(iuniform_type);
+
+        SetShaderValue(*shader_p_from_sexp(shader), iloc_index, string_from_sexp(value), iuniform_type);
+
+        return R_NilValue;
+}
+
+// Set shader uniform value vector
+SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type, SEXP count)
+{
+        int iloc_index = Rf_asInteger(loc_index);
+        int iuniform_type = Rf_asInteger(uniform_type);
+
+        shader_loc_index_valid_else_error(iloc_index);
+        shader_uniform_type_valid_else_error(iuniform_type);
+
+        SetShaderValueV(*shader_p_from_sexp(shader), iloc_index, string_from_sexp(value), iuniform_type,
+                        Rf_asInteger(count));
+
+        return R_NilValue;
+}
+
+// Set shader uniform value (matrix 4x4)
+SEXP SetShaderValueMatrix_R(SEXP shader, SEXP loc_index, SEXP mat)
+{
+        int iloc_index = Rf_asInteger(loc_index);
+
+        shader_loc_index_valid_else_error(iloc_index);
+
+        SetShaderValueMatrix(*shader_p_from_sexp(shader), iloc_index, matrix_4x4_from_sexp(mat));
+
+        return R_NilValue;
+}
+
+// Set shader uniform value for texture (sampler2d)
+SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture)
+{
+        int iloc_index = Rf_asInteger(loc_index);
+
+        shader_loc_index_valid_else_error(iloc_index);
+
+        SetShaderValueTexture(*shader_p_from_sexp(shader), iloc_index, texture_from_sexp(texture));
+
+        return R_NilValue;
+}
+
+// Screen-space-related functions
+/* SEXP GetMouseRay_R(SEXP mouse_position, SEXP camera) */
+/* { */
+
+/* } */
 /* RLAPI Ray GetMouseRay(Vector2 mousePosition, Camera camera);      // Get a ray trace from mouse position */
 /* RLAPI Matrix GetCameraMatrix(Camera camera);                      // Get camera transform matrix (view matrix) */
 /* RLAPI Matrix GetCameraMatrix2D(Camera2D camera);                  // Get camera 2d transform matrix */

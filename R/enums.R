@@ -46,3 +46,52 @@
 #'         \item{MOUSE_CURSOR_NOT_ALLOWED}{The operation-not-allowed shape}
 #' }
 "mouse_cursor"
+
+#' Color blending modes (pre-defined)
+#'
+#' @format An object of class ‘list’ of length 7.
+#' \describe{
+#'        \item{BLEND_ALPHA}{Blend textures considering alpha (default)}
+#'        \item{BLEND_ADDITIVE}{Blend textures adding colors}
+#'        \item{BLEND_MULTIPLIED}{Blend textures multiplying colors}
+#'        \item{BLEND_ADD_COLORS}{Blend textures adding colors (alternative)}
+#'        \item{BLEND_SUBTRACT_COLORS}{Blend textures subtracting colors (alternative)}
+#'        \item{BLEND_ALPHA_PREMUL}{Blend premultiplied textures considering alpha}
+#'        \item{BLEND_CUSTOM}{Blend textures using custom src/dst factors (use rlSetBlendMode())}
+#' }
+"blend_mode"
+
+#' Shader uniform data type
+"shader_uniform_data_type"
+
+#' Shader attribute data type
+"shader_attribute_data_type"
+
+#' Shader location index
+"shader_location_index"
+
+#' Material map index
+"material_map_index"
+
+#' Pixel formats
+#'
+#' Note: Support depends on OpenGL version and platform
+"pixel_format"
+
+#' Texture parameters: filter mode
+#'
+#' Note 1: Filtering considers mipmaps if available in the texture
+#' Note 2: Filter is accordingly set for minification and magnification
+"texture_filter"
+
+#' Texture parameters: wrap mode
+"texture_wrap"
+
+#' Cubemap layouts
+"cubemap_layout"
+
+#' Font type, defines generation method
+"font_type"
+
+#' N-patch layout
+"npatch_layout"

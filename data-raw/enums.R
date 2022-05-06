@@ -214,3 +214,149 @@ mouse_cursor <- list(
         MOUSE_CURSOR_NOT_ALLOWED   = 10
 )
 usethis::use_data(mouse_cursor, overwrite = TRUE)
+
+blend_mode <- list(
+        BLEND_ALPHA           = 0,
+        BLEND_ADDITIVE        = 1,
+        BLEND_MULTIPLIED      = 2,
+        BLEND_ADD_COLORS      = 3,
+        BLEND_SUBTRACT_COLORS = 4,
+        BLEND_ALPHA_PREMUL    = 5,
+        BLEND_CUSTOM          = 6
+)
+usethis::use_data(blend_mode, overwrite = TRUE)
+
+shader_uniform_data_type <- list(
+        SHADER_UNIFORM_FLOAT     = 0,
+        SHADER_UNIFORM_VEC2      = 1,
+        SHADER_UNIFORM_VEC3      = 2,
+        SHADER_UNIFORM_VEC4      = 3,
+        SHADER_UNIFORM_INT       = 4,
+        SHADER_UNIFORM_IVEC2     = 5,
+        SHADER_UNIFORM_IVEC3     = 6,
+        SHADER_UNIFORM_IVEC4     = 7,
+        SHADER_UNIFORM_SAMPLER2D = 8
+)
+usethis::use_data(shader_uniform_data_type, overwrite = TRUE)
+
+shader_attribute_data_type <- list(
+        SHADER_ATTRIB_FLOAT = 0,
+        SHADER_ATTRIB_VEC2  = 1,
+        SHADER_ATTRIB_VEC3  = 2,
+        SHADER_ATTRIB_VEC4  = 3
+)
+usethis::use_data(shader_attribute_data_type, overwrite = TRUE)
+
+shader_location_index <- list(
+        SHADER_LOC_VERTEX_POSITION   = 0,
+        SHADER_LOC_VERTEX_TEXCOORD01 = 1,
+        SHADER_LOC_VERTEX_TEXCOORD02 = 2,
+        SHADER_LOC_VERTEX_NORMAL     = 3,
+        SHADER_LOC_VERTEX_TANGENT    = 4,
+        SHADER_LOC_VERTEX_COLOR      = 5,
+        SHADER_LOC_MATRIX_MVP        = 6,
+        SHADER_LOC_MATRIX_VIEW       = 7,
+        SHADER_LOC_MATRIX_PROJECTION = 8,
+        SHADER_LOC_MATRIX_MODEL      = 9,
+        SHADER_LOC_MATRIX_NORMAL     = 10,
+        SHADER_LOC_VECTOR_VIEW       = 11,
+        SHADER_LOC_COLOR_DIFFUSE     = 12,
+        SHADER_LOC_COLOR_SPECULAR    = 13,
+        SHADER_LOC_COLOR_AMBIENT     = 14,
+        SHADER_LOC_MAP_ALBEDO        = 12,
+        SHADER_LOC_MAP_METALNESS     = 13,
+        SHADER_LOC_MAP_NORMAL        = 17,
+        SHADER_LOC_MAP_ROUGHNESS     = 18,
+        SHADER_LOC_MAP_OCCLUSION     = 19,
+        SHADER_LOC_MAP_EMISSION      = 20,
+        SHADER_LOC_MAP_HEIGHT        = 21,
+        SHADER_LOC_MAP_CUBEMAP       = 22,
+        SHADER_LOC_MAP_IRRADIANCE    = 23,
+        SHADER_LOC_MAP_PREFILTER     = 24,
+        SHADER_LOC_MAP_BRDF          = 25
+)
+usethis::use_data(shader_location_index, overwrite = TRUE)
+
+material_map_index <- list(
+        MATERIAL_MAP_ALBEDO     = 0,
+        MATERIAL_MAP_DIFFUSE    = 0,
+        MATERIAL_MAP_METALNESS  = 1,
+        MATERIAL_MAP_SPECULAR   = 1,
+        MATERIAL_MAP_NORMAL     = 2,
+        MATERIAL_MAP_ROUGHNESS  = 3,
+        MATERIAL_MAP_OCCLUSION  = 4,
+        MATERIAL_MAP_EMISSION   = 5,
+        MATERIAL_MAP_HEIGHT     = 6,
+        MATERIAL_MAP_CUBEMAP    = 7,
+        MATERIAL_MAP_IRRADIANCE = 8,
+        MATERIAL_MAP_PREFILTER  = 9,
+        MATERIAL_MAP_BRDF       = 10
+)
+usethis::use_data(material_map_index, overwrite = TRUE)
+
+pixel_format <- list(
+        PIXELFORMAT_UNCOMPRESSED_GRAYSCALE    = 1,
+        PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA   = 2,
+        PIXELFORMAT_UNCOMPRESSED_R5G6B5       = 3,
+        PIXELFORMAT_UNCOMPRESSED_R8G8B8       = 4,
+        PIXELFORMAT_UNCOMPRESSED_R5G5B5A1     = 5,
+        PIXELFORMAT_UNCOMPRESSED_R4G4B4A4     = 6,
+        PIXELFORMAT_UNCOMPRESSED_R8G8B8A8     = 7,
+        PIXELFORMAT_UNCOMPRESSED_R32          = 8,
+        PIXELFORMAT_UNCOMPRESSED_R32G32B32    = 9,
+        PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10,
+        PIXELFORMAT_COMPRESSED_DXT1_RGB       = 11,
+        PIXELFORMAT_COMPRESSED_DXT1_RGBA      = 12,
+        PIXELFORMAT_COMPRESSED_DXT3_RGBA      = 13,
+        PIXELFORMAT_COMPRESSED_DXT5_RGBA      = 14,
+        PIXELFORMAT_COMPRESSED_ETC1_RGB       = 15,
+        PIXELFORMAT_COMPRESSED_ETC2_RGB       = 16,
+        PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA  = 17,
+        PIXELFORMAT_COMPRESSED_PVRT_RGB       = 18,
+        PIXELFORMAT_COMPRESSED_PVRT_RGBA      = 19,
+        PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA  = 20,
+        PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA  = 21
+)
+usethis::use_data(pixel_format, overwrite = TRUE)
+
+texture_filter <- list(
+        TEXTURE_FILTER_POINT           = 0,
+        TEXTURE_FILTER_BILINEAR        = 1,
+        TEXTURE_FILTER_TRILINEAR       = 2,
+        TEXTURE_FILTER_ANISOTROPIC_4X  = 3,
+        TEXTURE_FILTER_ANISOTROPIC_8X  = 4,
+        TEXTURE_FILTER_ANISOTROPIC_16X = 5
+)
+usethis::use_data(texture_filter, overwrite = TRUE)
+
+texture_wrap <- list(
+        TEXTURE_WRAP_REPEAT        = 0,
+        TEXTURE_WRAP_CLAMP         = 1,
+        TEXTURE_WRAP_MIRROR_REPEAT = 2,
+        TEXTURE_WRAP_MIRROR_CLAMP  = 3
+)
+usethis::use_data(texture_wrap, overwrite = TRUE)
+
+cubemap_layout <- list(
+        CUBEMAP_LAYOUT_AUTO_DETECT         = 0,
+        CUBEMAP_LAYOUT_LINE_VERTICAL       = 1,
+        CUBEMAP_LAYOUT_LINE_HORIZONTAL     = 2,
+        CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3,
+        CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4,
+        CUBEMAP_LAYOUT_PANORAMA            = 5
+)
+usethis::use_data(cubemap_layout, overwrite = TRUE)
+
+font_type <- list(
+    FONT_DEFAULT = 0,
+    FONT_BITMAP = 1,
+    FONT_SDF = 2
+)
+usethis::use_data(font_type, overwrite = TRUE)
+
+npatch_layout <- list(
+        NPATCH_NINE_PATCH             = 0,
+        NPATCH_THREE_PATCH_VERTICAL   = 1,
+        NPATCH_THREE_PATCH_HORIZONTAL = 2
+)
+usethis::use_data(npatch_layout, overwrite = TRUE)

@@ -47,6 +47,14 @@ SEXP GetMonitorName_R(SEXP monitor);
 SEXP SetClipboardText_R(SEXP text);
 SEXP GetClipboardText_R(void);
 
+// Cursor-related functions
+SEXP ShowCursor_R(void);
+SEXP HideCursor_R(void);
+SEXP IsCursorHidden_R(void);
+SEXP EnableCursor_R(void);
+SEXP DisableCursor_R(void);
+SEXP IsCursorOnScreen_R(void);
+
 // Drawing-related functions
 SEXP ClearBackground_R(SEXP color);
 SEXP BeginDrawing_R(void);
@@ -55,8 +63,25 @@ SEXP BeginMode2D_R(SEXP camera);
 SEXP EndMode2D_R(void);
 SEXP BeginMode3D_R(SEXP camera);
 SEXP EndMode3D_R(void);
+SEXP BeginTextureMode_R(SEXP target);
+SEXP EndTextureMode_R(void);
+SEXP BeginShaderMode_R(SEXP shader);
+SEXP EndShaderMode_R(void);
+SEXP BeginBlendMode_R(SEXP mode);
+SEXP EndBlendMode_R(void);
+SEXP BeginScissorMode_R(SEXP x, SEXP y, SEXP width, SEXP height);
+SEXP EndScissorMode_R(void);
 
-// Cursor-related functions
+// Shader management functions
+// NOTE: Shader functionality is not available on OpenGL 1.1
+SEXP GetShaderLocation_R(SEXP shader, SEXP uniform_name);
+SEXP GetShaderLocationAttrib_R(SEXP shader, SEXP attrib_name);
+SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type);
+SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type, SEXP count);
+SEXP SetShaderValueMatrix_R(SEXP shader, SEXP loc_index, SEXP mat);
+SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture);
+
+// Screen-space-related functions
 
 
 // Timing-related functions

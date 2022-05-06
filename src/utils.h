@@ -25,7 +25,12 @@ void keyboard_key_valid_else_error(int key);
 void general_key_valid_else_error(int key);
 void mouse_button_valid_else_error(int button);
 void mouse_cursor_valid_else_error(int cursor);
+void shader_loc_index_valid_else_error(int loc_index);
+void shader_uniform_type_valid_else_error(int uniform_type);
+void blending_mode_valid_else_error(int mode);
 void window_ready_else_error(void);
 Image *image_p_from_sexp(SEXP image);
+Shader *shader_p_from_sexp(SEXP shader);
+Matrix matrix_4x4_from_sexp(SEXP matrix);
 
 #endif

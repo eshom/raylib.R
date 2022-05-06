@@ -244,3 +244,22 @@ Image <- function(filename) {
         class(out) <- c("Image", class(out))
         out
 }
+
+#' @family Raylib objects
+#' @title Shader, Load a shader from files or code
+#' @param vs_filename Path for vertex shader code.
+#' @param fs_filename Path for fragment shader code.
+#' @param vs_code Vertex shader code.
+#' @param fs_code Fragment shader code.
+#' @export
+Shader <- function(vs_filename, fs_filename, vs_code, fs_code) {
+        if (missing(vs_code) && missing(fs_code))
+                out <- .Call(.C_create_Shader_R, vs_filename, fs_filename, NULL)
+        else if (missing(vs_filename) && missing(fs_filename))
+                out <- .Call(.C_create_Shader_code_R, vs_code, fs_code, NULL)
+        else
+                out <- c("Expecting filenames or code, not both")
+
+        class(out) <- c("Shader", class(out))
+        out
+}
