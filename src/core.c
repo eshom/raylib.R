@@ -307,16 +307,48 @@ SEXP GetClipboardText_R(void)
 /* RLAPI void PollInputEvents(void);                                 // Register all input events */
 /* RLAPI void WaitTime(float ms);                                    // Wait for some milliseconds (halt program execution) */
 
-/* // Cursor-related functions */
-/* RLAPI void ShowCursor(void);                                      // Shows cursor */
-/* RLAPI void HideCursor(void);                                      // Hides cursor */
-/* RLAPI bool IsCursorHidden(void);                                  // Check if cursor is not visible */
-/* RLAPI void EnableCursor(void);                                    // Enables cursor (unlock cursor) */
-/* RLAPI void DisableCursor(void);                                   // Disables cursor (lock cursor) */
-/* RLAPI bool IsCursorOnScreen(void);                                // Check if cursor is on the screen */
+// Cursor-related functions
 
-/* // Drawing-related functions */
-/* RLAPI void ClearBackground(Color color);                          // Set background color (framebuffer clear color) */
+// Shows cursor
+SEXP ShowCursor_R(void)
+{
+        ShowCursor();
+        return R_NilValue;
+}
+
+// Hides cursor
+SEXP HideCursor_R(void)
+{
+        HideCursor();
+        return R_NilValue;
+}
+
+// Check if cursor is not visible
+SEXP IsCursorHidden_R(void)
+{
+        IsCursorHidden();
+        return R_NilValue;
+}
+
+// Enables cursor (unlock cursor)
+SEXP EnableCursor_R(void)
+{
+        EnableCursor();
+        return R_NilValue;
+}
+
+// Disables cursor (lock cursor)
+SEXP DisableCursor_R(void)
+{
+        DisableCursor();
+        return R_NilValue;
+}
+
+// Check if cursor is on the screen
+SEXP IsCursorOnScreen_R(void)
+{
+        return Rf_ScalarLogical(IsCursorOnScreen());
+}
 
 // Drawing-related functions
 
@@ -392,8 +424,23 @@ SEXP EndMode3D_R(void)
         return R_NilValue;
 }
 
-/* RLAPI void BeginTextureMode(RenderTexture2D target);              // Begin drawing to render texture */
-/* RLAPI void EndTextureMode(void);                                  // Ends drawing to render texture */
+// Begin drawing to render texture
+SEXP BeginTextureMode_R(SEXP target)
+{
+        window_ready_else_error();
+
+        BeginTextureMode(render_texture_from_sexp(target));
+        return R_NilValue;
+}
+
+// Ends drawing to render texture
+SEXP EndTextureMode_R(void)
+{
+        window_ready_else_error();
+
+        EndTextureMode();
+        return R_NilValue;
+}
 /* RLAPI void BeginShaderMode(Shader shader);                        // Begin custom shader drawing */
 /* RLAPI void EndShaderMode(void);                                   // End custom shader drawing (use default shader) */
 /* RLAPI void BeginBlendMode(int mode);                              // Begin blending mode (alpha, additive, multiplied, subtract, custom) */

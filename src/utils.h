@@ -13,6 +13,7 @@ SEXP sexp_from_vector2(Vector2 vec);
 Vector3 vector3_from_sexp(SEXP vec3);
 SEXP sexp_from_vector3(Vector3 vec);
 Texture texture_from_sexp(SEXP texture);
+RenderTexture render_texture_from_sexp(SEXP render_texture);
 Rectangle rectangle_from_sexp(SEXP rectangle);
 SEXP sexp_from_rectangle(Rectangle rec);
 unsigned int flag_from_sexp(SEXP flag);

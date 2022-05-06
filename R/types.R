@@ -52,6 +52,24 @@ Texture2D <- Texture
 TextureCubemap <- Texture
 
 #' @family Raylib objects
+#' @title RenderTexture, fbo for texture rendering
+#' @param id Unsigned integer. OpenGL framebuffer object id
+#' @param texture Texture. Color buffer attachment texture
+#' @param depth Texture. Depth buffer attachment texture
+#' @export
+RenderTexture <- function(id, texture, depth) {
+        out <- list(id = id, texture = texture, depth = depth)
+
+        class(out) <- c("RenderTexture", class(out))
+        out
+}
+
+#' @family Raylib objects
+#' @rdname RenderTexture
+#' @export
+RenderTexture2D <- RenderTexture
+
+#' @family Raylib objects
 #' @title Rectangle, 4 components
 #' @param x Rectangle top-left corner position x. If other parameters
 #' are missing, then expecting a vector of length 4 with x, y, width, and

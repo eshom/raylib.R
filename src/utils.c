@@ -1,5 +1,6 @@
 #include <R_ext/Error.h>
 #include <Rinternals.h>
+#include <raylib.h>
 #include "raylib.R.h"
 
 // Colors must be between 0 and 255 in order to cast to unsigned char
@@ -104,14 +105,34 @@ SEXP sexp_from_vector3(Vector3 vec)
 // Take a texture vector passed from R, and return a Texture struct + checks
 Texture texture_from_sexp(SEXP texture)
 {
+
+        if (!Rf_inherits(texture, "Texture"))
+                Rf_error("Expecting `Texture` object");
+
         int *texture_p = INTEGER(Rf_coerceVector(texture, INTSXP));
 
         if (texture_p[0] < 0) {
-                Rf_error("Expecting positive number for first element of `texture` argument");
+                Rf_error("Expecting positive number for the first element of `texture` argument");
         }
 
         return (Texture){texture_p[0], // unsigned int promotion
                 texture_p[1], texture_p[2], texture_p[3], texture_p[4]};
+}
+
+RenderTexture render_texture_from_sexp(SEXP render_texture)
+{
+        if (!Rf_inherits(render_texture, "RenderTexture"))
+                Rf_error("Expecting `RenderTexture` object");
+
+        SEXP id_sexp = VECTOR_ELT(render_texture, 0);
+        int id = Rf_asInteger(id_sexp);
+
+        if (id < 0) {
+                Rf_error("Expecting positive number for the first element of `render_texture` argument");
+        }
+
+        return (RenderTexture){id, texture_from_sexp(VECTOR_ELT(render_texture, 1)),
+                               texture_from_sexp(VECTOR_ELT(render_texture, 2))};
 }
 
 // Take a rectangle vector passed from R, and return a Rectangle struct

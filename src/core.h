@@ -56,6 +56,9 @@ SEXP EndMode2D_R(void);
 SEXP BeginMode3D_R(SEXP camera);
 SEXP EndMode3D_R(void);
 
+// Cursor-related functions
+
+
 // Timing-related functions
 
 // Set target FPS (maximum)
