@@ -263,3 +263,15 @@ Shader <- function(vs_filename, fs_filename, vs_code, fs_code) {
         class(out) <- c("Shader", class(out))
         out
 }
+
+#' @family Raylib objects
+#' @title Ray, ray for raycasting
+#' @param position Vector3. Ray position (origin)
+#' @param direction Vector3. Ray direction (origin)
+#' @export
+Ray <- function(position, direction) {
+        out <- list(position = position, direction = direction)
+
+        class(out) <- c("Ray", class(out))
+        out
+}

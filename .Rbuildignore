@@ -11,3 +11,4 @@ compile_commands.json
 ^get_declarations$
 ^get_title_case$
 ^gen_package_raw_data$
+^get_callmethods$

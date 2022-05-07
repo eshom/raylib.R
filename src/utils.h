@@ -32,5 +32,7 @@ void window_ready_else_error(void);
 Image *image_p_from_sexp(SEXP image);
 Shader *shader_p_from_sexp(SEXP shader);
 Matrix matrix_4x4_from_sexp(SEXP matrix);
+SEXP sexp_from_matrix_4x4(Matrix m);
+SEXP sexp_from_ray(Ray ray);
 
 #endif

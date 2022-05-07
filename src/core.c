@@ -577,17 +577,78 @@ SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture)
 }
 
 // Screen-space-related functions
-/* SEXP GetMouseRay_R(SEXP mouse_position, SEXP camera) */
-/* { */
 
-/* } */
-/* RLAPI Ray GetMouseRay(Vector2 mousePosition, Camera camera);      // Get a ray trace from mouse position */
-/* RLAPI Matrix GetCameraMatrix(Camera camera);                      // Get camera transform matrix (view matrix) */
-/* RLAPI Matrix GetCameraMatrix2D(Camera2D camera);                  // Get camera 2d transform matrix */
-/* RLAPI Vector2 GetWorldToScreen(Vector3 position, Camera camera);  // Get the screen space position for a 3d world space position */
-/* RLAPI Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height); // Get size position for a 3d world space position */
-/* RLAPI Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera); // Get the screen space position for a 2d camera world space position */
-/* RLAPI Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera); // Get the world space position for a 2d camera screen space position */
+// Get a ray trace from mouse position
+SEXP GetMouseRay_R(SEXP mouse_position, SEXP camera)
+{
+        Ray out_ray = GetMouseRay(vector2_from_sexp(mouse_position), *camera3d_p_from_sexp(camera));
+
+        SEXP out = sexp_from_ray(out_ray);
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get camera transform matrix (view matrix)
+SEXP GetCameraMatrix_R(SEXP camera)
+{
+        Matrix mat = GetCameraMatrix(*camera3d_p_from_sexp(camera));
+        SEXP out = sexp_from_matrix_4x4(mat);
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get camera 2d transform matrix
+SEXP GetCameraMatrix2D_R(SEXP camera)
+{
+        Matrix mat = GetCameraMatrix2D(camera2d_from_sexp(camera));
+        SEXP out = sexp_from_matrix_4x4(mat);
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get the screen space position for a 3d world space position
+SEXP GetWorldToScreen_R(SEXP position, SEXP camera)
+{
+        SEXP out = sexp_from_vector2(GetWorldToScreen(vector3_from_sexp(position),
+                                                      *camera3d_p_from_sexp(camera)));
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get size position for a 3d world space position
+SEXP GetWorldToScreenEx_R(SEXP position, SEXP camera, SEXP width, SEXP height)
+{
+        SEXP out = sexp_from_vector2(GetWorldToScreenEx(vector3_from_sexp(position),
+                                                        *camera3d_p_from_sexp(camera),
+                                                        Rf_asInteger(width), Rf_asInteger(height)));
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get the screen space position for a 2d camera world space position
+SEXP GetWorldToScreen2D_R(SEXP position, SEXP camera)
+{
+        SEXP out = sexp_from_vector2(GetWorldToScreen2D(vector2_from_sexp(position),
+                                                        camera2d_from_sexp(camera)));
+
+        UNPROTECT(1);
+        return out;
+}
+
+// Get the world space position for a 2d camera screen space position
+SEXP GetScreenToWorld2D_R(SEXP position, SEXP camera)
+{
+        SEXP out = sexp_from_vector2(GetScreenToWorld2D(vector2_from_sexp(position),
+                                                        camera2d_from_sexp(camera)));
+
+        UNPROTECT(1);
+        return out;
+}
 
 // Timing-related functions
 
@@ -597,22 +658,53 @@ SEXP SetTargetFPS_R(SEXP fps)
         SetTargetFPS(Rf_asInteger(fps));
         return R_NilValue;
 }
-/* RLAPI void SetTargetFPS(int fps);                                 // Set target FPS (maximum) */
-/* RLAPI int GetFPS(void);                                           // Get current FPS */
-/* RLAPI float GetFrameTime(void);                                   // Get time in seconds for last frame drawn (delta time) */
-/* RLAPI double GetTime(void);                                       // Get elapsed time in seconds since InitWindow() */
 
-/* // Misc. functions */
-/* RLAPI int GetRandomValue(int min, int max);                       // Get a random value between min and max (both included) */
-/* RLAPI void SetRandomSeed(unsigned int seed);                      // Set the seed for the random number generator */
-/* RLAPI void TakeScreenshot(const char *fileName);                  // Takes a screenshot of current screen (filename extension defines format) */
-/* RLAPI void SetConfigFlags(unsigned int flags);                    // Setup init configuration flags (view FLAGS) */
+// Get current FPS
+SEXP GetFPS_R(void)
+{
+        return Rf_ScalarInteger(GetFPS());
+}
 
-/* RLAPI void TraceLog(int logLevel, const char *text, ...);         // Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...) */
-/* RLAPI void SetTraceLogLevel(int logLevel);                        // Set the current threshold (minimum) log level */
-/* RLAPI void *MemAlloc(int size);                                   // Internal memory allocator */
-/* RLAPI void *MemRealloc(void *ptr, int size);                      // Internal memory reallocator */
-/* RLAPI void MemFree(void *ptr);                                    // Internal memory free */
+// Get time in seconds for last frame drawn (delta time)
+SEXP GetFrameTime_R(void)
+{
+        return Rf_ScalarReal(GetFrameTime());
+}
+
+// Get elapsed time in seconds since InitWindow()
+SEXP GetTime_R(void)
+{
+        window_ready_else_error();
+        return Rf_ScalarReal(GetTime());
+}
+
+// Misc. functions
+
+// Takes a screenshot of current screen (filename extension defines format)
+SEXP TakeScreenshot_R(SEXP filename)
+{
+        TakeScreenshot(string_from_sexp(filename));
+        return R_NilValue;
+}
+
+// Setup init configuration flags (view FLAGS)
+SEXP SetConfigFlags_R(SEXP flags)
+{
+        SetConfigFlags(flag_from_sexp(flags));
+        return R_NilValue;
+}
+
+// Set the current threshold (minimum) log level
+SEXP SetTraceLogLevel_R(SEXP loglevel)
+{
+        int l = Rf_asInteger(loglevel);
+
+        if (!(l >= 0 && l <= 7))
+                Rf_error("Invalid log level");
+
+        SetTraceLogLevel(l);
+        return R_NilValue;
+}
 
 /* // Set custom callbacks */
 /* // WARNING: Callbacks setup is intended for advance users */
@@ -651,18 +743,6 @@ SEXP GetDroppedFiles_R(void)
 
         return str_out;
 }
-
-/* // Compression/Encoding functionality */
-/* RLAPI unsigned char *CompressData(const unsigned char *data, int dataLength, int *compDataLength);        // Compress data (DEFLATE algorithm) */
-/* RLAPI unsigned char *DecompressData(const unsigned char *compData, int compDataLength, int *dataLength);  // Decompress data (DEFLATE algorithm) */
-/* RLAPI char *EncodeDataBase64(const unsigned char *data, int dataLength, int *outputLength);               // Encode data to Base64 string */
-/* RLAPI unsigned char *DecodeDataBase64(const unsigned char *data, int *outputLength);                      // Decode Base64 string data */
-
-/* // Persistent storage management */
-/* RLAPI bool SaveStorageValue(unsigned int position, int value);    // Save integer value to storage file (to defined position), returns true on success */
-/* RLAPI int LoadStorageValue(unsigned int position);                // Load integer value from storage file (from defined position) */
-
-/* RLAPI void OpenURL(const char *url);                              // Open URL with default system browser (if available) */
 
 // Input-related functions: keyboard
 

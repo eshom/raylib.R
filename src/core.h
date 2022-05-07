@@ -82,12 +82,24 @@ SEXP SetShaderValueMatrix_R(SEXP shader, SEXP loc_index, SEXP mat);
 SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture);
 
 // Screen-space-related functions
-
+SEXP GetMouseRay_R(SEXP mouse_position, SEXP camera);
+SEXP GetCameraMatrix_R(SEXP camera);
+SEXP GetCameraMatrix2D_R(SEXP camera);
+SEXP GetWorldToScreen_R(SEXP position, SEXP camera);
+SEXP GetWorldToScreenEx_R(SEXP position, SEXP camera, SEXP width, SEXP height);
+SEXP GetWorldToScreen2D_R(SEXP position, SEXP camera);
+SEXP GetScreenToWorld2D_R(SEXP position, SEXP camera);
 
 // Timing-related functions
-
-// Set target FPS (maximum)
 SEXP SetTargetFPS_R(SEXP fps);
+SEXP GetFPS_R(void);
+SEXP GetFrameTime_R(void);
+SEXP GetTime_R(void);
+
+// Misc. functions
+SEXP TakeScreenshot_R(SEXP filename);
+SEXP SetConfigFlags_R(SEXP flags);
+SEXP SetTraceLogLevel_R(SEXP loglevel);
 
 // Files management functions
 SEXP IsFileDropped_R(void);

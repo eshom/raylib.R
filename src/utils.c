@@ -369,3 +369,28 @@ Matrix matrix_4x4_from_sexp(SEXP matrix)
                         (float)m[2], (float)m[6], (float)m[10], (float)m[14],
                         (float)m[3], (float)m[7], (float)m[11], (float)m[15]};
 }
+
+// Create a matrix SEXP from Matrix object. Needs UNPROTECT after calling.
+SEXP sexp_from_matrix_4x4(Matrix m)
+{
+        SEXP out = PROTECT(allocMatrix(REALSXP, 4, 4));
+        double *p = REAL(out);
+
+        p[0] = m.m0;  p[4] = m.m1;  p[8]  = m.m2;  p[12] = m.m3;
+        p[1] = m.m4;  p[5] = m.m5;  p[9]  = m.m6;  p[13] = m.m7;
+        p[2] = m.m8;  p[6] = m.m9;  p[10] = m.m10; p[14] = m.m11;
+        p[3] = m.m12; p[7] = m.m13; p[11] = m.m14; p[15] = m.m15;
+
+        return out;
+}
+
+SEXP sexp_from_ray(Ray ray)
+{
+        SEXP out = PROTECT(Rf_mkNamed(VECSXP, (const char *[]){"position", "direction", ""}));
+
+        SET_VECTOR_ELT(out, 0, sexp_from_vector3(ray.position));
+        SET_VECTOR_ELT(out, 1, sexp_from_vector3(ray.direction));
+
+        UNPROTECT(2); // The named list would still need to be unprotected
+        return out;
+}
