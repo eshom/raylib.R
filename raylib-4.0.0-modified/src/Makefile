@@ -376,7 +376,7 @@ endif
 # Define include paths for required headers
 # NOTE: Several external required libraries (stb and others)
 # Modified for R
-INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -I$(R_HOME)/include
+INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -I$(R_INCLUDE_DIR)
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),BSD)

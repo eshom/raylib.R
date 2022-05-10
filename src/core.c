@@ -1,8 +1,4 @@
 #include "raylib.R.h"
-#include "utils.h"
-#include <R_ext/Error.h>
-#include <Rinternals.h>
-#include <raylib.h>
 
 // Windows-related functions
 
@@ -167,6 +163,7 @@ SEXP SetWindowSize_R(SEXP width, SEXP height)
         return R_NilValue;
 }
 
+/* Not supported in raylib 4.0
 // Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
 SEXP SetWindowOpacity_R(SEXP opacity)
 {
@@ -177,7 +174,7 @@ SEXP SetWindowOpacity_R(SEXP opacity)
 
         SetWindowOpacity(fopacity);
         return R_NilValue;
-}
+} */
 
 /* RLAPI void *GetWindowHandle(void);                                // Get native window handle */
 
@@ -193,17 +190,20 @@ SEXP GetScreenHeight_R(void)
         return Rf_ScalarInteger(GetScreenHeight());
 }
 
+/* Not supported in 4.0
 // Get current render width (it considers HiDPI)
 SEXP GetRenderWidth_R(void)
 {
         return Rf_ScalarInteger(GetRenderWidth());
 }
+*/
 
+/* Not supported in 4.0
 // Get current render height (it considers HiDPI)
 SEXP GetRenderHeight_R(void)
 {
         return Rf_ScalarInteger(GetRenderHeight());
-}
+}*/
 
 // Get number of connected monitors
 SEXP GetMonitorCount_R(void)
@@ -447,7 +447,7 @@ SEXP BeginShaderMode_R(SEXP shader)
 {
         window_ready_else_error();
 
-        BeginShaderMode(shader_p_from_sexp(shader));
+        BeginShaderMode(*shader_p_from_sexp(shader));
         return R_NilValue;
 }
 
