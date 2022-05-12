@@ -65,54 +65,121 @@ update_player <- function(player, env_items, env_items_length, delta) {
 }
 
 # camera update functions
-update_camera_center <- function(camera, player, width, height) {
+update_camera_center <- function(
+    camera, player, env_items, env_items_length, delta, width, height) {
   camera$offset <- Vector2(width/2, height/2)
   camera$target <- player$position
+  
   return(camera)
 }
 
-# update_camera_center_inside_map <- 
-#   function(camera, player, env_items, env_items_length, delta, width, height) {
+# update_camera_center_inside_map <- function(
+#     camera, player, env_items, env_items_length, delta, width, height) {
 #   camera$target <- player$position
 #   camera$offset <- Vector2(width/2, height/2)
-#   
-#   min_x <- min_y <- 1000 
+# 
+#   min_x <- min_y <- 1000
 #   max_x <- max_y <- -1000
 #   
-#   
-# }
-# 
-# void UpdateCameraCenterInsideMap(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
-# {
-#   camera->target = player->position;
-#   camera->offset = (Vector2){ width/2.0f, height/2.0f };
-#   float minX = 1000, minY = 1000, maxX = -1000, maxY = -1000;
-#   
-#   for (int i = 0; i < envItemsLength; i++)
-#   {
-#     EnvItem *ei = envItems + i;
-#     minX = fminf(ei->rect.x, minX);
-#     maxX = fmaxf(ei->rect.x + ei->rect.width, maxX);
-#     minY = fminf(ei->rect.y, minY);
-#     maxY = fmaxf(ei->rect.y + ei->rect.height, maxY);
+#   for (i in 1:env_items_length) {
+#     min_x <- min(env_items[[i]]$rect["x"], min_x)
+#     max_x <- max(env_items[[i]]$rect["x"] + env_items$rect["width"], max_x)
+#     min_y <- min(env_items[[i]]$rect["y"], min_y)
+#     max_y <- max(env_items[[i]]$rect["y"] + env_items$rect["height"], max_y)
 #   }
 #   
-#   Vector2 max = GetWorldToScreen2D((Vector2){ maxX, maxY }, *camera);
-#   Vector2 min = GetWorldToScreen2D((Vector2){ minX, minY }, *camera);
+#   max = .Call(.C_GetWorldToScreen2D_R, Vector2(max_x, max_y), camera)
+#   min = .Call(.C_GetWorldToScreen2D_R, Vector2(min_x, min_y), camera)
 #   
-#   if (max.x < width) camera->offset.x = width - (max.x - width/2);
-#   if (max.y < height) camera->offset.y = height - (max.y - height/2);
-#   if (min.x > 0) camera->offset.x = width/2 - min.x;
-#   if (min.y > 0) camera->offset.y = height/2 - min.y;
+#   if (max["x"] < width) camera$offset["x"] <- width - (max["x"] - width/2)
+#   if (max["y"] < height) camera$offset["y"] <- heigh - (max["y"] - height/2)
+#   if (min["x"] > 0) camera$offset["x"] <- width/2 - min["x"]
+#   if (min["y"] > 0) camera$offset["y"] <- height/2 - min["y"]
+#   
+#   return(camera)
+#   }
+
+update_camera_center_smooth_follow <- function(
+    camera, player, env_items, env_items_length, delta, width, height) {
+  
+  min_speed <- 30
+  min_effect_length <- 10
+  fraction_speed <- 0.8
+  
+  camera$offset <- Vector2(width/2, height/2)
+  
+  diff <- player$position - camera$target
+  veclength <- sqrt(sum(sapply(diff, \(x) x^2)))
+  
+  if (veclength > min_effect_length) {
+    speed <- max(fraction_speed * veclength, min_speed)
+    camera$target <- camera$target + diff*(speed * delta / veclength)
+  }
+  return(camera)
+}
+
+update_camera_even_out_on_landing <- function(
+    camera, player, env_items, env_items_length, delta, width, height) {
+  
+  if (!exists(".update_camera_even_out_env")) {
+    .update_camera_even_out_env <- new.env()
+    .update_camera_even_out_env[["evening_out"]] <- FALSE
+    .update_camera_even_out_env[["even_out_target"]] <- NULL
+  } 
+  
+  even_out_speed <- 700
+  
+  camera$offset <- Vector2(width/2, height/2)
+  camera$target["x"] <- player$position["x"]
+  
+  if (isTRUE(.update_camera_even_out_env[["evening_out"]])) {
+    if (.update_camera_even_out_env[["even_out_target"]] > camera$target["y"]) {
+      camera$target["y"] <- camera$target["y"] + even_out_speed * delta
+      if (camera$target["y"] > .update_camera_even_out_env[["even_out_target"]]) {
+        camera$target["y"] <- .update_camera_even_out_env[["even_out_target"]]
+        .update_camera_even_out_env[["evening_out"]] <- FALSE
+      }
+    } else {
+      camera$target["y"] <- camera$target["y"] - even_out_speed*delta
+      if (camera$target["y"] < .update_camera_even_out_env[["even_out_target"]]) {
+        camera$target["y"] <- .update_camera_even_out_env[["even_out_target"]]
+        .update_camera_even_out_env[["evening_out"]] <- FALSE
+      }
+    }
+  } else if (isTRUE(player$can_jump) && player$speed == 0 && player$position["y"] != camera$target["y"]) {
+    .update_camera_even_out_env[["evening_out"]] <- TRUE
+    .update_camera_even_out_env[["even_out_target"]] <- player$position["y"]
+  }
+  
+  return(camera)
+}
+
+# update_camera_player_bound_push <- function(
+#     camera, player, env_items, env_items_length, delta, width, height) {
+# 
+#   bbox <- Vector2(0.2, 0.2)
+#   
+#   bbox_world_min <- .Call(.C_GetScreenToWorld2D, 
+#                           Vector2((1 - bbox["x"]) * 0.5 * width, (1 - bbox["y"] * 0.5 * height)),
+#                           camera)
+#   bbox_world_max <- .Call(.C_GetScreenToWorld2D, 
+#                           Vector2((1 + bbox["x"]) * 0.5 * width, (1 + bbox["y"] * 0.5 * height)),
+#                           camera)
+#   
+#   camera$offset <- Vector2((1 - bbox["x"]) * 0.5 * width, (1 - bbox["y"]) * 0.5 * height)
+#   
+#   if (player$position["x"] < bbox_world_min["x"])
+#     camera$target["x"] <- player$position["x"]
+#   if (player$position["y"] < bbox_world_min["y"])
+#     camera$target["y"] <- player$position["y"]
+#   if (player$position["x"] > bbox_world_max["x"])
+#     camera$target["x"] <- bbox_world_min["x"] + (player$position["x"] - bbox_world_min["x"])
+#   if (player$position["y"] > bbox_world_max["y"])
+#     camera$target["y"] <- bbox_world_min["y"] + (player$position["y"] - bbox_world_min["y"])
+#   
+#   return(camera)
+#   
 # }
-
-
-
-
-# void UpdateCameraCenterInsideMap(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height);
-# void UpdateCameraCenterSmoothFollow(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height);
-# void UpdateCameraEvenOutOnLanding(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height);
-# void UpdateCameraPlayerBoundsPush(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height);
 
 ##################
 # Initialization #
@@ -142,25 +209,31 @@ play_game <- function() {
                      rotation = 0,
                      zoom = 1)
   
-  # // Store pointers to the multiple update camera functions
-  # void (*cameraUpdaters[])(Camera2D*, Player*, EnvItem*, int, float, int, int) = {
-  #   UpdateCameraCenter,
-  #   UpdateCameraCenterInsideMap,
-  #   UpdateCameraCenterSmoothFollow,
-  #   UpdateCameraEvenOutOnLanding,
-  #   UpdateCameraPlayerBoundsPush
-  # };
+  # set up camera updaters
+  camera_updaters <- list(
+    update = list(
+      descr = "Follow player center",
+      func = update_camera_center
+    ),
+    # update_inside_map = list(
+    #   descr = "Follow player center, but clamp to map edges",
+    #   func = update_camera_center_inside_map
+    # ),
+    update_smooth_follow = list(
+      descr = "Follow player center;\nsmoothed",
+      func = update_camera_center_smooth_follow
+    ),
+    update_even_out_on_landing = list(
+      descr = "Follow player center horizontally;\nupdate player center vertically after landing",
+      func = update_camera_even_out_on_landing
+    )#,
+    # update_player_bound_push = list(
+    #   descr = "Player push camera on getting too close to screen edge",
+    #   func = update_camera_player_bound_push
+    # )
+  )
   
-  # int cameraOption = 0;
-  # int cameraUpdatersLength = sizeof(cameraUpdaters)/sizeof(cameraUpdaters[0]);
-  
-  # char *cameraDescriptions[] = {
-  #   "Follow player center",
-  #   "Follow player center, but clamp to map edges",
-  #   "Follow player center; smoothed",
-  #   "Follow player center horizontally; updateplayer center vertically after landing",
-  #   "Player push camera on getting too close to screen edge"
-  # };
+  camera_option = 1
   
   set_target_fps(60)
   
@@ -170,6 +243,7 @@ play_game <- function() {
   
   while(!window_should_close()) {
     
+    # to implement
     # delta_time <- get_frame_time()
     delta_time <- 1/60
     
@@ -187,21 +261,27 @@ play_game <- function() {
       player$position <- Vector2(400, 280)
     }
     
-    # if (IsKeyPressed(KEY_C)) cameraOption = (cameraOption + 1)%cameraUpdatersLength;
-    # 
-    # // Call update camera function by its pointer
-    # cameraUpdaters[cameraOption](&camera, &player, envItems, envItemsLength, deltaTime, screenWidth, screenHeight);
-    # //----------------------------------------------------------------------------------
+    if (is_key_pressed(keyboard_key$KEY_C)) {
+      camera_option <- camera_option %% length(camera_updaters) + 1
+    }
     
-    camera <- update_camera_center(camera, player, screen_width, screen_height)
+    # update the camera!
+    camera <- do.call(what = camera_updaters[[camera_option]]$func,
+                      args = list(
+                        camera = camera,
+                        player = player,
+                        env_items = env_items,
+                        env_items_length = env_items_length,
+                        delta = delta_time,
+                        width = screen_width,
+                        height = screen_height
+                      ))
     
     begin_drawing()
     
     clear_background(raylib_color$LIGHTGRAY)
     
     begin_mode_2d(camera)
-    
-    # for (int i = 0; i < envItemsLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
     
     invisible(lapply(env_items, \(x) { draw_rectangle_rec(x$rect, x$color) }))
     
@@ -214,9 +294,9 @@ play_game <- function() {
     DrawText("- Right/Left to move", 40, 40, 10, raylib_color$DARKGRAY);
     DrawText("- Space to jump", 40, 60, 10, raylib_color$DARKGRAY);
     DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, raylib_color$DARKGRAY);
-    # DrawText("- C to change camera mode", 40, 100, 10, raylib_color$DARKGRAY);
-    # DrawText("Current camera mode:", 20, 120, 10, "BLACK");
-    # DrawText(cameraDescriptions[cameraOption], 40, 140, 10, DARKGRAY);
+    DrawText("- C to change camera mode", 40, 100, 10, raylib_color$DARKGRAY);
+    DrawText("Current camera mode:", 20, 120, 10, raylib_color$BLACK);
+    DrawText(camera_updaters[[camera_option]]$descr, 40, 140, 10, raylib_color$DARKGRAY);
     
     end_drawing()
     
@@ -231,76 +311,3 @@ play_game <- function() {
 }
 
 play_game()
-
-# void UpdateCameraCenterSmoothFollow(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
-# {
-#   static float minSpeed = 30;
-#   static float minEffectLength = 10;
-#   static float fractionSpeed = 0.8f;
-#   
-#   camera->offset = (Vector2){ width/2.0f, height/2.0f };
-#   Vector2 diff = Vector2Subtract(player->position, camera->target);
-#   float length = Vector2Length(diff);
-#   
-#   if (length > minEffectLength)
-#   {
-#     float speed = fmaxf(fractionSpeed*length, minSpeed);
-#     camera->target = Vector2Add(camera->target, Vector2Scale(diff, speed*delta/length));
-#   }
-# }
-# 
-# void UpdateCameraEvenOutOnLanding(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
-# {
-#   static float evenOutSpeed = 700;
-#   static int eveningOut = false;
-#   static float evenOutTarget;
-#   
-#   camera->offset = (Vector2){ width/2.0f, height/2.0f };
-#   camera->target.x = player->position.x;
-#   
-#   if (eveningOut)
-#   {
-#     if (evenOutTarget > camera->target.y)
-#     {
-#       camera->target.y += evenOutSpeed*delta;
-#       
-#       if (camera->target.y > evenOutTarget)
-#       {
-#         camera->target.y = evenOutTarget;
-#         eveningOut = 0;
-#       }
-#     }
-#     else
-#     {
-#       camera->target.y -= evenOutSpeed*delta;
-#       
-#       if (camera->target.y < evenOutTarget)
-#       {
-#         camera->target.y = evenOutTarget;
-#         eveningOut = 0;
-#       }
-#     }
-#   }
-#   else
-#   {
-#     if (player->canJump && (player->speed == 0) && (player->position.y != camera->target.y))
-#     {
-#       eveningOut = 1;
-#       evenOutTarget = player->position.y;
-#     }
-#   }
-# }
-# 
-# void UpdateCameraPlayerBoundsPush(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
-# {
-#   static Vector2 bbox = { 0.2f, 0.2f };
-#   
-#   Vector2 bboxWorldMin = GetScreenToWorld2D((Vector2){ (1 - bbox.x)*0.5f*width, (1 - bbox.y)*0.5f*height }, *camera);
-#   Vector2 bboxWorldMax = GetScreenToWorld2D((Vector2){ (1 + bbox.x)*0.5f*width, (1 + bbox.y)*0.5f*height }, *camera);
-#   camera->offset = (Vector2){ (1 - bbox.x)*0.5f * width, (1 - bbox.y)*0.5f*height };
-#   
-#   if (player->position.x < bboxWorldMin.x) camera->target.x = player->position.x;
-#   if (player->position.y < bboxWorldMin.y) camera->target.y = player->position.y;
-#   if (player->position.x > bboxWorldMax.x) camera->target.x = bboxWorldMin.x + (player->position.x - bboxWorldMax.x);
-#   if (player->position.y > bboxWorldMax.y) camera->target.y = bboxWorldMin.y + (player->position.y - bboxWorldMax.y);
-# }
