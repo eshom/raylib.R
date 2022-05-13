@@ -1,4 +1,6 @@
 #include "raylib.R.h"
+#include <Rinternals.h>
+#include <raylib.h>
 
 // Windows-related functions
 
@@ -326,8 +328,7 @@ SEXP HideCursor_R(void)
 // Check if cursor is not visible
 SEXP IsCursorHidden_R(void)
 {
-        IsCursorHidden();
-        return R_NilValue;
+        return Rf_ScalarLogical(IsCursorHidden());
 }
 
 // Enables cursor (unlock cursor)

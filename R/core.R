@@ -162,6 +162,218 @@ set_window_icon <- function(image) {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Set title for window (only PLATFORM_DESKTOP)
+#' @param title Character vector length 1. Window Title.
+#'
+#' @export
+set_window_title <- function(title) {
+        .Call(.C_SetWindowTitle_R, title)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title  Set window position on screen (only PLATFORM_DESKTOP)
+#' @param x Integer. X position.
+#' @param y Integer. Y position.
+#'
+#' @export
+set_window_position <- function(x, y) {
+        .Call(.C_SetWindowPosition_R, x, y)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Set monitor for the current window (fullscreen mode)
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+set_window_monitor <- function(monitor) {
+        .Call(.C_SetWindowMonitor_R, monitor)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
+#' @param width Integer. Minimum width.
+#' @param height Integer. Minimum height.
+#'
+#' @export
+set_window_min_size <- function(width, height) {
+        .Call(.C_SetWindowMinSize_R, width, height)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Set window dimensions
+#' @param width Integer. Window width.
+#' @param height Integer. Window height.
+#'
+#' @export
+set_window_size <- function(width, height) {
+        .Call(.C_SetWindowSize_R, width, height)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Get current screen width
+#'
+#' @export
+get_screen_width <- function() {
+        .Call(.C_GetScreenWidth_R)
+}
+
+#' @family Windows-related functions
+#' @title Get current screen height
+#'
+#' @export
+get_screen_height <- function() {
+        .Call(.C_GetScreenHeight_R)
+}
+
+#' @family Windows-related functions
+#' @title Get number of connected monitors
+#'
+#' @export
+get_monitor_count <- function() {
+        .Call(.C_GetMonitorCount_R)
+}
+
+#' @family Windows-related functions
+#' @title Get current connected monitor
+#'
+#' @export
+get_current_monitor <- function() {
+        .Call(.C_GetCurrentMonitor_R)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor position
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_position <- function(monitor) {
+        .Call(.C_GetMonitorPosition_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor width (max available by monitor)
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_width <- function(monitor) {
+        .Call(.C_GetMonitorWidth_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor height (max available by monitor)
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_height <- function(monitor) {
+        .Call(.C_GetMonitorHeight_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor physical width in millimetres
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_physical_width <- function(monitor) {
+        .Call(.C_GetMonitorPhysicalWidth_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor physical height in millimetres
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_physical_height <- function(monitor) {
+        .Call(.C_GetMonitorPhysicalHeight_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get specified monitor refresh rate
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_refresh_rate <- function(monitor) {
+        .Call(.C_GetMonitorRefreshRate_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Get window position XY on monitor
+#' @return Vector2. XY position of window on monitor.
+#'
+#' @export
+get_window_position <- function() {
+        .Call(.C_GetWindowPosition_R)
+}
+
+#' @family Windows-related functions
+#' @title Get window scale DPI factor
+#' @return Vector2.
+#'
+#' @export
+get_window_scale_DPI <- function() {
+        .Call(.C_GetWindowScaleDPI_R)
+}
+
+#' @family Windows-related functions
+#' @title Get the human-readable, UTF-8 encoded name of the primary monitor
+#' @param monitor Integer. Monitor number.
+#'
+#' @export
+get_monitor_name <- function(monitor) {
+        .Call(.C_GetMonitorName_R, monitor)
+}
+
+#' @family Windows-related functions
+#' @title Set clipboard text content
+#' @param text Character vector, length 1.
+#'
+#' @export
+set_clipboard_text <- function(text) {
+        .Call(.C_SetClipboardText_R, text)
+        invisible()
+}
+
+#' @family Windows-related functions
+#' @title Get clipboard text content
+#'
+#' @export
+get_clipboard_text <- function() {
+        .Call(.C_GetClipboardText_R)
+}
+
+##--------------------------##
+## Cursor-related functions
+##--------------------------##
+#' @family Cursor-related functions
+#' @title Shows cursor
+#'
+#' @export
+show_cursor <- function() {
+        .Call(.C_ShowCursor_R)
+        invisible()
+}
+
+#' @family Cursor-related functions
+#' @title Hides cursor
+#'
+#' @export
+hide_cursor <- function() {
+        .Call(.C_HideCursor_R)
+        invisible()
+}
+
+#' @family Cursor-related functions
+#' @title  Check if cursor is not visible
+#'
+#' @export
+is_cursor_hidden <- function() {
+        .Call(.C_IsCursorHidden_R)
+}
 ##--------------------------##
 ## Drawing-related functions
 ##--------------------------##
