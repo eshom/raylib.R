@@ -1,4 +1,6 @@
 #include "raylib.R.h"
+#include "utils.h"
+#include <Rinternals.h>
 
 static void _finalizer(SEXP ext)
 {
@@ -40,4 +42,29 @@ SEXP create_Shader_code_R(SEXP vs_code, SEXP fs_code, SEXP info)
 
         UNPROTECT(1);
         return ext;
+}
+
+// Set Shader location array
+SEXP set_shader_location_array_R(SEXP shader, SEXP loc_index, SEXP shader_loc)
+{
+        int loc_index_len = Rf_length(loc_index);
+        int shader_loc_len = Rf_length(shader_loc);
+
+        if (loc_index_len != shader_loc_len)
+                Rf_error("`loc_index` and `shader_loc` lengths must be equal");
+
+        if (loc_index_len == 0)
+                Rf_error("Got zero length vector");
+
+        Shader *ptr = (Shader *) shader_p_from_sexp(shader);
+        int *loc_index_p = INTEGER(Rf_coerceVector(loc_index, INTSXP));
+        int *shader_loc_p = INTEGER(Rf_coerceVector(shader_loc, INTSXP));
+
+        for (int i = 0; i < Rf_length(loc_index); ++i) {
+                shader_loc_index_valid_else_error(loc_index_p[i]);
+
+                ptr->locs[loc_index_p[i]] = shader_loc_p[i];
+        }
+
+        return R_NilValue;
 }

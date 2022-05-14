@@ -23,7 +23,10 @@ Other Raylib objects:
 \code{\link{Camera3D}()},
 \code{\link{Color}()},
 \code{\link{Image}()},
+\code{\link{Ray}()},
 \code{\link{Rectangle}()},
+\code{\link{RenderTexture}()},
+\code{\link{Shader}()},
 \code{\link{Texture}()},
 \code{\link{Vector2}()},
 \code{\link{Vector4}()}

@@ -265,6 +265,21 @@ Shader <- function(vs_filename, fs_filename, vs_code, fs_code) {
 }
 
 #' @family Raylib objects
+#' @rdname Shader
+#' @param shader Shader object.
+#' @param loc_index Integer vector of shader location indice to set.
+#' Value must be of [shader_location_index].
+#' @param shader_loc Integer vector of shader locations values.
+#' These can be usually got from [get_shader_location()].
+#' @details Values from `shader_loc` are set for
+#' `loc_index` in a vectorized manner, however recycling is not allowed
+#' and will raise an error that vector lengths do not match.
+#' @export
+Shader_set_locs <- function(shader, loc_index, shader_loc) {
+        .Call(shader, loc_index, shader_loc)
+}
+
+#' @family Raylib objects
 #' @title Ray, ray for raycasting
 #' @param position Vector3. Ray position (origin)
 #' @param direction Vector3. Ray direction (origin)

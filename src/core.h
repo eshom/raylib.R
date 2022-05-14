@@ -76,8 +76,8 @@ SEXP EndScissorMode_R(void);
 // NOTE: Shader functionality is not available on OpenGL 1.1
 SEXP GetShaderLocation_R(SEXP shader, SEXP uniform_name);
 SEXP GetShaderLocationAttrib_R(SEXP shader, SEXP attrib_name);
-SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type);
-SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type, SEXP count);
+SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value);
+SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type);
 SEXP SetShaderValueMatrix_R(SEXP shader, SEXP loc_index, SEXP mat);
 SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture);
 

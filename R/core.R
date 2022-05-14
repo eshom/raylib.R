@@ -374,6 +374,33 @@ hide_cursor <- function() {
 is_cursor_hidden <- function() {
         .Call(.C_IsCursorHidden_R)
 }
+
+#' @family Cursor-related functions
+#' @title Enables cursor (unlock cursor)
+#'
+#' @export
+enable_cursor <- function() {
+        .Call(.C_EnableCursor_R)
+        invisible()
+}
+
+#' @family Cursor-related functions
+#' @title Disables cursor (lock cursor)
+#'
+#' @export
+disable_cursor <- function() {
+        .Call(.C_DisableCursor_R)
+        invisible()
+}
+
+#' @family Cursor-related functions
+#' @title Check if cursor is on the screen
+#'
+#' @export
+is_cursor_on_screen <- function() {
+        .Call(.C_IsCursorOnScreen_R)
+}
+
 ##--------------------------##
 ## Drawing-related functions
 ##--------------------------##
@@ -447,6 +474,183 @@ end_mode_3d <- function() {
         invisible()
 }
 
+#' @family Drawing-related functions
+#' @title Begin drawing to render texture
+#' @param target Texture object.
+#'
+#' @export
+begin_texture_mode <- function(target) {
+        .Call(.C_BeginTextureMode_R, target)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title Ends drawing to render texture
+#'
+#' @export
+end_texture_mode <- function() {
+        .Call(.C_EndTextureMode_R)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title Begin custom shader drawing
+#' @param shader Shader object.
+#'
+#' @export
+begin_shader_mode <- function(shader) {
+        .Call(.C_BeginShaderMode_R, shader)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title End custom shader drawing (use default shader)
+#'
+#' @export
+end_shader_mode <- function() {
+        .Call(.C_EndShaderMode_R)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title Begin blending mode
+#'
+#' Begin one of the following modes: alpha, additive, multiplied, subtract, custom.
+#' @param mode Integer. Valid blend mode. One of [blend_mode]
+#'
+#' @export
+begin_blend_mode <- function(mode) {
+        .Call(.C_BeginBlendMode_R, mode)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title End blending mode (reset to default: alpha blending)
+#'
+#' @export
+end_blend_mode <- function() {
+        .Call(.C_EndBlendMode_R)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title Begin scissor mode
+#'
+#' Define screen area for following drawing
+#' @param x Integer. X position.
+#' @param y Integer. Y position.
+#' @param width Integer.
+#' @param height Integer.
+#'
+#' @export
+begin_scissor_mode <- function(x, y, width, height) {
+        .Call(.C_BeginScissorMode_R, x, y, width, height)
+        invisible()
+}
+
+#' @family Drawing-related functions
+#' @title End scissor mode
+#'
+#' @export
+end_scissor_mode <- function() {
+        .Call(.C_EndScissorMode_R)
+        invisible()
+}
+
+##-----------------------------------##
+## Shader management functions
+##-----------------------------------##
+#' @family Shader management functions
+#' @title Get shader uniform location
+#' @param shader Shader object.
+#' @param uniform_name Character vector length 1. Name of the input
+#' uniform to get location for.
+#' @return Integer. The location index of the shader. One of [shader_location_index]
+#'
+#' @export
+get_shader_location <- function(shader, uniform_name) {
+        .Call(.C_GetShaderLocation_R)
+}
+
+#' @family Shader management functions
+#' @title Get shader attribute location
+#' @param shader Shader object.
+#' @param attrib_name Character vector length 1. Name of the attribute to get location for.
+#' @return Integer. The location index of the shader. One of [shader_location_index]
+#'
+#' @export
+get_shader_location_attrib <- function(shader, attrib_name) {
+        .Call(.C_GetShaderLocationAttrib_R)
+}
+
+#' @family Shader management functions
+#' @title Set shader uniform value
+#' @param shader Shader object.
+#' @param loc_index Shader location index. One of [shader_location_index].
+#' @param value Float or Integer vector. Possible lengths: 1 to 4.
+#'
+#' Sets a shader uniform value. The uniform type is determined from the `value`
+#' vector's attributes. Possible uniform types or specified in [shader_uniform_data_type]
+#'
+#' A vector of double type is automatically cast to a float type. It is
+#' recommended to use [as.integer()] and [as.double()] to make sure the selected
+#' uniform data type is correct. For example, an integer vector of length 3
+#' would get the uniform type `SHADER_UNIFORM_IVEC3`.
+#' If you want to set sampler2d, use [set_shader_value_texture()].
+#'
+#' @export
+set_shader_value <- function(shader, loc_index, value) {
+        .Call(.C_SetShaderValue_R, shader, loc_index, value)
+        invisible()
+}
+
+#' @family Shader management functions
+#' @title Set shader uniform value vector
+#' @param shader Shader object.
+#' @param loc_index Shader location index. One of [shader_location_index].
+#' @param value Float or Integer vector. Length must be a multiple of the shader
+#' uniform type specified in `uniform_type`.
+#' @param uniform_type Integer. One of [shader_uniform_data_type]
+#'
+#' Sets a shader uniform value for a uniform vector.
+#' The uniform type must be specified, and the value's length must be a multiple of the type.
+#'
+#' A vector of double type is automatically cast to a float type. It is
+#' recommended to use [as.integer()] and [as.double()] to make sure the selected
+#' uniform data type is correct.
+#' An example. An integer vector of length 9 and `uniform_type`
+#' set to SHADER_UNIFORM_IVEC3 would result in setting
+#' If you want to set sampler2d, use [set_shader_value_texture()].
+#'
+#' @export
+set_shader_value_v <- function(shader, loc_index, value, uniform_type) {
+        .Call(.C_SetShaderValueV_R, shader, loc_index, value, uniform_type)
+        invisible()
+}
+
+#' @family Shader management functions
+#' @title Set shader uniform value vector
+#' @param shader Shader object.
+#' @param loc_index Shader location index. One of [shader_location_index].
+#' @param mat 4x4 numeric matrix.
+#'
+#' @export
+set_shader_value_matrix <- function(shader, loc_index, mat) {
+        .Call(.C_SetShaderValueMatrix_R, shader, loc_index, mat)
+        invisible()
+}
+
+#' @family Shader management functions
+#' @title Set shader uniform value vector
+#' @param shader Shader object.
+#' @param loc_index Shader location index. One of [shader_location_index].
+#' @param texture Texture2D object.
+#'
+#' @export
+set_shader_value_texture <- function(shader, loc_index, texture) {
+        .Call(.C_SetShaderValueTexture_R, shader, loc_index, texture)
+        invisible()
+}
 ##-----------------------------------##
 ## Timing-related functions
 ##-----------------------------------##

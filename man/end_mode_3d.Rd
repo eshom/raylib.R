@@ -14,11 +14,19 @@ End 3D mode with custom camera (3D)
 }
 \seealso{
 Other Drawing-related functions: 
+\code{\link{begin_blend_mode}()},
 \code{\link{begin_drawing}()},
 \code{\link{begin_mode_2d}()},
 \code{\link{begin_mode_3d}()},
+\code{\link{begin_scissor_mode}()},
+\code{\link{begin_shader_mode}()},
+\code{\link{begin_texture_mode}()},
 \code{\link{clear_background}()},
+\code{\link{end_blend_mode}()},
 \code{\link{end_drawing}()},
-\code{\link{end_mode_2d}()}
+\code{\link{end_mode_2d}()},
+\code{\link{end_scissor_mode}()},
+\code{\link{end_shader_mode}()},
+\code{\link{end_texture_mode}()}
 }
 \concept{Drawing-related functions}

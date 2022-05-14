@@ -1,4 +1,5 @@
 #include "raylib.R.h"
+#include <R_ext/RS.h>
 #include <Rinternals.h>
 #include <raylib.h>
 
@@ -525,30 +526,195 @@ SEXP GetShaderLocationAttrib_R(SEXP shader, SEXP attrib_name)
 }
 
 // Set shader uniform value
-SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type)
+SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value)
 {
         int iloc_index = Rf_asInteger(loc_index);
-        int iuniform_type = Rf_asInteger(uniform_type);
-
         shader_loc_index_valid_else_error(iloc_index);
-        shader_uniform_type_valid_else_error(iuniform_type);
 
-        SetShaderValue(*shader_p_from_sexp(shader), iloc_index, string_from_sexp(value), iuniform_type);
+        bool value_double = Rf_isReal(value);
+        bool value_integer = Rf_isInteger(value);
+        int value_len = Rf_length(value);
+        ShaderUniformDataType uniform_type = -1; // An invalid initial value
+
+        float fvalue1[1], fvalue2[2], fvalue3[3], fvalue4[4];
+        void *val = NULL; // Uniform type determined in the switch statement below and used in SetShaderValue()
+
+        if (value_double) {
+                switch (value_len) {
+                case 1: {
+                        uniform_type = SHADER_UNIFORM_FLOAT;
+                        double *value_p = REAL(Rf_coerceVector(value, REALSXP));
+                        fvalue1[0] = (float)value_p[0];
+                        val = fvalue1;
+                        break;
+                }
+
+                case 2: {
+                        uniform_type = SHADER_UNIFORM_VEC2;
+                        double *value_p = REAL(Rf_coerceVector(value, REALSXP));
+                        fvalue2[0] = (float)value_p[0];
+                        fvalue2[1] = (float)value_p[1];
+                        val = fvalue2;
+                        break;
+                }
+
+                case 3: {
+                        uniform_type = SHADER_UNIFORM_VEC3;
+                        double *value_p = REAL(Rf_coerceVector(value, REALSXP));
+                        fvalue3[0] = (float)value_p[0];
+                        fvalue3[1] = (float)value_p[1];
+                        fvalue3[2] = (float)value_p[2];
+                        val = fvalue3;
+                        break;
+                }
+                case 4: {
+                        uniform_type = SHADER_UNIFORM_VEC4;
+                        double *value_p = REAL(Rf_coerceVector(value, REALSXP));
+                        fvalue4[0] = (float)value_p[0];
+                        fvalue4[1] = (float)value_p[1];
+                        fvalue4[2] = (float)value_p[2];
+                        fvalue4[3] = (float)value_p[3];
+                        val = fvalue4;
+                        break;
+                }
+                default: Rf_error("Expecting a vector of length between 1 to 4");
+                }
+        } else if (value_integer) {
+                int *value_p = INTEGER(Rf_coerceVector(value, INTSXP));
+
+                switch (value_len) {
+                case 5:
+                        uniform_type = SHADER_UNIFORM_INT;
+                        val = value_p;
+                        break;
+                case 6:
+                        uniform_type = SHADER_UNIFORM_IVEC2;
+                        val = value_p;
+                        break;
+                case 7:
+                        uniform_type = SHADER_UNIFORM_IVEC3;
+                        val = value_p;
+                        break;
+                case 8:
+                        uniform_type = SHADER_UNIFORM_IVEC4;
+                        val = value_p;
+                        break;
+
+                default: Rf_error("Expecting a vector of length between 1 to 4");
+                }
+        } else {
+                Rf_error("Expecting either a double or integer vector");
+        }
+
+        SetShaderValue(*shader_p_from_sexp(shader), iloc_index, val, uniform_type);
 
         return R_NilValue;
 }
 
 // Set shader uniform value vector
-SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type, SEXP count)
+SEXP SetShaderValueV_R(SEXP shader, SEXP loc_index, SEXP value, SEXP uniform_type)
 {
         int iloc_index = Rf_asInteger(loc_index);
-        int iuniform_type = Rf_asInteger(uniform_type);
+        ShaderUniformDataType iuniform_type = Rf_asInteger(uniform_type);
 
         shader_loc_index_valid_else_error(iloc_index);
         shader_uniform_type_valid_else_error(iuniform_type);
 
-        SetShaderValueV(*shader_p_from_sexp(shader), iloc_index, string_from_sexp(value), iuniform_type,
-                        Rf_asInteger(count));
+        bool value_double = Rf_isReal(value);
+        bool value_integer = Rf_isInteger(value);
+        int value_len = Rf_length(value);
+
+        if (value_len == 0)
+                Rf_error("Got a zero length vector");
+
+        if (value_double && iuniform_type > 3)
+                Rf_error("`uniform_type` is not float. This does not match vector type");
+        else if (value_integer && (iuniform_type < 4 || iuniform_type == 8))
+                Rf_error("`uniform_type` is not integer. This does not match vector type");
+
+        void *val = NULL;
+        int count; // Must be a multiple of the length of `val` according to uniform_type.
+
+        if (value_double) {
+                double *value_p = REAL(Rf_coerceVector(value, REALSXP));
+                float *fvalue = R_Calloc(value_len, float);
+
+                switch (iuniform_type) {
+                case SHADER_UNIFORM_FLOAT:
+                case SHADER_UNIFORM_VEC2:
+                        if (!(value_len % 2)) {
+
+                                if (!fvalue)
+                                        R_Free(fvalue);
+                                Rf_error("Vector length is not a multiple of uniform type length");
+                        }
+                        attribute_fallthrough;
+                case SHADER_UNIFORM_VEC3:
+                        if (!(value_len % 3)) {
+
+                                if (!fvalue)
+                                        R_Free(fvalue);
+                                Rf_error("Vector length is not a multiple of uniform type length");
+                        }
+                        attribute_fallthrough;
+                case SHADER_UNIFORM_VEC4:
+                        if (!(value_len % 4)) {
+
+                                if (!fvalue)
+                                        R_Free(fvalue);
+                                Rf_error("Vector length is not a multiple of uniform type length");
+                        }
+
+                        for (int i = 0; i < value_len; ++i)
+                                fvalue[i] = (float)value_p[i];
+                        val = fvalue;
+                        if (!fvalue)
+                                R_Free(fvalue);
+                        break;
+                case SHADER_UNIFORM_INT:
+                case SHADER_UNIFORM_IVEC2:
+                case SHADER_UNIFORM_IVEC3:
+                case SHADER_UNIFORM_IVEC4:
+                case SHADER_UNIFORM_SAMPLER2D:
+                default:
+                        if (!fvalue)
+                                R_Free(fvalue);
+                        Rf_error("Expecting a double vector");
+                }
+        } else if (value_integer) {
+                int *value_p = INTEGER(Rf_coerceVector(value, INTSXP));
+                switch (iuniform_type) {
+                case SHADER_UNIFORM_INT:
+                case SHADER_UNIFORM_IVEC2:
+                        if (!(value_len % 2))
+                                Rf_error("Vector length is not a multiple of uniform type length");
+                        attribute_fallthrough;
+                case SHADER_UNIFORM_IVEC3:
+                        if (!(value_len % 3))
+                                Rf_error("Vector length is not a multiple of uniform type length");
+                        attribute_fallthrough;
+                case SHADER_UNIFORM_IVEC4:
+                        if (!(value_len % 4))
+                                Rf_error("Vector length is not a multiple of uniform type length");
+
+                        val = value_p;
+                        break;
+                case SHADER_UNIFORM_FLOAT:
+                case SHADER_UNIFORM_VEC2:
+                case SHADER_UNIFORM_VEC3:
+                case SHADER_UNIFORM_VEC4:
+                case SHADER_UNIFORM_SAMPLER2D:
+                default:
+                        Rf_error("Expecting an integer vector");
+                }
+        } else {
+                Rf_error("Expecting either a double or integer vector");
+        }
+
+        // Invalid count values should be covered in the switch statements above
+        count = value_len / ((iuniform_type % 4) + 1);
+
+        SetShaderValueV(*shader_p_from_sexp(shader), iloc_index, val, iuniform_type, count);
 
         return R_NilValue;
 }
