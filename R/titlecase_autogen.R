@@ -73,6 +73,110 @@ RestoreWindow <- restore_window
 #' @export
 SetWindowIcon <- set_window_icon 
 
+#' @rdname set_window_title 
+#' @export
+SetWindowTitle <- set_window_title 
+
+#' @rdname set_window_position 
+#' @export
+SetWindowPosition <- set_window_position 
+
+#' @rdname set_window_monitor 
+#' @export
+SetWindowMonitor <- set_window_monitor 
+
+#' @rdname set_window_min_size 
+#' @export
+SetWindowMinSize <- set_window_min_size 
+
+#' @rdname set_window_size 
+#' @export
+SetWindowSize <- set_window_size 
+
+#' @rdname get_screen_width 
+#' @export
+GetScreenWidth <- get_screen_width 
+
+#' @rdname get_screen_height 
+#' @export
+GetScreenHeight <- get_screen_height 
+
+#' @rdname get_monitor_count 
+#' @export
+GetMonitorCount <- get_monitor_count 
+
+#' @rdname get_current_monitor 
+#' @export
+GetCurrentMonitor <- get_current_monitor 
+
+#' @rdname get_monitor_position 
+#' @export
+GetMonitorPosition <- get_monitor_position 
+
+#' @rdname get_monitor_width 
+#' @export
+GetMonitorWidth <- get_monitor_width 
+
+#' @rdname get_monitor_height 
+#' @export
+GetMonitorHeight <- get_monitor_height 
+
+#' @rdname get_monitor_physical_width 
+#' @export
+GetMonitorPhysicalWidth <- get_monitor_physical_width 
+
+#' @rdname get_monitor_physical_height 
+#' @export
+GetMonitorPhysicalHeight <- get_monitor_physical_height 
+
+#' @rdname get_monitor_refresh_rate 
+#' @export
+GetMonitorRefreshRate <- get_monitor_refresh_rate 
+
+#' @rdname get_window_position 
+#' @export
+GetWindowPosition <- get_window_position 
+
+#' @rdname get_window_scale_DPI 
+#' @export
+GetWindowScaleDPI <- get_window_scale_DPI 
+
+#' @rdname get_monitor_name 
+#' @export
+GetMonitorName <- get_monitor_name 
+
+#' @rdname set_clipboard_text 
+#' @export
+SetClipboardText <- set_clipboard_text 
+
+#' @rdname get_clipboard_text 
+#' @export
+GetClipboardText <- get_clipboard_text 
+
+#' @rdname show_cursor 
+#' @export
+ShowCursor <- show_cursor 
+
+#' @rdname hide_cursor 
+#' @export
+HideCursor <- hide_cursor 
+
+#' @rdname is_cursor_hidden 
+#' @export
+IsCursorHidden <- is_cursor_hidden 
+
+#' @rdname enable_cursor 
+#' @export
+EnableCursor <- enable_cursor 
+
+#' @rdname disable_cursor 
+#' @export
+DisableCursor <- disable_cursor 
+
+#' @rdname is_cursor_on_screen 
+#' @export
+IsCursorOnScreen <- is_cursor_on_screen 
+
 #' @rdname clear_background 
 #' @export
 ClearBackground <- clear_background 
@@ -101,9 +205,117 @@ BeginMode3d <- begin_mode_3d
 #' @export
 EndMode3d <- end_mode_3d 
 
+#' @rdname begin_texture_mode 
+#' @export
+BeginTextureMode <- begin_texture_mode 
+
+#' @rdname end_texture_mode 
+#' @export
+EndTextureMode <- end_texture_mode 
+
+#' @rdname begin_shader_mode 
+#' @export
+BeginShaderMode <- begin_shader_mode 
+
+#' @rdname end_shader_mode 
+#' @export
+EndShaderMode <- end_shader_mode 
+
+#' @rdname begin_blend_mode 
+#' @export
+BeginBlendMode <- begin_blend_mode 
+
+#' @rdname end_blend_mode 
+#' @export
+EndBlendMode <- end_blend_mode 
+
+#' @rdname begin_scissor_mode 
+#' @export
+BeginScissorMode <- begin_scissor_mode 
+
+#' @rdname end_scissor_mode 
+#' @export
+EndScissorMode <- end_scissor_mode 
+
+#' @rdname get_shader_location 
+#' @export
+GetShaderLocation <- get_shader_location 
+
+#' @rdname get_shader_location_attrib 
+#' @export
+GetShaderLocationAttrib <- get_shader_location_attrib 
+
+#' @rdname set_shader_value 
+#' @export
+SetShaderValue <- set_shader_value 
+
+#' @rdname set_shader_value_v 
+#' @export
+SetShaderValueV <- set_shader_value_v 
+
+#' @rdname set_shader_value_matrix 
+#' @export
+SetShaderValueMatrix <- set_shader_value_matrix 
+
+#' @rdname set_shader_value_texture 
+#' @export
+SetShaderValueTexture <- set_shader_value_texture 
+
+#' @rdname get_mouse_ray 
+#' @export
+GetMouseRay <- get_mouse_ray 
+
+#' @rdname get_camera_matrix 
+#' @export
+GetCameraMatrix <- get_camera_matrix 
+
+#' @rdname get_camera_matrix_2d 
+#' @export
+GetCameraMatrix2d <- get_camera_matrix_2d 
+
+#' @rdname get_world_to_screen 
+#' @export
+GetWorldToScreen <- get_world_to_screen 
+
+#' @rdname get_world_to_screen_ex 
+#' @export
+GetWorldToScreenEx <- get_world_to_screen_ex 
+
+#' @rdname get_world_to_screen_2d 
+#' @export
+GetWorldToScreen2d <- get_world_to_screen_2d 
+
+#' @rdname get_screen_to_world_2d 
+#' @export
+GetScreenToWorld2d <- get_screen_to_world_2d 
+
 #' @rdname set_target_fps 
 #' @export
 SetTargetFps <- set_target_fps 
+
+#' @rdname get_fps 
+#' @export
+GetFps <- get_fps 
+
+#' @rdname get_frame_time 
+#' @export
+GetFrameTime <- get_frame_time 
+
+#' @rdname get_time 
+#' @export
+GetTime <- get_time 
+
+#' @rdname take_screenshot 
+#' @export
+TakeScreenshot <- take_screenshot 
+
+#' @rdname set_config_flags 
+#' @export
+SetConfigFlags <- set_config_flags 
+
+#' @rdname set_trace_log_level 
+#' @export
+SetTraceLogLevel <- set_trace_log_level 
 
 #' @rdname is_file_dropped 
 #' @export
