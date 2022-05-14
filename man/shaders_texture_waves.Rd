@@ -19,11 +19,11 @@ screen_height <- 450
 init_window(screen_width, screen_height, "raylib [shaders] example - texture waves")
 
 ## Load texture texture to apply shaders
-texture <- Texture(file.path("resources", "space.png"))
+texture <- Texture(system.file(file.path("resources", "space.png"), package = "raylib.R"))
 
 ## Load shader and setup location points and values
 shader <- Shader(vs_filename = "",
-                fs_filename = file.path("resources", "shaders", "glsl330", "wave.fs"))
+                fs_filename = system.file(file.path("resources", "shaders", "glsl330", "wave.fs"), package = "raylib.R"))
 
 seconds_loc <- get_shader_location(shader, "secondes")
 freq_x_loc <- get_shader_location(shader, "freqX")
