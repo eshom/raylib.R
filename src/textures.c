@@ -1,4 +1,5 @@
 #include "raylib.R.h"
+#include "utils.h"
 #include <Rinternals.h>
 
 /* // Image loading functions */
@@ -73,13 +74,11 @@
 /* RLAPI void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color);   // Draw text (using default font) within an image (destination) */
 /* RLAPI void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint); // Draw text (custom sprite font) within an image (destination) */
 
-/* // Texture loading functions */
-/* // NOTE: These functions require GPU access */
-/* RLAPI Texture2D LoadTexture(const char *fileName);                                                       // Load texture from file into GPU memory (VRAM) */
+// Texture loading functions
+// NOTE: These functions require GPU access
 /* RLAPI Texture2D LoadTextureFromImage(Image image);                                                       // Load texture from image data */
 /* RLAPI TextureCubemap LoadTextureCubemap(Image image, int layout);                                        // Load cubemap from image, multiple image cubemap layouts supported */
 /* RLAPI RenderTexture2D LoadRenderTexture(int width, int height);                                          // Load texture for rendering (framebuffer) */
-/* RLAPI void UnloadTexture(Texture2D texture);                                                             // Unload texture from GPU memory (VRAM) */
 /* RLAPI void UnloadRenderTexture(RenderTexture2D target);                                                  // Unload render texture from GPU memory (VRAM) */
 /* RLAPI void UpdateTexture(Texture2D texture, const void *pixels);                                         // Update GPU texture with new data */
 /* RLAPI void UpdateTextureRec(Texture2D texture, Rectangle rec, const void *pixels);                       // Update GPU texture rectangle with new data */
@@ -89,8 +88,14 @@
 /* RLAPI void SetTextureFilter(Texture2D texture, int filter);                                              // Set texture scaling filter mode */
 /* RLAPI void SetTextureWrap(Texture2D texture, int wrap);                                                  // Set texture wrapping mode */
 
-/* // Texture drawing functions */
-/* RLAPI void DrawTexture(Texture2D texture, int posX, int posY, Color tint);                               // Draw a Texture2D */
+// Texture drawing functions
+SEXP DrawTexture_R(SEXP texture, SEXP pos_x, SEXP pos_y, SEXP tint)
+{
+        DrawTexture(*texture_p_from_sexp(texture), Rf_asInteger(pos_x),
+                    Rf_asInteger(pos_y), color_from_sexp(tint));
+
+        return R_NilValue;
+}
 /* RLAPI void DrawTextureV(Texture2D texture, Vector2 position, Color tint);                                // Draw a Texture2D with position defined as Vector2 */
 /* RLAPI void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);  // Draw a Texture2D with extended parameters */
 /* RLAPI void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);            // Draw a part of a texture defined by a rectangle */

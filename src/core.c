@@ -583,19 +583,19 @@ SEXP SetShaderValue_R(SEXP shader, SEXP loc_index, SEXP value)
                 int *value_p = INTEGER(Rf_coerceVector(value, INTSXP));
 
                 switch (value_len) {
-                case 5:
+                case 1:
                         uniform_type = SHADER_UNIFORM_INT;
                         val = value_p;
                         break;
-                case 6:
+                case 2:
                         uniform_type = SHADER_UNIFORM_IVEC2;
                         val = value_p;
                         break;
-                case 7:
+                case 3:
                         uniform_type = SHADER_UNIFORM_IVEC3;
                         val = value_p;
                         break;
-                case 8:
+                case 4:
                         uniform_type = SHADER_UNIFORM_IVEC4;
                         val = value_p;
                         break;
@@ -738,7 +738,7 @@ SEXP SetShaderValueTexture_R(SEXP shader, SEXP loc_index, SEXP texture)
 
         shader_loc_index_valid_else_error(iloc_index);
 
-        SetShaderValueTexture(*shader_p_from_sexp(shader), iloc_index, texture_from_sexp(texture));
+        SetShaderValueTexture(*shader_p_from_sexp(shader), iloc_index, *texture_p_from_sexp(texture));
 
         return R_NilValue;
 }

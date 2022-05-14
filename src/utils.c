@@ -104,21 +104,21 @@ SEXP sexp_from_vector3(Vector3 vec)
 }
 
 // Take a texture vector passed from R, and return a Texture struct + checks
-Texture texture_from_sexp(SEXP texture)
-{
+/* Texture texture_from_sexp(SEXP texture) */
+/* { */
 
-        if (!Rf_inherits(texture, "Texture"))
-                Rf_error("Expecting `Texture` object");
+/*         if (!Rf_inherits(texture, "Texture")) */
+/*                 Rf_error("Expecting `Texture` object"); */
 
-        int *texture_p = INTEGER(Rf_coerceVector(texture, INTSXP));
+/*         int *texture_p = INTEGER(Rf_coerceVector(texture, INTSXP)); */
 
-        if (texture_p[0] < 0) {
-                Rf_error("Expecting positive number for the first element of `texture` argument");
-        }
+/*         if (texture_p[0] < 0) { */
+/*                 Rf_error("Expecting positive number for the first element of `texture` argument"); */
+/*         } */
 
-        return (Texture){texture_p[0], // unsigned int promotion
-                texture_p[1], texture_p[2], texture_p[3], texture_p[4]};
-}
+/*         return (Texture){texture_p[0], // unsigned int promotion */
+/*                 texture_p[1], texture_p[2], texture_p[3], texture_p[4]}; */
+/* } */
 
 RenderTexture render_texture_from_sexp(SEXP render_texture)
 {
@@ -132,8 +132,8 @@ RenderTexture render_texture_from_sexp(SEXP render_texture)
                 Rf_error("Expecting positive number for the first element of `render_texture` argument");
         }
 
-        return (RenderTexture){id, texture_from_sexp(VECTOR_ELT(render_texture, 1)),
-                               texture_from_sexp(VECTOR_ELT(render_texture, 2))};
+        return (RenderTexture){id, *texture_p_from_sexp(VECTOR_ELT(render_texture, 1)),
+                               *texture_p_from_sexp(VECTOR_ELT(render_texture, 2))};
 }
 
 // Take a rectangle vector passed from R, and return a Rectangle struct
@@ -220,6 +220,22 @@ Camera3D *camera3d_p_from_sexp(SEXP camera)
 
         if (!ext_out)
                 Rf_error("Caught NULL pointer. Expecting pointer to Camera3D");
+
+        return ext_out;
+}
+
+Texture *texture_p_from_sexp(SEXP texture)
+{
+        if (!Rf_inherits(texture, "Texture"))
+                Rf_error("Expecting Texture object");
+
+        if (!Rf_inherits(texture, "externalptr"))
+                Rf_error("Expecting external pointer to Texture");
+
+        Texture *ext_out = (Texture*)R_ExternalPtrAddr(texture);
+
+        if (!ext_out)
+                Rf_error("Caught NULL pointer. Expecting pointer to Texture");
 
         return ext_out;
 }

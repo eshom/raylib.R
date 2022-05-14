@@ -205,6 +205,9 @@ static const R_CallMethodDef callMethods[] = {
         {"DrawPlane_R",      (DL_FUNC) &DrawPlane_R,      3},
         {"DrawGrid_R",       (DL_FUNC) &DrawGrid_R,       2},
 
+        // Texture drawing functions
+        {"DrawTexture_R", (DL_FUNC) &DrawTexture_R, 4},
+
         // Color or pixel related functions
         {"Fade_R",       (DL_FUNC) &Fade_R,       2},
 
@@ -213,6 +216,9 @@ static const R_CallMethodDef callMethods[] = {
         {"set_Camera3D_R",              (DL_FUNC) &set_Camera3D_R,              2},
         {"get_Camera3D_R",              (DL_FUNC) &get_Camera3D_R,              1},
         {"create_Image_R",              (DL_FUNC) &create_Image_R,              2},
+        {"create_Texture_R",            (DL_FUNC) &create_Texture_R,            2},
+        {"set_Texture_R",               (DL_FUNC) &set_Texture_R,               2},
+        {"get_Texture_R",               (DL_FUNC) &get_Texture_R,               1},
         {"create_Shader_R",             (DL_FUNC) &create_Shader_R,             3},
         {"create_Shader_code_R",        (DL_FUNC) &create_Shader_code_R,        3},
         {"set_shader_location_array_R", (DL_FUNC) &set_shader_location_array_R, 3},

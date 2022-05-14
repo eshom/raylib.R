@@ -2,33 +2,68 @@
 % Please edit documentation in R/types.R
 \name{Texture}
 \alias{Texture}
+\alias{Texture_set}
+\alias{Texture_get}
 \alias{Texture2D}
 \alias{TextureCubemap}
 \title{Texture, tex data stored in GPU memory (VRAM)}
 \usage{
-Texture(id, width, height, mipmaps, format)
+Texture(file_name)
 
-Texture2D(id, width, height, mipmaps, format)
+Texture_set(texture, what)
 
-TextureCubemap(id, width, height, mipmaps, format)
+Texture_get(texture)
+
+Texture2D(file_name)
+
+TextureCubemap(file_name)
 }
 \arguments{
-\item{id}{OpenGL texture id. If the rest of the parameters are missing,
+\item{file_name}{Path to file to load}
+
+\item{texture}{Texture object.}
+
+\item{what}{Named list of Texture parameters to set: id, width, height, mipmaps, format
+\itemize{
+\item id: OpenGL texture id. If the rest of the parameters are missing,
 expecting a vector of length 5 with the following
-components: id, width, height, mipmaps, format}
-
-\item{width}{Texture base width}
-
-\item{height}{Texture base height}
-
-\item{mipmaps}{Mipmap levels, 1 by default}
-
-\item{format}{Data format (PixelFormat type)}
+components: id, width, height, mipmaps, format
+\item width: Texture base width
+\item height: height Texture base height
+\item mipmaps: Mipmap levels, 1 by default
+\item format: Data format (PixelFormat type)
+}}
 }
 \description{
 Texture, tex data stored in GPU memory (VRAM)
 }
 \seealso{
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
+\code{\link{Color}()},
+\code{\link{Image}()},
+\code{\link{Ray}()},
+\code{\link{Rectangle}()},
+\code{\link{RenderTexture}()},
+\code{\link{Shader}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
+\code{\link{Color}()},
+\code{\link{Image}()},
+\code{\link{Ray}()},
+\code{\link{Rectangle}()},
+\code{\link{RenderTexture}()},
+\code{\link{Shader}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},

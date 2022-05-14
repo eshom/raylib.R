@@ -23,28 +23,44 @@ NULL
 
 #' @family Raylib objects
 #' @title Texture, tex data stored in GPU memory (VRAM)
-#' @param id OpenGL texture id. If the rest of the parameters are missing,
+#' @param file_name Path to file to load
+#' @export
+Texture <- function(file_name) {
+        out <- .Call(.C_create_Texture_R, file_name, NULL)
+        class(out) <- c("Texture", class(out))
+        out
+}
+
+#' @family Raylib objects
+#' @rdname Texture
+#' @param texture Texture object.
+#' @param what Named list of Texture parameters to set: id, width, height, mipmaps, format
+#'
+#' * id: OpenGL texture id. If the rest of the parameters are missing,
 #' expecting a vector of length 5 with the following
 #' components: id, width, height, mipmaps, format
-#' @param width Texture base width
-#' @param height Texture base height
-#' @param mipmaps Mipmap levels, 1 by default
-#' @param format Data format (PixelFormat type)
+#' * width: Texture base width
+#' * height: height Texture base height
+#' * mipmaps: Mipmap levels, 1 by default
+#' * format: Data format (PixelFormat type)
 #' @export
-Texture <- function(id, width, height, mipmaps, format) {
-        if (missing(width) && missing(height) && missing(mipmaps) && length(format) == 5)
-                out <- as.integer(id)
-        else
-                out <- as.integer(c(id, width, height, mipmaps, format))
+Texture_set <- function(texture, what) {
+        .Call(.C_set_Texture_R, texture, what)
+}
 
-        class(out) <- c("Texture", class(out))
-        stats::setNames(out, c("id", "width", "height", "mipmaps", "format"))
+#' @family Raylib objects
+#' @rdname Texture
+#' @param texture Texture object.
+#' @export
+Texture_get <- function(texture) {
+        .Call(.C_get_Texture_R, texture)
 }
 
 #' @family Raylib objects
 #' @rdname Texture
 #' @export
 Texture2D <- Texture
+
 
 #' @family Raylib objects
 #' @rdname Texture
