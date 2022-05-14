@@ -569,7 +569,7 @@ end_scissor_mode <- function() {
 #'
 #' @export
 get_shader_location <- function(shader, uniform_name) {
-        .Call(.C_GetShaderLocation_R)
+        .Call(.C_GetShaderLocation_R, shader, uniform_name)
 }
 
 #' @family Shader management functions
@@ -580,7 +580,7 @@ get_shader_location <- function(shader, uniform_name) {
 #'
 #' @export
 get_shader_location_attrib <- function(shader, attrib_name) {
-        .Call(.C_GetShaderLocationAttrib_R)
+        .Call(.C_GetShaderLocationAttrib_R, shader, attrib_name)
 }
 
 #' @family Shader management functions
@@ -652,6 +652,79 @@ set_shader_value_texture <- function(shader, loc_index, texture) {
         invisible()
 }
 ##-----------------------------------##
+## Screen-space related functions
+##-----------------------------------##
+#' @family Screen-space related functions
+#' @title Get a ray trace from mouse position
+#' @param mouse_position Vector2.
+#' @param camera Camera3D object.
+#'
+#' @export
+get_mouse_ray <- function(mouse_position, camera) {
+        .Call(.C_GetMouseRay_R, mouse_position, camera)
+}
+
+#' @family Screen-space related functions
+#' @title Get camera transform matrix (view matrix)
+#' @param camera Camera3D object.
+#'
+#' @export
+get_camera_matrix <- function(camera) {
+        .Call(.C_GetCameraMatrix_R, camera)
+}
+
+#' @family Screen-space related functions
+#' @title Get camera 2d transform matrix
+#' @param camera Camera2D object.
+#'
+#' @export
+get_camera_matrix_2d <- function(camera) {
+        .Call(.C_GetCameraMatrix2D_R, camera)
+}
+
+#' @family Screen-space related functions
+#' @title Get the screen space position for a 3d world space position
+#' @param position Vector3.
+#' @param camera Camera3D
+#'
+#' @export
+get_world_to_screen <- function(position, camera) {
+        .Call(.C_GetWorldToScreen_R, position, camera)
+}
+
+#' @family Screen-space related functions
+#' @title Get size position for a 3d world space position
+#' @param position Vector3.
+#' @param camera Camera3D
+#' @param width Integer.
+#' @param height Integer.
+#'
+#' @export
+get_world_to_screen_ex <- function(position, camera, width, height) {
+        .Call(.C_GetWorldToScreenEx_R, position, camera, width, height)
+}
+
+#' @family Screen-space related functions
+#' @title Get the screen space position for a 2d camera world space position
+#' @param position Vector2.
+#' @param camera Camera2D
+#'
+#' @export
+get_world_to_screen_2d <- function(position, camera) {
+        .Call(.C_GetWorldToScreen2D_R, position, camera)
+}
+
+#' @family Screen-space related functions
+#' @title Get the world space position for a 2d camera screen space position
+#' @param position Vector2.
+#' @param camera Camera2D
+#'
+#' @export
+get_screen_to_world_2d <- function(position, camera) {
+        .Call(.C_GetScreenToWorld2D_R, position, camera)
+}
+
+##-----------------------------------##
 ## Timing-related functions
 ##-----------------------------------##
 #' @family Timing-related functions
@@ -664,6 +737,58 @@ set_target_fps <- function(fps) {
         invisible()
 }
 
+#' @family Timing-related functions
+#' @title Get current FPS
+#'
+#' @export
+get_fps <- function() {
+        .Call(.C_GetFPS_R)
+}
+
+#' @family Timing-related functions
+#' @title Get time in seconds for last frame drawn (delta time)
+#'
+#' @export
+get_frame_time <- function() {
+        .Call(.C_GetFrameTime_R)
+}
+
+#' @family Timing-related functions
+#' @title Get elapsed time in seconds since InitWindow()
+#'
+#' @export
+get_time <- function() {
+        .Call(.C_GetTime_R)
+}
+
+##-----------------------------------##
+## Misc. functions
+##-----------------------------------##
+#' @family Misc. functions
+#' @title Takes a screenshot of current screen (filename extension defines format)
+#' @param filename Character vector length 1. Name of the file. Extention defines format.
+#' @export
+take_screenshot <- function(filename) {
+        .Call(.C_TakeScreenshot_R, filename)
+}
+
+#' @family Misc. functions
+#' @title Setup init configuration flags (view FLAGS)
+#' @param flags Integer. Config flag. One of [config_flags]
+#'
+#' @export
+set_config_flags <- function(flags) {
+        .Call(.C_SetConfigFlags_R, flags)
+}
+
+#' @family Misc. functions
+#' @title Set the current threshold (minimum) log level
+#' @param loglevel Integer. Log level, one of [trace_log_level]
+#'
+#' @export
+set_trace_log_level <- function(loglevel) {
+        .Call(.C_SetTraceLogLevel_R, loglevel)
+}
 ##-----------------------------------##
 ## File management functions
 ##-----------------------------------##

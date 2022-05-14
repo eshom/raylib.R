@@ -276,7 +276,7 @@ Shader <- function(vs_filename, fs_filename, vs_code, fs_code) {
 #' and will raise an error that vector lengths do not match.
 #' @export
 Shader_set_locs <- function(shader, loc_index, shader_loc) {
-        .Call(shader, loc_index, shader_loc)
+        .Call(.C_set_shader_location_array_R, shader, loc_index, shader_loc)
 }
 
 #' @family Raylib objects
