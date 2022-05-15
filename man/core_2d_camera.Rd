@@ -150,6 +150,7 @@ Other Core examples:
 \code{\link{core_basic_window}},
 \code{\link{core_drop_files}},
 \code{\link{core_input_keys}},
-\code{\link{core_input_mouse}}
+\code{\link{core_input_mouse}},
+\code{\link{core_window_flags}}
 }
 \concept{Core examples}

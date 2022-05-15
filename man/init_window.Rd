@@ -23,6 +23,7 @@ Initialize window and OpenGL context
 Other Windows-related functions: 
 \code{\link{clear_window_state}()},
 \code{\link{close_window}()},
+\code{\link{get_screen_width}()},
 \code{\link{is_window_focused}()},
 \code{\link{is_window_fullscreen}()},
 \code{\link{is_window_hidden}()},

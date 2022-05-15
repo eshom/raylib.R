@@ -15,4 +15,8 @@ SetTargetFps(fps)
 \description{
 Set target FPS (maximum)
 }
+\seealso{
+Other Timing-related functions: 
+\code{\link{get_frame_time}()}
+}
 \concept{Timing-related functions}

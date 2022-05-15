@@ -162,6 +162,21 @@ set_window_icon <- function(image) {
         invisible()
 }
 
+#' @family Windows-related functions
+#' @title Get current screen width
+#' @export
+get_screen_width <- function() {
+        .Call(.C_GetScreenWidth_R)
+}
+
+#' @family Windows-related function
+#' @title Get current screen height
+#' @export
+get_screen_height <- function() {
+        .Call(.C_GetScreenHeight_R)
+}
+
+
 ##--------------------------##
 ## Drawing-related functions
 ##--------------------------##
@@ -247,7 +262,13 @@ set_target_fps <- function(fps) {
         .Call(.C_SetTargetFPS_R, fps)
         invisible()
 }
-
+#' @family Timing-related functions
+#' @title Get frame time
+#'
+#' @export
+get_frame_time <- function() {
+        .Call(.C_GetFrameTime_R)
+}
 ##-----------------------------------##
 ## File management functions
 ##-----------------------------------##
@@ -467,4 +488,31 @@ get_mouse_wheel_move <- function() {
 set_mouse_cursor <- function(cursor) {
         .Call(.C_SetMouseCursor_R, cursor)
         invisible()
+}
+
+##-----------------------------------##
+## Screen-space-related functions
+##-----------------------------------##
+#' @family Screen-space-related functions
+#' @title Get the screen space position for a 2d camera world space position
+#' @param position Vector2
+#' @param camera Camera2D
+#' @return Vector2
+#'
+#' @export
+get_world_to_screen_2d <- function(position, camera) {
+        out <- .Call(.C_GetWorldToScreen2D_R, position, camera)
+        Vector2(out[1], out[2])
+}
+
+#' @family Screen-space-related functions
+#' @title Get the world space position for a 2d camera screen space position
+#' @param position Vector2
+#' @param camera Camera2D
+#' @return Vector2
+#'
+#' @export
+get_screen_to_world_2d <- function(position, camera) {
+        out <- .Call(.C_GetScreenToWorld2D_R, position, camera)
+        Vector2(out[1], out[2])
 }

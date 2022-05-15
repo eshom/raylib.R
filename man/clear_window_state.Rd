@@ -18,6 +18,7 @@ Clear window configuration state flags
 \seealso{
 Other Windows-related functions: 
 \code{\link{close_window}()},
+\code{\link{get_screen_width}()},
 \code{\link{init_window}()},
 \code{\link{is_window_focused}()},
 \code{\link{is_window_fullscreen}()},

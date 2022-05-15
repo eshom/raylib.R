@@ -12,107 +12,109 @@ game loop
 
 play_game <- function() {
 
-  ##################
-  # Initialization #
-  ##################
+        ##################
+        # Initialization #
+        ##################
 
-  screen_width <- 800
-  screen_height <- 450
+        screen_width <- 800
+        screen_height <- 450
 
-  init_window(screen_width, screen_height, "raylib [core] example - basic screen manager")
+        init_window(screen_width, screen_height, "raylib [core] example - basic screen manager")
 
-  # deinitialization of the window
-  on.exit(close_window())
+        # deinitialization of the window
+        on.exit(close_window())
 
-  current_screen <- "LOGO"
+        current_screen <- "LOGO"
 
-  frames_counter <- 0
+        frames_counter <- 0
 
-  set_target_fps(60)
+        set_target_fps(60)
 
-  ##################
-  # Main game loop #
-  ##################
+        ##################
+        # Main game loop #
+        ##################
 
-  while(!window_should_close()) {
+        while(!window_should_close()) {
 
-    # menage screen switches during this part
-    switch(current_screen,
+                # menage screen switches during this part
+                switch(current_screen,
 
-           LOGO = {
+                       LOGO = {
 
-             frames_counter <- frames_counter + 1 # count frames
+                               frames_counter <- frames_counter + 1 # count frames
 
-             # Wait for 2 seconds (120 frames) before jumping to TITLE screen
-             if (frames_counter > 120)
-               current_screen <- "TITLE"
-           },
+                               # Wait for 2 seconds (120 frames) before jumping to TITLE screen
+                               if (frames_counter > 120)
+                                       current_screen <- "TITLE"
+                       },
 
-           TITLE = {
+                       TITLE = {
 
-             if (is_key_pressed(keyboard_key$KEY_ENTER))
-               current_screen <- "GAMEPLAY"
+                               if (is_key_pressed(keyboard_key$KEY_ENTER))
+                                       current_screen <- "GAMEPLAY"
 
-           },
+                       },
 
-           GAMEPLAY = {
+                       GAMEPLAY = {
 
-             if (is_key_pressed(keyboard_key$KEY_ENTER))
-               current_screen <- "ENDING"
+                               if (is_key_pressed(keyboard_key$KEY_ENTER))
+                                       current_screen <- "ENDING"
 
-           },
+                       },
 
-           ENDING = {
+                       ENDING = {
 
-             if (is_key_pressed(keyboard_key$KEY_ENTER))
-               current_screen <- "TITLE"
+                               if (is_key_pressed(keyboard_key$KEY_ENTER))
+                                       current_screen <- "TITLE"
 
-           })
+                       })
 
-    begin_drawing()
+                begin_drawing()
 
-    clear_background(raylib_color$RAYWHITE)
+                clear_background(raylib_color$RAYWHITE)
 
-    # draw differently depending on the current screen
-    switch (current_screen,
+                # draw differently depending on the current screen
+                switch (current_screen,
 
-            LOGO = {
+                        LOGO = {
 
-              draw_text("LOGO SCREEN", 20, 20, 40, raylib_color$LIGHTGRAY)
-              draw_text("WAIT for 2 SECONDS...", 290, 220, 20, raylib_color$GRAY)
+                                draw_text("LOGO SCREEN", 20, 20, 40, raylib_color$LIGHTGRAY)
+                                draw_text("WAIT for 2 SECONDS...", 290, 220, 20, raylib_color$GRAY)
 
-            },
+                        },
 
-            TITLE = {
+                        TITLE = {
 
-              draw_rectangle(0, 0, screen_width, screen_height, raylib_color$GREEN)
-              draw_text("TITLE SCREEN", 20, 20, 40, raylib_color$DARKGREEN)
-              draw_text("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 120, 220, 20, raylib_color$DARKGREEN)
+                                draw_rectangle(0, 0, screen_width, screen_height, raylib_color$GREEN)
+                                draw_text("TITLE SCREEN", 20, 20, 40, raylib_color$DARKGREEN)
+                                draw_text("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 120, 220, 20, raylib_color$DARKGREEN)
 
-            },
+                        },
 
-            GAMEPLAY = {
+                        GAMEPLAY = {
 
-              draw_rectangle(0, 0, screen_width, screen_height, raylib_color$PURPLE)
-              draw_text("GAMEPLAY SCREEN", 20, 20, 40, raylib_color$MAROON)
-              draw_text("PRESS ENTER to JUMP to ENDING SCREEN", 120, 220, 20, raylib_color$MAROON)
+                                draw_rectangle(0, 0, screen_width, screen_height, raylib_color$PURPLE)
+                                draw_text("GAMEPLAY SCREEN", 20, 20, 40, raylib_color$MAROON)
+                                draw_text("PRESS ENTER to JUMP to ENDING SCREEN", 120, 220, 20, raylib_color$MAROON)
 
-            },
+                        },
 
-            ENDING = {
+                        ENDING = {
 
-              draw_rectangle(0, 0, screen_width, screen_height, raylib_color$BLUE)
-              draw_text("ENDNG SCREEN", 20, 20, 40, raylib_color$DARKBLUE)
-              draw_text("PRESS ENTER to JUMP to ENDING SCREEN", 120, 220, 20, raylib_color$DARKBLUE)
+                                draw_rectangle(0, 0, screen_width, screen_height, raylib_color$BLUE)
+                                draw_text("ENDNG SCREEN", 20, 20, 40, raylib_color$DARKBLUE)
+                                draw_text("PRESS ENTER to JUMP to ENDING SCREEN", 120, 220, 20, raylib_color$DARKBLUE)
 
-            })
+                        })
 
-    end_drawing()
+                end_drawing()
 
-  }
+        }
 }
 
-# run the game
+###################
+# LAUNCH THE GAME #
+###################
 
 play_game()
 \dontshow{\}) # examplesIf}
@@ -127,6 +129,7 @@ Other Core examples:
 \code{\link{core_basic_window}},
 \code{\link{core_drop_files}},
 \code{\link{core_input_keys}},
-\code{\link{core_input_mouse}}
+\code{\link{core_input_mouse}},
+\code{\link{core_window_flags}}
 }
 \concept{Core examples}

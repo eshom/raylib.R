@@ -16,6 +16,7 @@ Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
 Other Windows-related functions: 
 \code{\link{clear_window_state}()},
 \code{\link{close_window}()},
+\code{\link{get_screen_width}()},
 \code{\link{init_window}()},
 \code{\link{is_window_focused}()},
 \code{\link{is_window_fullscreen}()},
