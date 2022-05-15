@@ -14,6 +14,9 @@ GetWorldToScreen2d(position, camera)
 
 \item{camera}{Camera2D}
 }
+\value{
+Unnamed integer vector of length 2 containing x and y coords
+}
 \description{
 Get the screen space position for a 2d camera world space position
 }

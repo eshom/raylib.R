@@ -230,7 +230,6 @@ get_screen_width <- function() {
 get_screen_height <- function() {
         .Call(.C_GetScreenHeight_R)
 }
-
 #' @family Windows-related functions
 #' @title Get number of connected monitors
 #'
@@ -708,6 +707,7 @@ get_world_to_screen_ex <- function(position, camera, width, height) {
 #' @title Get the screen space position for a 2d camera world space position
 #' @param position Vector2.
 #' @param camera Camera2D
+#' @return Unnamed integer vector of length 2 containing x and y coords
 #'
 #' @export
 get_world_to_screen_2d <- function(position, camera) {
@@ -718,6 +718,7 @@ get_world_to_screen_2d <- function(position, camera) {
 #' @title Get the world space position for a 2d camera screen space position
 #' @param position Vector2.
 #' @param camera Camera2D
+#' @return Unnamed integer vector of length 2 containing x and y coords
 #'
 #' @export
 get_screen_to_world_2d <- function(position, camera) {

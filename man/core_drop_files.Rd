@@ -70,11 +70,14 @@ close_window() # Close window and OpenGL context
 \seealso{
 Other Core examples: 
 \code{\link{core_2d_camera}},
+\code{\link{core_2d_platformer}},
 \code{\link{core_3d_camera_first_person}},
 \code{\link{core_3d_camera_free}},
 \code{\link{core_3d_camera}},
+\code{\link{core_basic_screen_manager}},
 \code{\link{core_basic_window}},
 \code{\link{core_input_keys}},
-\code{\link{core_input_mouse}}
+\code{\link{core_input_mouse}},
+\code{\link{core_window_flags}}
 }
 \concept{Core examples}
