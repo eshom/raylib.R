@@ -2,9 +2,12 @@
 % Please edit documentation in R/types.R
 \name{Shader}
 \alias{Shader}
+\alias{Shader_set_locs}
 \title{Shader, Load a shader from files or code}
 \usage{
 Shader(vs_filename, fs_filename, vs_code, fs_code)
+
+Shader_set_locs(shader, loc_index, shader_loc)
 }
 \arguments{
 \item{vs_filename}{Path for vertex shader code.}
@@ -14,11 +17,37 @@ Shader(vs_filename, fs_filename, vs_code, fs_code)
 \item{vs_code}{Vertex shader code.}
 
 \item{fs_code}{Fragment shader code.}
+
+\item{shader}{Shader object.}
+
+\item{loc_index}{Integer vector of shader location indice to set.
+Value must be of \link{shader_location_index}.}
+
+\item{shader_loc}{Integer vector of shader locations values.
+These can be usually got from \code{\link[=get_shader_location]{get_shader_location()}}.}
 }
 \description{
 Shader, Load a shader from files or code
 }
+\details{
+Values from \code{shader_loc} are set for
+\code{loc_index} in a vectorized manner, however recycling is not allowed
+and will raise an error that vector lengths do not match.
+}
 \seealso{
+Other Raylib objects: 
+\code{\link{Camera2D}()},
+\code{\link{Camera3D}()},
+\code{\link{Color}()},
+\code{\link{Image}()},
+\code{\link{Ray}()},
+\code{\link{Rectangle}()},
+\code{\link{RenderTexture}()},
+\code{\link{Texture}()},
+\code{\link{Vector2}()},
+\code{\link{Vector3}()},
+\code{\link{Vector4}()}
+
 Other Raylib objects: 
 \code{\link{Camera2D}()},
 \code{\link{Camera3D}()},

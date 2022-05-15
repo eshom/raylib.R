@@ -5,7 +5,7 @@
 // defining a font char white rectangle would allow drawing everything in a single draw call
 SEXP SetShapesTexture_R(SEXP texture, SEXP rectangle_source)
 {
-        Texture2D t = texture_from_sexp(texture);
+        Texture2D t = *texture_p_from_sexp(texture);
         Rectangle r = rectangle_from_sexp(rectangle_source);
 
         SetShapesTexture(t, r);

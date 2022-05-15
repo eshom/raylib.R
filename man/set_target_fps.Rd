@@ -17,6 +17,8 @@ Set target FPS (maximum)
 }
 \seealso{
 Other Timing-related functions: 
-\code{\link{get_frame_time}()}
+\code{\link{get_fps}()},
+\code{\link{get_frame_time}()},
+\code{\link{get_time}()}
 }
 \concept{Timing-related functions}

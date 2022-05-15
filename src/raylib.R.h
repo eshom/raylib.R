@@ -14,8 +14,11 @@
 #include "textures.h"
 #include "rcamera.h"
 #include "image.h"
+#include "texture2d.h"
 #include "shader.h"
 
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
+
+#define attribute_fallthrough __attribute__ ((fallthrough))
 
 #endif

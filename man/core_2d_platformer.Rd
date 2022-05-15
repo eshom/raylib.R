@@ -112,10 +112,10 @@ update_camera_center_inside_map <- function(camera, player, env_items, env_items
         max <- get_world_to_screen_2d(Vector2(max_x, max_y), camera)
         min <- get_world_to_screen_2d(Vector2(min_x, min_y), camera)
 
-        if (max["x"] < width) camera$offset["x"] <- width - (max["x"] - width/2)
-        if (max["y"] < height) camera$offset["y"] <- height - (max["y"] - height/2)
-        if (min["x"] > 0) camera$offset["x"] <- width/2 - min["x"]
-        if (min["y"] > 0) camera$offset["y"] <- height/2 - min["y"]
+        if (max[1] < width) camera$offset["x"] <- width - (max[1] - width/2)
+        if (max[2] < height) camera$offset["y"] <- height - (max[2] - height/2)
+        if (min[1] > 0) camera$offset["x"] <- width/2 - min[1]
+        if (min[2] > 0) camera$offset["y"] <- height/2 - min[2]
 
         return(camera)
 }
@@ -187,14 +187,14 @@ update_camera_player_bound_push <- function(camera, player, env_items, env_items
 
         camera$offset <- Vector2((1 - bbox["x"]) * 0.5 * width, (1 - bbox["y"]) * 0.5 * height)
 
-        if (player$position["x"] < bbox_world_min["x"])
+        if (player$position["x"] < bbox_world_min[1])
                 camera$target["x"] <- player$position["x"]
-        if (player$position["y"] < bbox_world_min["y"])
+        if (player$position["y"] < bbox_world_min[2])
                 camera$target["y"] <- player$position["y"]
-        if (player$position["x"] > bbox_world_max["x"])
-                camera$target["x"] <- bbox_world_min["x"] + (player$position["x"] - bbox_world_max["x"])
-        if (player$position["y"] > bbox_world_max["y"])
-                camera$target["y"] <- bbox_world_min["y"] + (player$position["y"] - bbox_world_max["y"])
+        if (player$position["x"] > bbox_world_max[1])
+                camera$target["x"] <- bbox_world_min[1] + (player$position["x"] - bbox_world_max[1])
+        if (player$position["y"] > bbox_world_max[2])
+                camera$target["y"] <- bbox_world_min[2] + (player$position["y"] - bbox_world_max[2])
 
         return(camera)
 
