@@ -1,6 +1,6 @@
 .PHONY: all raylib cleanray
 
-RAYLIB_SRC = raylib-4.0.0-modified
+RAYLIB_SRC = raylib-4.2.0-modified
 
 PKG_LIBS = -L../inst/$(RAYLIB_SRC)/lib -lraylib -lGL -lc -lm -lpthread -ldl -lrt -lX11
 PKG_CPPFLAGS = -I../inst/include
