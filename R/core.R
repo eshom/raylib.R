@@ -806,8 +806,8 @@ is_file_dropped <- function() {
 #' @return Character vector of paths to the dropped files
 #'
 #' @export
-get_dropped_files <- function() {
-        .Call(.C_GetDroppedFiles_R)
+load_dropped_files <- function() {
+        .Call(.C_LoadDroppedFiles_R)
 }
 
 ##-----------------------------------##

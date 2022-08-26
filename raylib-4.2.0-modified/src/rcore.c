@@ -2799,7 +2799,7 @@ int GetRandomValue(int min, int max)
         min = tmp;
     }
 
-    return (rand()%(abs(max - min) + 1) + min);
+    return (int)Rf_fround(Rf_runif(min, max), 0);
 }
 
 // Set the seed for the random number generator

@@ -228,7 +228,7 @@ enumerating devices. The example below shows how to enumerate devices.
     // Loop over each device info and do something with it. Here we just print the name with their index. You may want
     // to give the user the opportunity to choose which device they'd prefer.
     for (ma_uint32 iDevice = 0; iDevice < playbackCount; iDevice += 1) {
-        printf("%d - %s\n", iDevice, pPlaybackInfos[iDevice].name);
+        Rprintf("%d - %s\n", iDevice, pPlaybackInfos[iDevice].name);
     }
 
     ma_device_config config = ma_device_config_init(ma_device_type_playback);
@@ -1463,7 +1463,7 @@ The example below is how you can initialize a resource manager using it's defaul
     result = ma_resource_manager_init(&config, &resourceManager);
     if (result != MA_SUCCESS) {
         ma_device_uninit(&device);
-        printf("Failed to initialize the resource manager.");
+        Rprintf("Failed to initialize the resource manager.");
         return -1;
     }
     ```
@@ -7854,7 +7854,7 @@ Example 1 - Simple Enumeration
 ------------------------------
 ma_bool32 ma_device_enum_callback(ma_context* pContext, ma_device_type deviceType, const ma_device_info* pInfo, void* pUserData)
 {
-    printf("Device Name: %s\n", pInfo->name);
+    Rprintf("Device Name: %s\n", pInfo->name);
     return MA_TRUE;
 }
 
@@ -12988,7 +12988,7 @@ void ma_log_callback_debug(void* pUserData, ma_uint32 level, const char* pMessag
     #else
     {
         /* Everything else. */
-        printf("%s: %s", ma_log_level_to_string(level), pMessage);
+        Rprintf("%s: %s", ma_log_level_to_string(level), pMessage);
     }
     #endif
 }

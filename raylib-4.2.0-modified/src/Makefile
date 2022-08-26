@@ -1,4 +1,5 @@
-#******************************************************************************
+CUSTOM_CFLAGS  = -DR_NO_REMAP
+CUSTOM_CFLAGS += -D'assert(x)=do {if (!(x)) Rf_error("Assertion \`" \#x "\` failed.");} while(0)'
 #
 #  raylib makefile
 #
@@ -413,7 +414,7 @@ endif
 # Define include paths for required headers: INCLUDE_PATHS
 # NOTE: Several external required libraries (stb and others)
 #------------------------------------------------------------------------------------------------
-INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -I$(R_INCLUDE_DIR)
+INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -I$(R_INCLUDE_DIR) -include Rmath.h -include R_ext/Print.h
 
 # Define additional directories containing required header files
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)

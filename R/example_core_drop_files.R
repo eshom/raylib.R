@@ -25,7 +25,7 @@
 #'        ############
 #'
 #'        if (is_file_dropped())
-#'                dropped_files <- get_dropped_files()
+#'                dropped_files <- load_dropped_files()
 #'
 #'        ##########
 #'        ## Draw ##

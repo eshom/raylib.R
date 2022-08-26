@@ -890,22 +890,20 @@ SEXP IsFileDropped_R(void)
 }
 
 // Get dropped files names (memory should be freed)
-SEXP GetDroppedFiles_R(void)
+SEXP LoadDroppedFiles_R(void)
 {
-        int count = 0;
+        FilePathList files_list = LoadDroppedFiles();
 
-        char **file_names = GetDroppedFiles(&count);
-
-        if (!count) {
-                ClearDroppedFiles();
+        if (!files_list.count) {
+                UnloadDroppedFiles(files_list);
                 return Rf_allocVector(STRSXP, 0);
         }
 
-        SEXP str_out = PROTECT(Rf_allocVector(STRSXP, count)); // Needs UNPROTECT
-        for (int ind = 0; ind < count; ++ind)
-                SET_STRING_ELT(str_out, ind, Rf_mkCharCE(file_names[ind], CE_UTF8));
+        SEXP str_out = PROTECT(Rf_allocVector(STRSXP, files_list.count)); // Needs UNPROTECT
+        for (unsigned int ind = 0; ind < files_list.count; ++ind)
+                SET_STRING_ELT(str_out, ind, Rf_mkCharCE(files_list.paths, CE_UTF8));
 
-        ClearDroppedFiles();
+        UnloadDroppedFiles(files_list);
         UNPROTECT(1);
 
         return str_out;

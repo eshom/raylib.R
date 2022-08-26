@@ -321,9 +321,9 @@ SetTraceLogLevel <- set_trace_log_level
 #' @export
 IsFileDropped <- is_file_dropped 
 
-#' @rdname get_dropped_files 
+#' @rdname load_dropped_files 
 #' @export
-GetDroppedFiles <- get_dropped_files 
+LoadDroppedFiles <- load_dropped_files 
 
 #' @rdname is_key_pressed 
 #' @export
@@ -624,6 +624,10 @@ DrawPlane <- draw_plane
 #' @rdname draw_grid 
 #' @export
 DrawGrid <- draw_grid 
+
+#' @rdname draw_texture 
+#' @export
+DrawTexture <- draw_texture 
 
 #' @rdname fade 
 #' @export

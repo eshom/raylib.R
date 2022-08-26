@@ -14,6 +14,6 @@ Check if a file has been dropped into window
 }
 \seealso{
 Other File management functions: 
-\code{\link{get_dropped_files}()}
+\code{\link{load_dropped_files}()}
 }
 \concept{File management functions}

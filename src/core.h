@@ -103,7 +103,7 @@ SEXP SetTraceLogLevel_R(SEXP loglevel);
 
 // Files management functions
 SEXP IsFileDropped_R(void);
-SEXP GetDroppedFiles_R(void);
+SEXP LoadDroppedFiles_R(void);
 
 // Input-related functions: keyboard
 SEXP IsKeyPressed_R(SEXP key);

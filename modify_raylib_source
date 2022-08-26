@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#########################
+#### Modify Makefile ####
+#########################
+
+# Where the static library to be linked will be
+sed -i 's@RAYLIB_RELEASE_PATH  ?= $(RAYLIB_SRC_PATH)@RAYLIB_RELEASE_PATH  ?= ../lib@' raylib-*/src/Makefile
+
+# Include the R library in raylib compilation for swapping some functions with R equivalents
+sed -i 's@INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw@INCLUDE_PATHS = -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -I$(R_INCLUDE_DIR) -include Rmath.h -include R_ext/Print.h@' raylib-*/src/Makefile
+
+# Macros to replace functions with R equivalents
+sed -i '0,/^#/d' raylib-*/src/Makefile # Clean previous run
+sed -i '1 i CUSTOM_CFLAGS  = -DR_NO_REMAP' raylib-*/src/Makefile # Limit namespace pollution somewhat
+sed -i '2 i CUSTOM_CFLAGS += -D'\''assert(x)=do {if (!(x)) Rf_error("Assertion \\\`" \\\#x "\\\` failed.");} while(0)'\' raylib-*/src/Makefile # Asserts will be handled by R instead of crashing the interpreter
+
+########################################
+#### Other source code substituions ####
+########################################
+
+sed -i 's@return (rand()%(abs(max - min) + 1) + min);@return (int)Rf_fround(Rf_runif(min, max), 0);@' raylib-*/src/rcore.c # Use R for RNG
+sed -i 's@fprintf(stderr,@REprintf(@' raylib-*/src/external/jar_xm.h raylib-*/src/external/tinyobj_loader_c.h # Let R handle stderr output
+# Let R handle stdout
+sed -i 's@vprintf(buffer, args)@Rvprintf(buffer, args)@; /fflush(stdout);/d' raylib-*/src/utils.c # Modifies TraceLog()
+sed -i 's@[[:space:]]printf(@ Rprintf(@' raylib-*/src/external/par_shapes.h raylib-*/src/external/miniaudio.h raylib-*/src/external/stb_image_resize.h # Using sed and not a macros, because it messes up TraceLog()

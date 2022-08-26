@@ -138,7 +138,7 @@ static const R_CallMethodDef callMethods[] = {
 
         // Files management functions
         {"IsFileDropped_R",   (DL_FUNC) &IsFileDropped_R,   0},
-        {"GetDroppedFiles_R", (DL_FUNC) &GetDroppedFiles_R, 0},
+        {"LoadDroppedFiles_R", (DL_FUNC) &LoadDroppedFiles_R, 0},
 
         // Shapes module
 

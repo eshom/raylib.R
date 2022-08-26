@@ -23,7 +23,8 @@ texture <- Texture(system.file(file.path("resources", "space.png"), package = "r
 
 ## Load shader and setup location points and values
 shader <- Shader(vs_filename = "",
-                fs_filename = system.file(file.path("resources", "shaders", "glsl330", "wave.fs"), package = "raylib.R"))
+                fs_filename = system.file(file.path("resources", "shaders", "glsl330",
+                                                    "wave.fs"), package = "raylib.R"))
 
 seconds_loc <- get_shader_location(shader, "secondes")
 freq_x_loc <- get_shader_location(shader, "freqX")

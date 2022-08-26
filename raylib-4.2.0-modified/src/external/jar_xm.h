@@ -235,7 +235,7 @@ uint64_t jar_xm_get_remaining_samples(jar_xm_context_t* ctx);
 #if JAR_XM_DEBUG            //JAR_XM_DEBUG defined as 0
 #include <stdio.h>
 #define DEBUG(fmt, ...) do {                                        \
-        fprintf(stderr, "%s(): " fmt "\n", __func__, __VA_ARGS__);    \
+        REprintf( "%s(): " fmt "\n", __func__, __VA_ARGS__);    \
         fflush(stderr);                                                \
     } while(0)
 #else
@@ -2172,23 +2172,23 @@ uint64_t jar_xm_get_remaining_samples(jar_xm_context_t* ctx) {
 //--------------------------------------------
 #undef DEBUG
 #define DEBUG(...) do {      \
-        fprintf(stderr, __VA_ARGS__); \
+        REprintf( __VA_ARGS__); \
         fflush(stderr); \
     } while(0)
 
 #define DEBUG_ERR(...) do {      \
-        fprintf(stderr, __VA_ARGS__); \
+        REprintf( __VA_ARGS__); \
         fflush(stderr); \
     } while(0)
 
 #define FATAL(...) do {      \
-        fprintf(stderr, __VA_ARGS__); \
+        REprintf( __VA_ARGS__); \
         fflush(stderr); \
         exit(1); \
     } while(0)
 
 #define FATAL_ERR(...) do {      \
-        fprintf(stderr, __VA_ARGS__); \
+        REprintf( __VA_ARGS__); \
         fflush(stderr); \
         exit(1); \
     } while(0)

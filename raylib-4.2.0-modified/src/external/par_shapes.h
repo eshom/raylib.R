@@ -1289,10 +1289,10 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
     #ifdef TEST_PARSE
     for (int i = 0; i < nrules; i++) {
         par_shapes__rule rule = rules[i];
-        printf("rule %s.%d\n", rule.name, rule.weight);
+        Rprintf("rule %s.%d\n", rule.name, rule.weight);
         for (int c = 0; c < rule.ncommands; c++) {
             par_shapes__command cmd = rule.commands[c];
-            printf("\t%s %s\n", cmd.cmd, cmd.arg);
+            Rprintf("\t%s %s\n", cmd.cmd, cmd.arg);
         }
     }
     #endif
@@ -1335,7 +1335,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
 
         par_shapes__command* cmd = rule->commands + (frame->pc++);
         #ifdef DUMP_TRACE
-        printf("%5s %5s %5s:%d  %03d\n", cmd->cmd, cmd->arg, rule->name,
+        Rprintf("%5s %5s %5s:%d  %03d\n", cmd->cmd, cmd->arg, rule->name,
             frame->pc - 1, stackptr);
         #endif
 
@@ -1698,7 +1698,7 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
                     PAR_SHAPES_T binvalue = *(bins + binindex);
                     if (binvalue > 0) {
                         if (nbins == 8) {
-                            printf("Epsilon value is too large.\n");
+                            Rprintf("Epsilon value is too large.\n");
                             break;
                         }
                         nearby[nbins++] = binindex;
